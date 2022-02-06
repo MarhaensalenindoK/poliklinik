@@ -1,6 +1,6 @@
 <div id="left-sidebar" class="sidebar">
     <div class="navbar-brand">
-        <a href="index.html"><img src="/images/icon.svg" alt="Oculux Logo" class="img-fluid logo"><span>Oculux</span></a>
+        <a href="index.html"><img src="/images/icon.svg" alt="Oculux Logo" class="img-fluid logo"><span>Poliklinik</span></a>
         <button type="button" class="btn-toggle-offcanvas btn btn-sm float-right"><i class="lnr lnr-menu icon-close"></i></button>
     </div>
     <div class="sidebar-scroll">
@@ -25,13 +25,6 @@
                     <ul>
                         <li class="active"><a href="index.html">My Dashboard</a></li>
                         <li><a href="index4.html">Web Analytics</a></li>
-                        <li><a href="index5.html">Event Monitoring</a></li>
-                        <li><a href="index6.html">Finance Performance</a></li>
-                        <li><a href="index7.html">Sales Monitoring</a></li>
-                        <li><a href="index8.html">Hospital Management</a></li>
-                        <li><a href="index9.html">Campaign Monitoring</a></li>
-                        <li><a href="index10.html">University Analytics</a></li>
-                        <li><a href="index11.html">eCommerce Analytics</a></li>
                     </ul>
                 </li>
             </ul>
