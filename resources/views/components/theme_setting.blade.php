@@ -39,7 +39,7 @@
                 RTL Version
                 <div class="float-right">
                     <label class="switch">
-                        <input type="checkbox" class="rtl-btn" checked>
+                        <input type="checkbox" class="rtl-btn">
                         <span class="slider round"></span>
                     </label>
                 </div>

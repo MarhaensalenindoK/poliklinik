@@ -176,12 +176,13 @@ $reds: 'red' '#dc3545',
     }
 }
 
-@for $key from 0 through 20 {
+@for $key from 0 through 50 {
     .font-#{$key} {
         font-size: #{$key}px;
     }
 }
 
-.test {
-    color: green;
+.image-slide {
+    object-fit: cover !important;
+    max-height: 25rem !important;
 }

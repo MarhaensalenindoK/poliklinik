@@ -9,9 +9,9 @@ class LoginController extends Controller
 {
     public function check(Request $request){
         if (! Auth::check() && $request->is('login')) {
-            return view('authentication.login');
+            return redirect('home');
         } elseif (! Auth::check()) {
-            return redirect('login');
+            return redirect('home');
         }
 
         return redirect('dashboard');
