@@ -65,7 +65,7 @@ $blacks:'black-1' #000000,
 'black' #000000;
 
 $greys:'grey' #6e6e6e,
-'grey-1' #6e6e6e;
+'grey-1' #B0B1B2;
 
 $blues:'blue-1' #17BED3,
 'blue-2' #17C2D7;
@@ -239,7 +239,7 @@ $reds: 'red' #dc3545,
 
 .image-slide {
     object-fit: cover !important;
-    height: 70vh !important;
+    height: 80vh !important;
 }
 
 .card-service {
@@ -251,50 +251,3 @@ $reds: 'red' #dc3545,
     max-height: 25rem;
     max-width: 60rem;
 }
-
-/* Footer Area Start */
-// .footer-area {
-//     background: #34363a;
-//   }
-
-//   .footer-area .footer-titel {
-//     font-size: 20px;
-//     color: #fff;
-//     font-weight: 700;
-//     padding-bottom: 10px;
-//     letter-spacing: 0.5px;
-//   }
-
-//   .footer-area ul li {
-//     margin-bottom: 10px;
-//   }
-
-//   .footer-area ul li a {
-//     color: #ccc;
-//     font-size: 14px;
-//     font-weight: 400;
-//   }
-
-//   .footer-area ul li a:hover {
-//     color: #17C2D7;
-//   }
-
-//   .footer-area #subscribe-form {
-//     margin-top: 15px;
-//   }
-
-//   .footer-area #subscribe-form .form-group {
-//     position: relative;
-//   }
-
-//   .footer-area #subscribe-form .form-group .btn-common {
-//     position: absolute;
-//     top: 0;
-//     right: 0;
-//     padding: 7px 15px;
-//     height: 39px;
-//     border-radius: 0;
-//     background: transparent;
-//     color: #17C2D7;
-//     border-left: 1px solid #ddd;
-//   }
