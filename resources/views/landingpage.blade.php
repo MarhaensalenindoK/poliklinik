@@ -1,23 +1,11 @@
 @extends('layout')
 
-@section('sidebar-biodata')
-<span>Welcome</span>
-@endsection
-
-@section('sidebar-menu')
-<li class="header">Main</li>
-<li class="active open">
-    <a href="#myPage" class="has-arrow"><i class="icon-home"></i><span>Page</span></a>
-    <ul>
-        <li class="active"><a href="javascript:void(0)">Home</a></li>
-        {{-- sementara --}}
-        <li><a href="javascript:void(0)">Clinic List</a></li>
-    </ul>
-</li>
+@section('css')
 @endsection
 
 @section('content')
-<div id="slideLandingPage" class="carousel slide" data-ride="carousel">
+@extends('components.header_landingpage')
+<div id="slideLandingPage" class="carousel slide mt-5" data-ride="carousel">
     <ol class="carousel-indicators">
         <li data-target="#slideLandingPage" data-slide-to="0" class="active"></li>
         <li data-target="#slideLandingPage" data-slide-to="1"></li>
@@ -25,13 +13,19 @@
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="{{ asset('images\image-gallery\1.jpg') }}" class="d-block w-100 image-slide" alt="Image">
+            <img src="{{ asset('images\landingpage\slider.png') }}" class="d-block w-100  image-slide" alt="Image">
+            <div class="carousel-caption d-none d-md-block">
+            </div>
         </div>
         <div class="carousel-item">
             <img src="{{ asset('images\image-gallery\2.jpg') }}" class="d-block w-100 image-slide" alt="Image">
+            <div class="carousel-caption d-none d-md-block">
+            </div>
         </div>
         <div class="carousel-item">
             <img src="{{ asset('images\image-gallery\3.jpg') }}" class="d-block w-100 image-slide" alt="Image">
+            <div class="carousel-caption d-none d-md-block">
+            </div>
         </div>
     </div>
     <a class="carousel-control-prev" href="#slideLandingPage" role="button" data-slide="prev">
@@ -43,56 +37,298 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
+<div id="main-content" class="w-100 p-0">
+    <div class="container-fluid p-0">
+        <div class="row-clearfix mx-5 mt-5 text-center">
+            <div class="card">
+                <div class="body border-radius-15-important">
+                    <div class="row">
+                        <div class="col-md-6 md-3">
+                            <img src="{{ asset('images/landingpage/hospital.png') }}" alt="image" class="img-fluid">
+                        </div>
+                        <div class="col-md-6 md-3">
+                            <p class="font-50 mb-0 text-info font-weight-700">
+                                Selamat Datang
+                            </p>
+                            <p class="font-30 mb-5 text-info">di Website Unit Kesehatan</p>
+                            <p class="text-muted font-16">
+                                Selamat datang di Website Unit Kesehatan Klinik dan Rumah Sakit.
+                                Website ini dimaksudkan sebagai sarana publikasi untuk memberikan informasi mengenai Unit Kesehatan.
 
-<div class="row-clearfix mx-5 mt-5 text-center">
-    <div class="card">
-        <div class="body">
-            <div class="row">
-                <div class="col md-3">
-                    <div class="mx-5">
-                        <img src="{{ asset('images/landingpage/medical-report.png') }}">
-                        <p class="font-20 text-light">Pelayanan Pasien</p>
-                        <p class="font-15 text-muted">Lebih dari 5 orang dokter spesialis di setiap kliniknya</p>
-                    </div>
-                </div>
-                <div class="col md-3">
-                    <div class="mx-5">
-                        <img src="{{ asset('images/landingpage/doctor.png') }}">
-                        <p class="font-20 text-light">Pelayanan Pasien</p>
-                        <p class="font-15 text-muted">Lebih dari 5 orang dokter spesialis di setiap kliniknya</p>
-                    </div>
-                </div>
-                <div class="col md-3">
-                    <div class="mx-5">
-                        <img src="{{ asset('images/landingpage/medicine.png') }}">
-                        <p class="font-20 text-light">Pelayanan Pasien</p>
-                        <p class="font-15 text-muted">Lebih dari 5 orang dokter spesialis di setiap kliniknya</p>
+                                Kritik dan saran yang ada sangat kami harapkan guna penyempurnaan website ini dimasa akan datang.
+
+                                Semoga website ini memberikan manfaat dan inspirasi bagi para pembaca.
+                                Jangan lupa follow sosial media kami, agar selalu terupdate dengan berita terbaru.
+
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="row mt-1 mx-5 text-center">
+            <div class="col-md-12">
+                <p class="font-36 font-weight-500 color-brown-1">
+                    <u>Our Services</u>
+                </p>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="mx-auto body card-service border-radius-10-important">
+                        <img src="{{ asset('images/landingpage/report.png') }}" class="img-fluid" alt="Image of report medical">
+                        <p class="mt-5 font-weight-bold font-20">
+                            Pelayanan Pasien
+                        </p>
+                        <p class="font-15 color-brown-1">
+                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum rerum, possimus dignissimos in accusantium quibusdam eaque aliquid. Aliquid, tempore dolorem!
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="mx-auto body card-service border-radius-10-important">
+                        <img src="{{ asset('images/landingpage/doctor.png') }}" class="img-fluid" alt="Image of doctor medical">
+                        <p class="mt-5 font-weight-bold font-20">
+                            Dokter Spesialis
+                        </p>
+                        <p class="font-15 color-brown-1">
+                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum rerum, possimus dignissimos in accusantium quibusdam eaque aliquid. Aliquid, tempore dolorem!
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="mx-auto body card-service border-radius-10-important">
+                        <img src="{{ asset('images/landingpage/medicine.png') }}" class="img-fluid" alt="Image of medicine medical">
+                        <p class="mt-5 font-weight-bold font-20">
+                            Terima Resep Dokter
+                        </p>
+                        <p class="font-15 color-brown-1">
+                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum rerum, possimus dignissimos in accusantium quibusdam eaque aliquid. Aliquid, tempore dolorem!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mx-auto mt-5">
+            <img src="{{ asset('images/landingpage/group 9.png') }}" alt="image" class="d-block w-100 image-fluid">
+        </div>
+
+        <div class="row-clearfix mx-5 mt-6 text-center">
+
+            <div class="card">
+                <div class="body border-radius-15-important">
+                    <div class="row">
+                        <div class="col-md-6"></div>
+                        <div class="col-md-6">
+                            <form id="navbar-search" class="navbar-form search-form">
+                                <div class="input-group mb-0">
+                                    <input type="text" class="form-control" placeholder="Search...">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="icon-magnifier"></i></span>
+                                        <a href="javascript:void(0);" class="search_toggle btn btn-danger"><i class="icon-close"></i></a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="row slider h-50 mx-auto">
+                        <div class="mx-2">
+                            <div class="card">
+                                <div class="body text-center">
+                                    <img src="{{ asset('images/landingpage/hospital-icon.png') }}" alt="" class="img-fluid mx-auto">
+                                    <p class="font-24">
+                                        Klinik Harapan Indah
+                                    </p>
+                                    <p class="font-18 text-muted">
+                                        jl. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta reiciendis quisquam alias, optio unde, blanditiis ab nulla voluptate inventore saepe possimus soluta quae.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mx-2">
+                            <div class="card">
+                                <div class="body text-center">
+                                    <img src="{{ asset('images/landingpage/hospital-icon.png') }}" alt="" class="img-fluid mx-auto">
+                                    <p class="font-24">
+                                        Klinik Harapan Indah
+                                    </p>
+                                    <p class="font-18 text-muted">
+                                        jl. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta reiciendis quisquam alias, optio unde, blanditiis ab nulla voluptate inventore saepe possimus soluta quae.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mx-2">
+                            <div class="card">
+                                <div class="body text-center">
+                                    <img src="{{ asset('images/landingpage/hospital-icon.png') }}" alt="" class="img-fluid mx-auto">
+                                    <p class="font-24">
+                                        Klinik Harapan Indah
+                                    </p>
+                                    <p class="font-18 text-muted">
+                                        jl. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta reiciendis quisquam alias, optio unde, blanditiis ab nulla voluptate inventore saepe possimus soluta quae.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mx-2">
+                            <div class="card">
+                                <div class="body text-center">
+                                    <img src="{{ asset('images/landingpage/hospital-icon.png') }}" alt="" class="img-fluid mx-auto">
+                                    <p class="font-24">
+                                        Klinik Harapan Indah
+                                    </p>
+                                    <p class="font-18 text-muted">
+                                        jl. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta reiciendis quisquam alias, optio unde, blanditiis ab nulla voluptate inventore saepe possimus soluta quae.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row-clearfix mx-5 mt-5 text-center">
+            <div class="card">
+                <div class="body border-radius-15-important bg-info">
+                    <div class="row">
+                        <div class="col-md-6 md-3">
+                            <img src="{{ asset('images/landingpage/Doctor 1.png') }}" alt="image" class="img-fluid">
+                        </div>
+                        <div class="col-md-5 md-3 mt-6 ">
+                            <p class="font-25 mb-0 text-white font-weight-500">
+                                masuk untuk mendapatkan berbagai macam pelayanan politeknik dari kami
+                            </p>
+                                <button type="button" class="btn btn-primary font-25 rounded-pill mt-4">Masuk</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="bg-dark text-white pt-5 pb-4 mt-6">
+
+        <div class="container text-center text-md-left mt-6">
+
+            <div class="row text-center text-md-left">
+
+                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-2 class ">
+                    <img src="{{ asset('images/landingpage/Logo Poliklinik.png') }}" alt="" class="img-fluid mx-auto" >
+                    <span class="font-weight-700 font-20 color-grey-1">Poliklinik</span>
+                    <p>sebuah sistem informasi prosedur pelayanan kesehatan berbasis web yang digunakan untuk mendata, mengelola dan memantau jalur informasi pelayanan pengobatan pasien</p>
+
+                </div>
+
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 font-weight-bold text-white">Company</h5>
+                <p>
+                    <a href="javascript:void(0)" class="text-white text-decoration-none"> Press lereases </a>
+                </p>
+                <p>
+                    <a href="javascript:void(0)" class="text-white text-decoration-none"> Mission</a>
+                </p>
+                <p>
+                    <a href="javascript:void(0)" class="text-white text-decoration-none"> Srategy</a>
+                </p>
+                </div>
+
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 font-weight-bold text-white">About</h5>
+                <p>
+                    <a href="javascript:void(0)" class="text-white text-decoration-none"> Carrier</a>
+                </p>
+                <p>
+                    <a href="javascript:void(0)" class="text-white text-decoration-none"> Team</a>
+                </p>
+                <p>
+                    <a href="javascript:void(0)" class="text-white text-decoration-none"> Clients</a>
+                </p>
+                </div>
+
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 font-weight-bold text-white" >Find Us On</h5>
+                    <div class="row">
+                        <div class="col-md-0">
+                            <div class="col-md-1">
+                                <i class="fa fa-facebook"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-0">
+                            <div class="col-md-1">
+                                <i class="fa fa-twitter"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-0">
+                            <div class="col-md-1">
+                                <i class="fa fa-instagram"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-0">
+                            <i class="fa fa-linkedin"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class=" mb-4 mt-10">
+
+            <div class="row align-items-center">
+
+                <div class="col-md-7 mt-4 col-lg-12 text-center">
+                    <p>	Copyright ©2022 All rights reserved</p>
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
-</div>
 
-<div class="row mt-5">
-    <div class="col-md-6">
-        <img src="{{ asset('images/landingpage/hospital.png') }}" alt="image">
-    </div>
-    <div class="col-md-6">
-        <p class="font-50 text-white mb-0">
-            Selamat Datang
-        </p>
-        <p class="font-30 text-white mb-5">di Website Unit Kesehatan</p>
-        <p class="text-muted font-16">
-            Selamat datang di Website Unit Kesehatan Klinik dan Rumah Sakit.
-            Website ini dimaksudkan sebagai sarana publikasi untuk memberikan informasi mengenai Unit Kesehatan.
+    </footer>
+@endsection
 
-            Kritik dan saran yang ada sangat kami harapkan guna penyempurnaan website ini dimasa akan datang.
+@section('script')
+<script>
 
-            Semoga website ini memberikan manfaat dan inspirasi bagi para pembaca.
-            Jangan lupa follow sosial media kami, agar selalu terupdate dengan berita terbaru.
-
-        </p>
-    </div>
-</div>
+$('.slider').slick({
+  dots: true,
+  infinite: true,
+  speed: 300,
+  slidesToShow: 2,
+  slidesToScroll: 2,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        infinite: true,
+        dots: true
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+  ]
+});
+</script>
 @endsection

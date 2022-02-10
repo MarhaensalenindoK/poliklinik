@@ -61,26 +61,29 @@ $shadow-click: inset 0px -2px 0px rgba(255, 255, 255, 0.15),
 inset 0px 1px 3px rgba(65, 51, 104, 0.2);
 $shadow-avatar: inset 0px 2px 4px rgba(65, 51, 104, 0.2);
 
-$blacks:'black-1' '#000000',
-'black' '#000000';
+$blacks:'black-1' #000000,
+'black' #000000;
 
-$greys:'grey' '#6e6e6e',
-'grey-1' '#6e6e6e';
+$greys:'grey' #6e6e6e,
+'grey-1' #B0B1B2;
 
-$blues:'blue-1' '#007FFF',
-'blue-2' '#17C2D7';
+$blues:'blue-1' #17BED3,
+'blue-2' #17C2D7;
 
-$purples:'purple' '#9367B4',
-'purple-1' '#9367B4';
+$browns:'brown-1' #535353,
+'brown-2' #535353;
 
-$oranges: 'orange' '#FFA117',
-'orange-1' '#FFA117';
+$purples:'purple' #9367B4,
+'purple-1' #9367B4;
 
-$greens: 'green' '#28A745',
-'green-1' '#28A745';
+$oranges: 'orange' #FFA117,
+'orange-1' #FFA117;
 
-$reds: 'red' '#dc3545',
-'red-1' '#dc3545';
+$greens: 'green' #28A745,
+'green-1' #28A745;
+
+$reds: 'red' #dc3545,
+'red-1' #dc3545;
 
 @each $name, $color in $blacks {
     .color-#{$name} {
@@ -89,6 +92,10 @@ $reds: 'red' '#dc3545',
 
     .bg-#{$name} {
         background: $color;
+    }
+
+    .bg-#{$name}-important {
+        background: $color !important;
     }
 }
 
@@ -100,6 +107,10 @@ $reds: 'red' '#dc3545',
     .bg-#{$name} {
         background: $color;
     }
+
+    .bg-#{$name}-important {
+        background: $color !important;
+    }
 }
 
 @each $name, $color in $blues {
@@ -109,6 +120,24 @@ $reds: 'red' '#dc3545',
 
     .bg-#{$name} {
         background: $color;
+    }
+
+    .bg-#{$name}-important {
+        background: $color !important;
+    }
+}
+
+@each $name, $color in $browns {
+    .color-#{$name} {
+        color: $color;
+    }
+
+    .bg-#{$name} {
+        background: $color;
+    }
+
+    .bg-#{$name}-important {
+        background: $color !important;
     }
 }
 
@@ -120,6 +149,9 @@ $reds: 'red' '#dc3545',
     .bg-#{$name} {
         background: $color;
     }
+    .bg-#{$name}-important {
+        background: $color !important;
+    }
 }
 
 @each $name, $color in $oranges {
@@ -129,6 +161,9 @@ $reds: 'red' '#dc3545',
 
     .bg-#{$name} {
         background: $color;
+    }
+    .bg-#{$name}-important {
+        background: $color !important;
     }
 }
 
@@ -140,6 +175,9 @@ $reds: 'red' '#dc3545',
     .bg-#{$name} {
         background: $color;
     }
+    .bg-#{$name}-important {
+        background: $color !important;
+    }
 }
 
 @each $name, $color in $reds {
@@ -149,6 +187,9 @@ $reds: 'red' '#dc3545',
 
     .bg-#{$name} {
         background: $color;
+    }
+    .bg-#{$name}-important {
+        background: $color !important;
     }
 }
 
@@ -164,9 +205,15 @@ $reds: 'red' '#dc3545',
     }
 }
 
-@for $key from 0 through 10 {
+@for $key from 0 through 15 {
     .border-radius-#{$key} {
         border-radius: #{$key}px;
+    }
+}
+
+@for $key from 0 through 15 {
+    .border-radius-#{$key}-important {
+        border-radius: #{$key}px !important;
     }
 }
 
@@ -182,7 +229,25 @@ $reds: 'red' '#dc3545',
     }
 }
 
+.font-weight-700 {
+    font-weight: 700;
+}
+
+.font-weight-500 {
+    font-weight: 500;
+}
+
 .image-slide {
     object-fit: cover !important;
-    max-height: 25rem !important;
+    height: 80vh !important;
+}
+
+.card-service {
+    min-height: 27rem;
+    width: 16.25rem;
+}
+
+.slider {
+    max-height: 25rem;
+    max-width: 60rem;
 }
