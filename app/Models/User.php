@@ -10,18 +10,24 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    const SUPERADMIN = 'SUPERADMIN';
     const ADMIN = 'ADMIN';
     const DOCTOR = 'DOCTOR';
     const RECEPTIONIST = 'RECEPTIONIST';
     const PATIENT = 'PATIENT';
-    const USER = 'USER';
 
     public $incrementing = false;
 
     protected $fillable = [
         'id',
-        'user_id',
-        'subjects',
+        'clinic_id',
+        'name',
+        'nik',
+        'email',
+        'role',
+        'username',
+        'password',
+        'status',
         'created_at',
         'update_at',
     ];

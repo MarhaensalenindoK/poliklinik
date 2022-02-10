@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Clinic;
+use App\Models\DetailClinic;
+use App\Models\News;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -15,19 +18,25 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $clinicId = Clinic::factory(['name' => 'Tadika Mesra'])->create()->id;
+
+        News::factory(['clinic_id' => $clinicId])->create();
+
         $users = [
             [
-                'name' => 'adminuser',
-                'username' => 'admin123',
-                'password' => Hash::make('admin123'),
-                'role' => User::ADMIN,
+                'name' => 'superadmin',
+                'clinic_id' => $clinicId,
+                'username' => 'superadmin123',
+                'password' => Hash::make('superadmin123'),
+                'role' => User::SUPERADMIN,
                 'status' => true,
             ],
             [
-                'name' => 'user',
-                'username' => 'user123',
-                'password' => Hash::make('user123'),
-                'role' => User::USER,
+                'name' => 'admin',
+                'clinic_id' => $clinicId,
+                'username' => 'admin123',
+                'password' => Hash::make('admin123'),
+                'role' => User::ADMIN,
                 'status' => true,
             ],
         ];
