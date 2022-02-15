@@ -37,9 +37,6 @@ Route::post('/authenticate', [LoginController::class, 'authenticate'])->name('au
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
-Route::group(['middleware' => ['auth', 'role:ADMIN']], function(){
-    Route::get('/dashboard', function () {
-        // sementara
-        return view('layout');
-    })->name('home');
+Route::group(['middleware' => ['auth', 'role:SUPERADMIN']], function(){
+    Route::get('/dashboard', [Controllers\SuperAdminController::class, 'index'])->name('index');
 });
