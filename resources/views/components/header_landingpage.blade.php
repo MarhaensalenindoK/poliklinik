@@ -13,7 +13,7 @@
         <div class="navbar-right">
             <div id="navbar-menu">
                 <ul class="nav navbar-nav">
-                    <li><a href="javascript:void(0)" class="icon-menu">Masuk</a></li>
+                    <li><a href="/login" class="icon-menu">Masuk</a></li>
                 </ul>
             </div>
         </div>
