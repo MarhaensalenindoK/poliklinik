@@ -251,3 +251,16 @@ $reds: 'red' #dc3545,
     max-height: 25rem;
     max-width: 60rem;
 }
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.slick-prev:before {
+    color: EEEEEE;
+    height: 44px;
+}
+.slick-next:before {
+    color: EEEEEE;
+    height: 44px;
+}

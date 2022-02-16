@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers;
 use App\Http\Controllers\LoginController;
 
 /*
@@ -21,9 +22,11 @@ use App\Http\Controllers\LoginController;
 Route::get('/', [LoginController::class, 'check']);
 // No Auth
 
-Route::get('/home', function () {
-    return view('landingpage');
-})->name('landingpage');
+Route::get('/home', [Controllers\LandingPageController::class, 'index'])->name('landingpage');
+
+Route::get('/detail-clinic', function () {
+    return view('detail_clinic');
+})->name('detail_clinic');
 
 // Auth
 Route::get('/login', function () {
@@ -34,11 +37,8 @@ Route::post('/authenticate', [LoginController::class, 'authenticate'])->name('au
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
-Route::group(['middleware' => ['auth', 'role:ADMIN']], function(){
-    Route::get('/dashboard', function () {
-        // sementara
-        return view('layout');
-    })->name('home');
+Route::group(['middleware' => ['auth', 'role:SUPERADMIN']], function(){
+    Route::get('/dashboard', [Controllers\SuperAdminController::class, 'index'])->name('index');
 });
 
 Route::get('/detail-clinic', function () {

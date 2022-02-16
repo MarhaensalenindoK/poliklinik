@@ -125,71 +125,34 @@
                     <div class="row">
                         <div class="col-md-6"></div>
                         <div class="col-md-6">
-                            <form id="navbar-search" class="navbar-form search-form">
+                            <div id="navbar-search" class="navbar-form search-form my-5 d-none">
                                 <div class="input-group mb-0">
-                                    <input type="text" class="form-control" placeholder="Search...">
+                                    <input type="text" class="form-control" id="searchInput" placeholder="Search..." onkeyup="searchClinic(event)">
                                     <div class="input-group-append">
                                         <span class="input-group-text"><i class="icon-magnifier"></i></span>
                                         <a href="javascript:void(0);" class="search_toggle btn btn-danger"><i class="icon-close"></i></a>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="row slider h-50 mx-auto">
-                        <div class="mx-2">
-                            <div class="card">
-                                <div class="body text-center">
-                                    <img src="{{ asset('images/landingpage/hospital-icon.png') }}" alt="" class="img-fluid mx-auto">
-                                    <p class="font-24">
-                                        Klinik Harapan Indah
-                                    </p>
-                                    <p class="font-18 text-muted">
-                                        jl. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta reiciendis quisquam alias, optio unde, blanditiis ab nulla voluptate inventore saepe possimus soluta quae.
-                                    </p>
+                    <div class="row slider h-50 mx-auto" id="renderClinic">
+                        @foreach ($clinics['data'] as $clinic)
+                            <div class="mx-2 cursor-pointer" onclick="detailClinicPage('{{ $clinic['id'] }}')">
+                                <div class="card">
+                                    <div class="body text-center" style="min-height: 23rem;">
+                                        <img src="{{ asset('images/landingpage/hospital-icon.png') }}" alt="" class="img-fluid mx-auto">
+                                        <p class="font-24">
+                                            {{ $clinic['name'] }}
+                                        </p>
+                                        <p class="font-18 text-muted">
+                                            {{ $clinic['address'] }}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="mx-2">
-                            <div class="card">
-                                <div class="body text-center">
-                                    <img src="{{ asset('images/landingpage/hospital-icon.png') }}" alt="" class="img-fluid mx-auto">
-                                    <p class="font-24">
-                                        Klinik Harapan Indah
-                                    </p>
-                                    <p class="font-18 text-muted">
-                                        jl. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta reiciendis quisquam alias, optio unde, blanditiis ab nulla voluptate inventore saepe possimus soluta quae.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mx-2">
-                            <div class="card">
-                                <div class="body text-center">
-                                    <img src="{{ asset('images/landingpage/hospital-icon.png') }}" alt="" class="img-fluid mx-auto">
-                                    <p class="font-24">
-                                        Klinik Harapan Indah
-                                    </p>
-                                    <p class="font-18 text-muted">
-                                        jl. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta reiciendis quisquam alias, optio unde, blanditiis ab nulla voluptate inventore saepe possimus soluta quae.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mx-2">
-                            <div class="card">
-                                <div class="body text-center">
-                                    <img src="{{ asset('images/landingpage/hospital-icon.png') }}" alt="" class="img-fluid mx-auto">
-                                    <p class="font-24">
-                                        Klinik Harapan Indah
-                                    </p>
-                                    <p class="font-18 text-muted">
-                                        jl. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta reiciendis quisquam alias, optio unde, blanditiis ab nulla voluptate inventore saepe possimus soluta quae.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -206,7 +169,7 @@
                             <p class="font-25 mb-0 text-white font-weight-500">
                                 masuk untuk mendapatkan berbagai macam pelayanan politeknik dari kami
                             </p>
-                                <button type="button" class="btn btn-primary font-25 rounded-pill mt-4">Masuk</button>
+                                <button type="button" class="btn btn-primary font-25 w-50 rounded-pill mt-4" onclick="window.open(`/login`, '_blank')">Masuk</button>
 
                         </div>
                     </div>
@@ -298,37 +261,83 @@
 @section('script')
 <script>
 
-$('.slider').slick({
-  dots: true,
-  infinite: true,
-  speed: 300,
-  slidesToShow: 2,
-  slidesToScroll: 2,
-  responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 3,
-        slidesToScroll: 3,
+    $('#renderClinic').slick({
+        dots: true,
         infinite: true,
-        dots: true
-      }
-    },
-    {
-      breakpoint: 600,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2
-      }
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1
-      }
+        speed: 300,
+        slidesToShow: 3,
+        slidesToScroll: 2,
+        responsive: [
+            {
+            breakpoint: 1024,
+            settings: {
+                slidesToShow: 3,
+                slidesToScroll: 3,
+                infinite: true,
+                dots: true
+            }
+            },
+            {
+            breakpoint: 600,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2
+            }
+            },
+            {
+            breakpoint: 480,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+            }
+            }
+        ]
+    });
+
+    let clinics = @json($clinics['data']);
+
+    function detailClinicPage(clinicId) {
+        window.open(`/detail-clinic/${clinicId}`, '_blank');
     }
-  ]
-});
+
+    function searchClinic(e) {
+        let value = $("#searchInput").val();
+        console.log(value)
+        if (value != '') {
+            let keyword = value.toLowerCase();
+            filtered_clinics = clinics.filter(function(clinic){
+                    name = clinic.name.toLowerCase();
+                return name.indexOf(keyword) > -1;
+            });
+
+            renderClinic(filtered_clinics)
+        } else {
+            renderClinic(clinics)
+        }
+    }
+
+    function renderClinic(data) {
+        let html = ``
+
+        $.each(data, function (key, clinic) {
+            html += `
+                <div class="mx-2 cursor-pointer" onclick="detailClinicPage(${clinic.id})">
+                    <div class="card">
+                        <div class="body text-center" style="min-height: 23rem;">
+                            <img src="{{ asset('images/landingpage/hospital-icon.png') }}" alt="" class="img-fluid mx-auto">
+                            <p class="font-24">
+                                ${clinic.name}
+                            </p>
+                            <p class="font-18 text-muted">
+                                ${clinic.address}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            `
+        });
+
+        $("#renderClinic").html(html);
+    }
 </script>
 @endsection

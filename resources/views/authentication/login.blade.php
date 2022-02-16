@@ -8,7 +8,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
-<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="{{ asset('images/logo-poliklinik.png') }}" type="image/x-icon">
 <!-- VENDOR CSS -->
 <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/vendor/font-awesome/css/font-awesome.min.css') }}">
@@ -21,32 +21,38 @@
 
 </head>
 
-<body class="theme-cyan font-montserrat dark_version">
+<body class="theme-cyan font-montserrat light_version">
 <!-- Page Loader -->
+<div class="page-loader-wrapper">
+    <div class="loader">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+        <div class="bar4"></div>
+        <div class="bar5"></div>
+    </div>
+</div>
 
-<div class="auth-main particles_js">
+<div class="auth-main2 particles_js">
     <div class="auth_div vivify fadeInTop">
         <div class="card">
             <div class="body">
                 <div class="login-img">
-                    <img class="img-fluid" src="{{asset('assets/images/login-img.png')}}" />
+                    <img class="img-fluid" src="{{ asset('images/landingpage/hospital.png') }}" />
                 </div>
-                <form class="form-auth-small my-auto" action="{{route('auth')}}" method="post">
+                <form class="form-auth-small" action="{{route('auth')}}" method="post">
                     {{ csrf_field() }}
+                    <div class="mb-3">
+                        <p class="lead">Masuk ke akun kamu</p>
+                    </div>
                     <div class="form-group">
-                        <label for="signin-username" class="control-label sr-only">Username</label>
-                        <input type="text" class="form-control round" id="signin-username" name="username" placeholder="Username" required>
+                        <label for="signin-email" class="control-label sr-only">Username</label>
+                        <input type="text" name="username" class="form-control round" id="signin-username" value="" placeholder="Username" required>
                     </div>
                     <div class="form-group">
                         <label for="signin-password" class="control-label sr-only">Password</label>
-                        <input type="password" class="form-control round" id="signin-password" name="password" placeholder="Password" required>
+                        <input type="password" name="password" class="form-control round" id="signin-password" value="" placeholder="Password" required>
                     </div>
-                    {{-- <div class="form-group clearfix">
-                        <label class="fancy-checkbox element-left">
-                            <input type="checkbox">
-                            <span>Ingat saya</span>
-                        </label>
-                    </div> --}}
                     <button type="submit" class="btn btn-primary btn-round btn-block">MASUK</button>
                 </form>
                 <div class="pattern">

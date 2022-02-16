@@ -56,16 +56,16 @@
         <footer class="bg-dark text-white pt-5 pb-4 mt-6">
 
             <div class="container text-center text-md-left mt-6">
-    
+
                 <div class="row text-center text-md-left">
-    
+
                     <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-2 class ">
                         <img src="{{ asset('images/landingpage/Logo Poliklinik.png') }}" alt="" class="img-fluid mx-auto" >
                         <span class="font-weight-700 font-20 color-grey-1">Poliklinik</span>
                         <p>sebuah sistem informasi prosedur pelayanan kesehatan berbasis web yang digunakan untuk mendata, mengelola dan memantau jalur informasi pelayanan pengobatan pasien</p>
-    
+
                     </div>
-    
+
                     <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
                         <h5 class="text-uppercase mb-4 font-weight-bold text-white">Company</h5>
                     <p>
@@ -78,7 +78,7 @@
                         <a href="javascript:void(0)" class="text-white text-decoration-none"> Srategy</a>
                     </p>
                     </div>
-    
+
                     <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
                         <h5 class="text-uppercase mb-4 font-weight-bold text-white">About</h5>
                     <p>
@@ -91,7 +91,7 @@
                         <a href="javascript:void(0)" class="text-white text-decoration-none"> Clients</a>
                     </p>
                     </div>
-    
+
                     <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
                         <h5 class="text-uppercase mb-4 font-weight-bold text-white" >Find Us On</h5>
                         <div class="row">
@@ -116,26 +116,26 @@
                         </div>
                     </div>
                 </div>
-    
+
                 <hr class=" mb-4 mt-10">
-    
+
                 <div class="row align-items-center">
-    
+
                     <div class="col-md-7 mt-4 col-lg-12 text-center">
                         <p>	Copyright ©2022 All rights reserved</p>
                     </div>
-    
+
                 </div>
-    
+
             </div>
-    
+
         </div>
 
     </div>
-    
+
     </footer>
 
-         
+
 @endsection
 
 @section('script')
