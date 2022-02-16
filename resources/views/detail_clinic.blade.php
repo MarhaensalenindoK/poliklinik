@@ -19,7 +19,7 @@
 
 @section('content')
 <div class="col-md-3 col-lg-3 col-xl- mx-auto mt-2 class float-left ">
-    <img src="{{ asset('images/landingpage/Logo Poliklinik.png') }}" alt="" class="img-fluid mx-auto" >
+    <img src="{{ asset('images/logo-poliklinik.png') }}" alt="" class="img-fluid mx-auto" >
         <span class="font-weight-700 font-20 color-grey-1">Nama RS</span>
 </div>
 
@@ -50,7 +50,7 @@
         </div>
 
         <div class="mx-auto mt-5">
-            <img src="{{ asset('images/landingpage/emergency.png') }}" alt="image" class="d-block w-100 image-fluid">
+            <img src="{{ asset('images/emergency.png') }}" alt="image" class="d-block w-100 image-fluid">
         </div>
 
         <footer class="bg-dark text-white pt-5 pb-4 mt-6">
