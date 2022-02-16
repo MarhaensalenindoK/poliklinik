@@ -4,6 +4,7 @@ namespace App\Service\Database;
 
 use App\Models\Clinic;
 use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
 use Ramsey\Uuid\Uuid;
 
 class ClinicService {
@@ -15,7 +16,7 @@ class ClinicService {
 
         $query = Clinic::orderBy('created_at', $orderBy);
 
-        $clinics = $query->simplePaginate($per_page);
+        $clinics = $query->paginate($per_page);
 
         return $clinics->toArray();
     }
@@ -31,6 +32,15 @@ class ClinicService {
     {
         $clinic = new Clinic();
         $clinic->id = Uuid::uuid4()->toString();
+        $clinic = $this->fill($clinic, $payload);
+        $clinic->save();
+
+        return $clinic;
+    }
+
+    public function update($clinicId, $payload)
+    {
+        $clinic = Clinic::findOrFail($clinicId);
         $clinic = $this->fill($clinic, $payload);
         $clinic->save();
 
