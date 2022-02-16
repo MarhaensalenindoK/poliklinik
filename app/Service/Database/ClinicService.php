@@ -13,8 +13,13 @@ class ClinicService {
     {
         $orderBy = $filter['order_by'] ?? 'DESC';
         $per_page = $filter['per_page'] ?? 999;
+        $with_news = $filter['with_news'] ?? false;
 
         $query = Clinic::orderBy('created_at', $orderBy);
+
+        if ($with_news) {
+            $query->with('news');
+        }
 
         $clinics = $query->paginate($per_page);
 
@@ -45,6 +50,13 @@ class ClinicService {
         $clinic->save();
 
         return $clinic;
+    }
+
+    public function destroy($clinicId)
+    {
+        Clinic::findOrFail($clinicId)->delete();
+
+        return true;
     }
 
     private function fill(Clinic $clinic, array $attributes)

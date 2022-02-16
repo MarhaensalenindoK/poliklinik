@@ -10,19 +10,20 @@ use Ramsey\Uuid\Uuid;
 use Illuminate\Validation\Rule;
 
 class UserService {
-    public function index($clinicId, $filter = [])
+    public function index($filter = [])
     {
         $orderBy = $filter['order_by'] ?? 'DESC';
         $per_page = $filter['per_page'] ?? 999;
         $role = $filter['role'] ?? null;
         $name = $filter['name'] ?? null;
+        $clinic_id = $filter['clinic_id'] ?? null;
         $with_clinic = $filter['with_clinic'] ?? false;
-
-        Clinic::findOrFail($clinicId);
 
         $query = User::orderBy('created_at', $orderBy);
 
-        $query->where('clinic_id', $clinicId);
+        if ($clinic_id !== null) {
+            $query->where('clinic_id', $clinicId);
+        }
 
         if ($role !== null) {
             $query->where('role', $role);
@@ -41,7 +42,7 @@ class UserService {
         return $users->toArray();
     }
 
-    public function detail($clinicId, $userId)
+    public function detail($userId)
     {
         Clinic::findOrFail($clinicId);
         $user = User::with('clinic')->findOrFail($userId);
@@ -63,6 +64,23 @@ class UserService {
         $user->save();
 
         return $user;
+    }
+
+    public function update($userId, $payload)
+    {
+        $user = User::findOrFail($userId);
+        $user = $this->fill($user, $payload);
+        $user->password = Hash::make($user->password);
+        $user->save();
+
+        return $user;
+    }
+
+    public function destroy($userId)
+    {
+        User::findOrFail($userId)->delete();
+
+        return true;
     }
 
     private function fill(User $user, array $attributes)
