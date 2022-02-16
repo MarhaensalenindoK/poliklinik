@@ -40,3 +40,11 @@ Route::group(['middleware' => ['auth', 'role:ADMIN']], function(){
         return view('layout');
     })->name('home');
 });
+
+Route::get('/detail-clinic', function () {
+    return view('detail_clinic');
+})->name('detail_clinic');
+
+
+
+
