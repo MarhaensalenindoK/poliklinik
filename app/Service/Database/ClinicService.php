@@ -28,7 +28,7 @@ class ClinicService {
 
     public function detail($clinicId)
     {
-        $clinic = Clinic::findOrfail($clinicId);
+        $clinic = Clinic::with('news')->findOrfail($clinicId);
 
         return $clinic->toArray();
     }

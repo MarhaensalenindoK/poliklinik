@@ -146,52 +146,37 @@
 </section>
 
 <!-- Testimonial Section Start -->
+@if ($clinicDetail['news'] !== [])
 <section id="testimonial" class="testimonial section-padding">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div id="testimonials" class="owl-carousel wow fadeInUp" data-wow-delay="1.2s">
+                    @foreach ($clinicDetail['news'] as $news)
                     <div class="item">
                         <div class="testimonial-item d-flex">
+                            @if ($news['thumbnail'] !== null)
                             <div class="img-thumb">
-                                <img src="assets/img/sm/avatar1.jpg" alt="">
+                                <img src="{{ asset('images/thumbnails/' . $news['thumbnail']) }}" alt="">
                             </div>
+                            @endif
                             <div class="content">
-                                <p class="description">Holisticly empower leveraged ROI whereas effective
-                                    web-readiness. Completely enable emerging meta-services with cross-platform web
-                                    services. Quickly initiate inexpensive total linkage rather than extensible
-                                    scenarios. Holisticly empower leveraged ROI whereas effective web-readiness.
+                                <p class="description">{{ $news['content'] }}
                                 </p>
                                 <div class="info">
-                                    <h2><a href="#">Lisa Garett</a></h2>
-                                    <h3><a href="#">CEO & Founder @Oculux</a></h3>
+                                    <h2><a href="javascript:void(0)">{{ $news['title'] }}</a></h2>
+                                    {{-- <h3><a href="javascript:void(0)">CEO & Founder @Oculux</a></h3> --}}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="item">
-                        <div class="testimonial-item d-flex">
-                            <div class="img-thumb">
-                                <img src="assets/img/sm/avatar2.jpg" alt="">
-                            </div>
-                            <div class="content">
-                                <p class="description">Holisticly empower leveraged ROI whereas effective
-                                    web-readiness. Completely enable emerging meta-services with cross-platform web
-                                    services. Quickly initiate inexpensive total linkage rather than extensible
-                                    scenarios. Holisticly empower leveraged ROI whereas effective web-readiness.
-                                </p>
-                                <div class="info">
-                                    <h2><a href="#">Folisise Chosielie</a></h2>
-                                    <h3><a href="#">UX Director @PoppinApp</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
     </div>
 </section>
+@endif
 
 <!-- Footer Section Start -->
 <footer id="footer" class="footer-area section-padding">
