@@ -32,6 +32,6 @@ class Clinic extends Model
     ];
 
     public function news() {
-        return $this->hasOne(News::class, 'clinic_id', 'id');
+        return $this->hasMany(News::class);
     }
 }

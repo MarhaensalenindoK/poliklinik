@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Service\Database\ClinicService;
+use App\Service\Database\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 

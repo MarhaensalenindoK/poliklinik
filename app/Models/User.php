@@ -33,6 +33,6 @@ class User extends Authenticatable
     ];
 
     public function clinic() {
-        return $this->hasOne(Clinic::class, 'id', 'clinic_id');
+        return $this->belongsTo(Clinic::class);
     }
 }
