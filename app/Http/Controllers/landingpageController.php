@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class landingpageController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         $DBclinic = new ClinicService;
 
@@ -15,5 +15,18 @@ class landingpageController extends Controller
 
         return view('landingpage')
         ->with('clinics', $clinics);
+    }
+
+    public function detailClinic($clinicId)
+    {
+        $DBclinic = new ClinicService;
+
+        $clinicDetail = $DBclinic->detail($clinicId);
+
+        $totalService = count($clinicDetail['service']);
+
+        return view('detail_clinic')
+        ->with('clinicDetail', $clinicDetail)
+        ->with('totalService', $totalService);
     }
 }

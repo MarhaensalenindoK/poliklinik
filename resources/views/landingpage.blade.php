@@ -297,7 +297,7 @@
     let clinics = @json($clinics['data']);
 
     function detailClinicPage(clinicId) {
-        window.open(`/detail-clinic/${clinicId}`, '_blank');
+        window.open(`/${clinicId}/detail-clinic`, '_blank');
     }
 
     function searchClinic(e) {

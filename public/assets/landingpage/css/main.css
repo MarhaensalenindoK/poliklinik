@@ -291,11 +291,11 @@ hr {
   border-top: 1px dotted #ddd;
 }
 
-#feature {
+#facility {
   background: #22252a;
 }
-#feature hr{ border-color: #414448; }
-#feature .title-h3{ color: #a5a8ad}
+#facility hr{ border-color: #414448; }
+#facility .title-h3{ color: #a5a8ad}
 
 .text-wrapper {
   height: 100%;
