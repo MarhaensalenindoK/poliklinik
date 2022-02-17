@@ -30,4 +30,8 @@ class Clinic extends Model
         'created_at',
         'update_at',
     ];
+
+    public function news() {
+        return $this->hasMany(News::class);
+    }
 }
