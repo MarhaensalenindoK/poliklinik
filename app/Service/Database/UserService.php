@@ -14,8 +14,10 @@ class UserService {
     {
         $orderBy = $filter['order_by'] ?? 'DESC';
         $per_page = $filter['per_page'] ?? 999;
+        $page = $filter['page'] ?? 1;
         $role = $filter['role'] ?? null;
         $name = $filter['name'] ?? null;
+        $status = $filter['status'] ?? null;
         $clinic_id = $filter['clinic_id'] ?? null;
         $with_clinic = $filter['with_clinic'] ?? false;
 
@@ -33,11 +35,15 @@ class UserService {
             $query->where('name', $name);
         }
 
+        if ($status !== null) {
+            $query->where('status', $status);
+        }
+
         if ($with_clinic) {
             $query->with('clinic');
         }
 
-        $users = $query->paginate($per_page);
+        $users = $query->paginate($per_page, ['*'], 'page', $page);
 
         return $users->toArray();
     }

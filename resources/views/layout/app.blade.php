@@ -48,9 +48,7 @@
 
     <div id="main-content">
         @yield('content')
-        <img src="{{ asset('images/logo-poliklinik.png') }}" alt="" srcset="">
     </div>
-    {{-- <link rel="icon" href="{{ asset('images/logo-poliklinik.png') }}" type="image/x-icon"> --}}
 </div>
 
 
