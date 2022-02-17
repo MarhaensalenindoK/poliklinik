@@ -32,6 +32,7 @@
         <div class="overlay"></div>
 
         <div id="wrapper">
+            @include('components.header_landingpage')
             @yield('content')
 
         </div>

@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
     {
         $clinicId = Clinic::factory(['name' => 'Tadika Mesra'])->create()->id;
 
-        News::factory(['clinic_id' => $clinicId])->create();
+        News::factory(['clinic_id' => $clinicId])->count(5)->create();
 
         $users = [
             [

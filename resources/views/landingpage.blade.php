@@ -4,7 +4,6 @@
 @endsection
 
 @section('content')
-@extends('components.header_landingpage')
 <div id="slideLandingPage" class="carousel slide mt-5" data-ride="carousel">
     <ol class="carousel-indicators">
         <li data-target="#slideLandingPage" data-slide-to="0" class="active"></li>
@@ -297,7 +296,7 @@
     let clinics = @json($clinics['data']);
 
     function detailClinicPage(clinicId) {
-        window.open(`/detail-clinic/${clinicId}`, '_blank');
+        window.open(`/${clinicId}/detail-clinic`, '_blank');
     }
 
     function searchClinic(e) {

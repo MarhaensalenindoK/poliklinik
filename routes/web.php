@@ -24,9 +24,7 @@ Route::get('/', [LoginController::class, 'check']);
 
 Route::get('/home', [Controllers\LandingPageController::class, 'index'])->name('landingpage');
 
-Route::get('/detail-clinic', function () {
-    return view('detail_clinic');
-})->name('detail_clinic');
+Route::get('/{clinicId}/detail-clinic', [Controllers\LandingPageController::class, 'detailClinic'])->name('detail_clinic');
 
 // Auth
 Route::get('/login', function () {
@@ -40,3 +38,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::group(['middleware' => ['auth', 'role:SUPERADMIN']], function(){
     Route::get('/dashboard', [Controllers\SuperAdminController::class, 'index'])->name('index');
 });
+
+
+
+
