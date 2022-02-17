@@ -2,7 +2,8 @@
 <html lang="en">
 
 <head>
-<title>Oculux | Home</title>
+<title>Poliklinik</title>
+<link rel="icon" href="{{ asset('images/logo-poliklinik.png') }}" type="image/x-icon">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -10,7 +11,6 @@
 <meta name="keywords" content="admin template, Oculux admin template, dashboard template, flat admin template, responsive admin template, web app, Light Dark version">
 <meta name="author" content="GetBootstrap, design by: puffintheme.com">
 
-<link rel="icon" href="{{ asset('images/logo-poliklinik.png') }}" type="image/x-icon">
 <!-- VENDOR CSS -->
 <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/vendor/font-awesome/css/font-awesome.min.css') }}">
@@ -42,8 +42,17 @@
 
 <!-- Overlay For Sidebars -->
 <div class="overlay"></div>
+<div id="wrapper">
+    @include('components.header')
+    @include('components.sidebar')
 
-@yield('content')
+    <div id="main-content">
+        @yield('content')
+        <img src="{{ asset('images/logo-poliklinik.png') }}" alt="" srcset="">
+    </div>
+    {{-- <link rel="icon" href="{{ asset('images/logo-poliklinik.png') }}" type="image/x-icon"> --}}
+</div>
+
 
 <!-- Javascript -->
 <script src="{{ asset('assets/bundles/libscripts.bundle.js') }}"></script>

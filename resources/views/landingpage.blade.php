@@ -4,7 +4,6 @@
 @endsection
 
 @section('content')
-@extends('components.header_landingpage')
 <div id="slideLandingPage" class="carousel slide mt-5" data-ride="carousel">
     <ol class="carousel-indicators">
         <li data-target="#slideLandingPage" data-slide-to="0" class="active"></li>
