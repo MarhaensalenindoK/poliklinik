@@ -61,6 +61,9 @@
             </div>
             <div class="col-lg-8 col-md-12" >
                 <div class="card">
+                    <div class="header">
+                        <h2>Clinics</h2>
+                    </div>
                     <div class="body border-bottom-0" id="renderClinic">
                         @foreach ($clinics['data'] as $clinic)
                             <div class="mx-2 cursor-pointer">

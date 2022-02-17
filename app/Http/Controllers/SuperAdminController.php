@@ -24,8 +24,6 @@ class SuperAdminController extends Controller
             'per_page' => 1,
         ])['total'];
 
-        // dd($users);
-
         return view('superadmin.dashboard')
         ->with('users', $users)
         ->with('totalUserNonActive', $totalUserNonActive)

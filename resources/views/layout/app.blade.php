@@ -49,7 +49,6 @@
     <div id="main-content">
         @yield('content')
     </div>
-    {{-- <link rel="icon" href="{{ asset('images/logo-poliklinik.png') }}" type="image/x-icon"> --}}
 </div>
 
 
