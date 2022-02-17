@@ -260,7 +260,16 @@ $reds: 'red' #dc3545,
     color: EEEEEE;
     height: 44px;
 }
+
 .slick-next:before {
     color: EEEEEE;
     height: 44px;
+}
+
+.bg-white-pagination {
+    background-color: #ffff !important;
+
+    &:hover{
+        background-color: #18B9CD !important;
+    }
 }
