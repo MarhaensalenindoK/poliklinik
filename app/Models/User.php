@@ -31,4 +31,8 @@ class User extends Authenticatable
         'created_at',
         'update_at',
     ];
+
+    public function clinic() {
+        return $this->belongsTo(Clinic::class);
+    }
 }
