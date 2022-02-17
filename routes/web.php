@@ -37,6 +37,8 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::group(['middleware' => ['auth', 'role:SUPERADMIN']], function(){
     Route::get('/dashboard', [Controllers\SuperAdminController::class, 'index'])->name('index');
+    Route::get('/clinic-management', [Controllers\SuperAdminController::class, 'clinicManagement'])->name('clinicManagement');
+    Route::get('/account-management', [Controllers\SuperAdminController::class, 'accountManagement'])->name('accountManagement');
 });
 
 

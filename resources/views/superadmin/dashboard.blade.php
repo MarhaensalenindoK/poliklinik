@@ -20,9 +20,9 @@
     <li class="active open">
         <a href="#myPage" class="has-arrow"><i class="icon-home"></i><span>My Page</span></a>
         <ul>
-            <li class="active"><a href="index.html">Dashboard</a></li>
-            <li><a href="javascript:void(0)">Clinic Management</a></li>
-            <li><a href="javascript:void(0)">Account Management</a></li>
+            <li class="active"><a href="{{ url('/dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url('/clinic-management') }}">Clinic Management</a></li>
+            <li><a href="{{ url('/account-management') }}">Account Management</a></li>
         </ul>
     </li>
     @endsection

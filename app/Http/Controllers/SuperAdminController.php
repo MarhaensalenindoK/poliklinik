@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class SuperAdminController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         $DBclinic = new ClinicService;
         $DBuser = new UserService;
@@ -29,5 +29,15 @@ class SuperAdminController extends Controller
         ->with('totalUserNonActive', $totalUserNonActive)
         ->with('totalUser', $totalUser)
         ->with('clinics', $clinics);
+    }
+
+    public function clinicManagement()
+    {
+        return view('superadmin.clinic_management');
+    }
+
+    public function accountManagement()
+    {
+        return view('superadmin.account_management');
     }
 }
