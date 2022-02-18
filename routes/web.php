@@ -39,6 +39,15 @@ Route::group(['middleware' => ['auth', 'role:SUPERADMIN']], function(){
     Route::get('/dashboard', [Controllers\SuperAdminController::class, 'index'])->name('index');
     Route::get('/clinic-management', [Controllers\SuperAdminController::class, 'clinicManagement'])->name('clinicManagement');
     Route::get('/account-management', [Controllers\SuperAdminController::class, 'accountManagement'])->name('accountManagement');
+
+    Route::prefix('database')->group(function () {
+        Route::get('/superadmin', [Controllers\SuperAdminController::class, 'getSuperAdmin']);
+        Route::post('/user/reset-password', [Controllers\SuperAdminController::class, 'resetPassword']);
+        Route::patch('/user', [Controllers\SuperAdminController::class, 'updateAccount']);
+        Route::delete('/user', [Controllers\SuperAdminController::class, 'deleteAccount']);
+
+        Route::get('/clinic', [Controllers\SuperAdminController::class, 'getClinic']);
+    });
 });
 
 

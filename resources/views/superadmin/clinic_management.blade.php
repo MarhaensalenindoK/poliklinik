@@ -27,46 +27,131 @@
     </li>
     @endsection
 @section('content')
+<div class="row clearfix mt-5">
+    <div class="col-lg-12 col-md-12">
+        <div class="card">
+            <div class="header d-flex justify-content-between">
+                <h2>Clinics</h2>
+                <button class="btn btn-primary float-right">
+                    Create Clinic
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12">
+        <div class="table-responsive">
+            <table class="table table-hover table-custom spacing5" id="table_clinic">
+                <thead>
+                    <tr>
+                        <th style="width: 20px;">#</th>
+                        <th>name clinic</th>
+                        <th>address</th>
+                        <th>facility</th>
+                        <th>service</th>
+                        <th>contact</th>
+                        <th>action</th>
+                    </tr>
+                </thead>
+                <tbody id="renderClinic">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('script')
 <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap4.min.js"></script>
 <script>
-    $(document).ready( function () {
-        $('#table_id').DataTable();
-    } );
-    $('#renderClinic').slick({
-        dots: false,
-        infinite: true,
-        speed: 300,
-        slidesToShow: 3,
-        slidesToScroll: 2,
-        responsive: [
-            {
-            breakpoint: 1024,
-            settings: {
-                slidesToShow: 2,
-                slidesToScroll: 1,
-                infinite: true,
-                dots: false
-            }
-            },
-            {
-            breakpoint: 600,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-            }
-            },
-            {
-            breakpoint: 480,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-            }
-            }
-        ]
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
     });
+    getClinic()
+    function getClinic() {
+        let url = `{{ url('/database/clinic') }}`
+
+        $.ajax({
+            type: "get",
+            url: url,
+            success: function (response) {
+                renderClinic(response.data)
+            },
+            error: function (e) {
+                swal({
+                    title: "Error",
+                    text: "Gagal mendapatkan data",
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+            }
+        });
+    }
+
+    function renderClinic(data) {
+        let html = ``
+        let no = 1
+        $.each(data, function (key, clinic) {
+            html += `
+            <tr>
+                <td>
+                    <span>${no++}</span>
+                </td>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <a href="javascript:void(0)" title="${clinic.name}">${clinic.name}</a>
+                            <p class="mb-0">${clinic.email === null ? '-' : clinic.email}</p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <span>${clinic.address}</span>
+                </td>
+                <td>`
+                $.each(clinic.facility, function (keyFacility, facility) {
+                    let lastFacility = keyFacility == clinic.facility.length -1;
+                    if (lastFacility) {
+                        html += `
+                            ${facility.name}.
+                        `
+                    }
+                    html += `
+                        ${facility.name},
+                    `
+                });
+            html +=`</td>
+                <td>`
+                    $.each(clinic.service, function (keyService, service) {
+                        let lastService = keyService == clinic.service.length -1;
+                        if (lastService) {
+                            html += `
+                                ${service}.
+                            `
+                        }
+                        html += `
+                            ${service},
+                        `
+                    });
+            html +=`</td>
+                <td>
+                    <span>${clinic.contact === null ? '-' : clinic.contact}</span>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-sm btn-default" onclick="showModalUpdateAccount('${clinic.id}')" title="Update Account" data-toggle="tooltip" data-placement="top"><i class="icon-pencil"></i></button>
+                    <button type="button" class="btn btn-sm btn-default" onclick="deleteAccount('${clinic.id}')" title="Delete Account" data-toggle="tooltip" data-placement="top"><i class="icon-trash"></i></button>
+                </td>
+            </tr>
+            `
+        });
+
+        $("#renderClinic").html(html);
+        $(document).ready( function () {
+            $('#table_clinic').DataTable();
+        } );
+    }
 </script>
 @endsection

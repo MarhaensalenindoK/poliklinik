@@ -50,7 +50,6 @@ class UserService {
 
     public function detail($userId)
     {
-        Clinic::findOrFail($clinicId);
         $user = User::with('clinic')->findOrFail($userId);
 
         return $user->toArray();
@@ -79,7 +78,7 @@ class UserService {
         $user->password = Hash::make($user->password);
         $user->save();
 
-        return $user;
+        return $user->toArray();
     }
 
     public function destroy($userId)

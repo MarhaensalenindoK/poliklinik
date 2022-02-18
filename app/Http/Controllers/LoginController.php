@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Service\Database\ClinicService;
-use App\Service\Database\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,12 +27,12 @@ class LoginController extends Controller
             return redirect('dashboard');
         }
 
-        return redirect('login')->view('authentication.login');
+        return redirect('login')->with('error', true);
     }
 
     public function logout(){
         Auth::logout();
 
-        return redirect('/');
+        return redirect('/login');
     }
 }
