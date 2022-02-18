@@ -260,6 +260,13 @@
 @section('script')
 <script>
 
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+
     $('#renderClinic').slick({
         dots: true,
         infinite: true,

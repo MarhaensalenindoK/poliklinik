@@ -16,6 +16,8 @@
 
 <link rel="stylesheet" href="{{ asset('assets/vendor/c3/c3.min.css') }}"/>
 
+<link rel="stylesheet" href="{{ asset('assets/vendor/sweetalert/sweetalert.css') }}"/>
+
 <!-- MAIN CSS -->
 <link rel="stylesheet" href="{{ asset('assets/css/site.min.css') }}">
 
@@ -73,8 +75,13 @@
 <script src="{{ asset('assets/bundles/vendorscripts.bundle.js') }}"></script>
 
 <script src="{{ asset('assets/bundles/c3.bundle.js') }}"></script>
-
+<script src="{{ asset('assets/vendor/sweetalert/sweetalert.min.js') }}"></script>
 <script src="{{ asset('assets/bundles/mainscripts.bundle.js') }}"></script>
 <script src="{{ asset('assets/js/index.js') }}"></script>
+@if (Session::has('error'))
+<script>
+     swal("Error!", "Gagal login!. Silahkan cek username dan password kembali !", "error");
+</script>
+@endif
 </body>
 </html>

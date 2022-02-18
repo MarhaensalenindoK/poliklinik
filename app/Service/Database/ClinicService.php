@@ -13,6 +13,7 @@ class ClinicService {
     {
         $orderBy = $filter['order_by'] ?? 'DESC';
         $per_page = $filter['per_page'] ?? 999;
+        $page = $filter['page'] ?? 1;
         $with_news = $filter['with_news'] ?? false;
 
         $query = Clinic::orderBy('created_at', $orderBy);
@@ -21,7 +22,7 @@ class ClinicService {
             $query->with('news');
         }
 
-        $clinics = $query->paginate($per_page);
+        $clinics = $query->paginate($per_page, ['*'], 'page', $page);
 
         return $clinics->toArray();
     }
