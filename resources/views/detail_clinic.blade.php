@@ -71,7 +71,7 @@
                         {{ $clinicDetail['name'] }}</h2>
                     </div>
                     <div class="img-thumb text-center wow fadeInUp" data-wow-delay="0.6s">
-                        <img class="img-fluid" src="{{ $clinicDetail['profile_image'] !== null ? asset('images/thumbnails/' . $clinicDetail['profile_image']) : asset('images/thumbnails/thumbnail1.png') }}" alt="">
+                        <img class="img-fluid" src="{{ $clinicDetail['profile_image'] !== null ? asset('images/profile_image/' . $clinicDetail['profile_image']) : asset('images/profile_image/thumbnail1.png') }}" alt="">
                     </div>
                 </div>
             </div>

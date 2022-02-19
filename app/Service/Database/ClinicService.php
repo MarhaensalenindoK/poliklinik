@@ -75,7 +75,7 @@ class ClinicService {
             'service' => 'required',
             'contact' => 'nullable|numeric',
             'email' => 'nullable|email',
-            'profile_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'profile_image' => 'nullable',
         ])->validate();
 
         return $clinic;

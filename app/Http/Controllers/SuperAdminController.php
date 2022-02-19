@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Service\Database\ClinicService;
 use App\Service\Database\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SuperAdminController extends Controller
 {
@@ -100,5 +101,41 @@ class SuperAdminController extends Controller
         $clinics = $DBclinic->index();
 
         return response()->json($clinics);
+    }
+
+    public function createClinic(Request $request)
+    {
+        $DBclinic = new ClinicService;
+        $countFacility = count($request->nameFacility);
+        $countService = count($request->nameService);
+
+        $payload = [
+            'name' => $request->name,
+            'address' => $request->address,
+            'contact' => $request->contact,
+            'about' => $request->about,
+            'email' => $request->email ?? null,
+        ];
+
+        $nameFacility = $request->nameFacility;
+        $descriptionFacility = $request->descriptionFacility;
+        for ($index = 0; $index < $countFacility; $index++) {
+            $payload['facility'][$index] = [
+                'name' => $nameFacility[$index],
+                'description' => $descriptionFacility[$index],
+            ];
+        }
+
+        $nameService = $request->nameService;
+        for ($index = 0; $index < $countService; $index++) {
+            $payload['service'][$index] = $nameService[$index];
+        }
+
+        $uploadImage = Storage::disk('public')->put('profile_image', $request->file('image'));
+        $payload['profile_image'] = $uploadImage;
+
+        $createClinic = $DBclinic->create($payload);
+        dd($createClinic);
+        return redirect('clinic-management');
     }
 }

@@ -2,6 +2,19 @@
 
 @section('css')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap4.min.css">
+    <style>
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
 @endsection
 @section('sidebar-biodata')
     <span>Welcome,</span>
@@ -32,7 +45,7 @@
         <div class="card">
             <div class="header d-flex justify-content-between">
                 <h2>Clinics</h2>
-                <button class="btn btn-primary float-right">
+                <button class="btn btn-primary float-right" onclick="showModalCreateClinic()">
                     Create Clinic
                 </button>
             </div>
@@ -59,6 +72,8 @@
         </div>
     </div>
 </div>
+
+@include('superadmin.modals._create_clinic')
 @endsection
 
 @section('script')
@@ -152,6 +167,47 @@
         $(document).ready( function () {
             $('#table_clinic').DataTable();
         } );
+    }
+
+    function showModalCreateClinic() {
+        $("#createClinic").modal('show')
+    }
+
+    function addInputFacility() {
+        let inputLength = $(".inputManyFacility").length
+        let html = `
+            <div class="mt-3 inputManyFacility input-facility-${inputLength + 1}" style="display:none;">
+                <div class="d-flex">
+                    <input type="text" class="form-control" name="nameFacility[]" placeholder="Nama Fasilitas" required>
+                    <a href="javascript:void(0)" class="btn btn-primary ml-1" onclick="removeInputFacility(${inputLength + 1})">X</a>
+                </div>
+                <textarea class="form-control mt-3" rows="5" cols="30" name="descriptionFacility[]" placeholder="Deskripsi Fasilitas" required></textarea>
+            </div>
+        `
+        $("#input-facility").append(html);
+        $(`.input-facility-${inputLength + 1}`).show('slow')
+    }
+
+    function removeInputFacility(index) {
+        $(`.input-facility-${index}`).hide('slow', function(){ $(this).remove(); });
+    }
+
+    function addInputService() {
+        let inputLength = $(".inputManyService").length
+        let html = `
+            <div class="mt-3 inputManyService input-service-${inputLength + 1}" style="display:none;">
+                <div class="d-flex">
+                    <input type="text" class="form-control" name="nameService[]" placeholder="Layanan" required>
+                    <a href="javascript:void(0)" class="btn btn-primary ml-1" onclick="removeInputService(${inputLength + 1})">X</a>
+                </div>
+            </div>
+        `
+        $("#input-service").append(html);
+        $(`.input-service-${inputLength + 1}`).show('slow')
+    }
+
+    function removeInputService(index) {
+        $(`.input-service-${index}`).hide('slow', function(){ $(this).remove(); });
     }
 </script>
 @endsection
