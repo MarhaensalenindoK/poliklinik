@@ -41,7 +41,7 @@ class ClinicService {
         $clinic = $this->fill($clinic, $payload);
         $clinic->save();
 
-        return $clinic;
+        return $clinic->toArray();
     }
 
     public function update($clinicId, $payload)
@@ -50,7 +50,7 @@ class ClinicService {
         $clinic = $this->fill($clinic, $payload);
         $clinic->save();
 
-        return $clinic;
+        return $clinic->toArray();
     }
 
     public function destroy($clinicId)
