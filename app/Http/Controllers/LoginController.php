@@ -24,9 +24,14 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt(($credentials + ['status' => true]))){
-            return redirect('dashboard');
-        }
+            $user = Auth::user();
 
+            if ($user->role === 'SUPERADMIN') {
+                return redirect('dashboard');
+            }
+
+            return redirect( strtolower($user->role) . '/dashboard');
+        }
         return redirect('login')->with('error', true);
     }
 
