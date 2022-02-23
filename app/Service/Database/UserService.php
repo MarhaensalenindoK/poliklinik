@@ -24,7 +24,7 @@ class UserService {
         $query = User::orderBy('created_at', $orderBy);
 
         if ($clinic_id !== null) {
-            $query->where('clinic_id', $clinicId);
+            $query->where('clinic_id', $clinic_id);
         }
 
         if ($role !== null) {

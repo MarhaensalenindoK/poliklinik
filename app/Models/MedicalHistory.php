@@ -13,7 +13,6 @@ class MedicalHistory extends Model
 
     protected $casts = [
         'been_diagnosed' => 'array',
-        'been_diagnosed' => 'array',
         'hospitalization_surgery' => 'array',
     ];
 

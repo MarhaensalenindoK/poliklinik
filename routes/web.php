@@ -56,6 +56,10 @@ Route::group(['middleware' => ['auth', 'role:ADMIN'], 'prefix' => 'admin'], func
     Route::get('/admin-management', [Controllers\Admin\ManagementAccountController::class, 'index']);
 });
 
+Route::group(['middleware' => ['auth', 'role:DOCTOR'], 'prefix' => 'doctor'], function(){
+    Route::get('/dashboard', [Controllers\Doctor\DashboardController::class, 'index']);
+});
+
 
 
 
