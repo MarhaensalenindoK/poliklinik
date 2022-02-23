@@ -62,7 +62,6 @@
                     </tr>
                 </thead>
                 <tbody id="renderUser">
-
                 </tbody>
             </table>
         </div>
