@@ -22,6 +22,52 @@
     </li>
     @endsection
 @section('content')
+<div class="row clearfix mt-5">
+    <div class="col-lg-12 col-md-12">
+        <div class="card">
+            <div class="header">
+                <h2>Users</h2>
+            </div>
+            <div class="body">
+                <div class="row text-center">
+                    <div class="col-6 border-right pb-4 pt-4">
+                        <label class="mb-0">Total akun</label>
+                        <h4 class="font-30 font-weight-bold text-col-blue"></h4>
+                    </div>
+                    <div class="col-6 pb-4 pt-4">
+                        <label class="mb-0">Total Non-Active Account</label>
+                        <h4 class="font-30 font-weight-bold text-col-blue"></h4>
+                    </div>
+                    <div class="col-12">
+                        <hr style="border: 1px solid rgb(225 232 237);">
+                    </div>
+                    <div class="col-6 pb-4 pt-4 border-right">
+                        <label class="mb-0">Total Admin</label>
+                        <h4 class="font-30 font-weight-bold text-col-blue"></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12">
+        <div class="table-responsive">
+            <table class="table table-hover table-custom spacing5" id="table_account">
+                <thead>
+                    <tr>
+                        <th style="width: 20px;">#</th>
+                        <th>Name</th>
+                        <th style="width: 50px;">email</th>
+                        <th style="width: 50px;">Status</th>
+                        <th style="width: 110px;">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="renderUser">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('script')
