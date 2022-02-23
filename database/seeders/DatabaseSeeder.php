@@ -39,6 +39,14 @@ class DatabaseSeeder extends Seeder
                 'role' => User::ADMIN,
                 'status' => true,
             ],
+            [
+                'name' => 'doctor',
+                'clinic_id' => $clinicId,
+                'username' => 'doctor123',
+                'password' => Hash::make('doctor123'),
+                'role' => User::DOCTOR,
+                'status' => true,
+            ],
         ];
 
         foreach ($users as $user) {
