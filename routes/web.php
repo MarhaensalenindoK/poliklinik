@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
 use App\Http\Controllers\LoginController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,7 +53,7 @@ Route::group(['middleware' => ['auth', 'role:SUPERADMIN']], function(){
 
 Route::group(['middleware' => ['auth', 'role:ADMIN'], 'prefix' => 'admin'], function(){
     Route::get('/dashboard', [Controllers\Admin\DashboardController::class, 'index']);
-    Route::get('/admin-management', [Controllers\Admin\DashboardController::class, 'adminManagement']);
+    Route::get('/admin-management', [Controllers\Admin\ManagementAccountController::class, 'index']);
 });
 
 
