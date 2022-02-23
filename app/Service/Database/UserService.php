@@ -20,15 +20,20 @@ class UserService {
         $status = $filter['status'] ?? null;
         $clinic_id = $filter['clinic_id'] ?? null;
         $with_clinic = $filter['with_clinic'] ?? false;
+        $not_role = $filter['not_role'] ?? null;
 
         $query = User::orderBy('created_at', $orderBy);
 
         if ($clinic_id !== null) {
-            $query->where('clinic_id', $clinicId);
+            $query->where('clinic_id', $clinic_id);
         }
 
         if ($role !== null) {
             $query->where('role', $role);
+        }
+
+        if ($not_role !== null) {
+            $query->where('role', '!=', $not_role);
         }
 
         if ($name !== null) {
