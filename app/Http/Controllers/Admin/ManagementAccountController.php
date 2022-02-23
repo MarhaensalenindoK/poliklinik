@@ -12,7 +12,7 @@ class ManagementAccountController extends Controller
 {
     public function index()
     {
-        return view('admin.account_admin_management', );
+        return view('admin.account_admin_management');
     }
 
     public function getUsers()
