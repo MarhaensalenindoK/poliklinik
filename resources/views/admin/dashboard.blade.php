@@ -32,11 +32,11 @@
                 <div class="row text-center">
                     <div class="col-6 border-right pb-4 pt-4">
                         <label class="mb-0">Total akun</label>
-                        <h4 class="font-30 font-weight-bold text-col-blue"></h4>
+                        <h4 class="font-30 font-weight-bold text-col-blue">{{ $totalUser }}</h4>
                     </div>
                     <div class="col-6 pb-4 pt-4">
                         <label class="mb-0">Total Non-Active Account</label>
-                        <h4 class="font-30 font-weight-bold text-col-blue"></h4>
+                        <h4 class="font-30 font-weight-bold text-col-blue">{{ $totalUserNonActive }}</h4>
                     </div>
                     <div class="col-6">
                         <hr style="border: 1px solid rgb(225 232 237);">
@@ -45,7 +45,7 @@
                     </div>
                     <div class="col-6 pb-4 pt-4 border-right">
                         <label class="mb-0">Total Admin</label>
-                        <h4 class="font-30 font-weight-bold text-col-blue"></h4>
+                        <h4 class="font-30 font-weight-bold text-col-blue">{{ $users['total'] }}</h4>
                     </div>
                 </div>
             </div>

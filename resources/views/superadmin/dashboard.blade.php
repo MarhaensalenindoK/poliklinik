@@ -41,7 +41,7 @@
                         </div>
                         <div class="col-6 pb-4 pt-4">
                             <label class="mb-0">Total Clinic</label>
-                            <h4 class="font-30 font-weight-bold text-col-blue">{{ $clinics['total'] }}</h4>
+                            <h4 class="font-30 font-weight-bold text-col-blue">{{ $clinics ['total']}}</h4>
                         </div>
                         <div class="col-12">
                             <hr style="border: 1px solid rgb(225 232 237);">
