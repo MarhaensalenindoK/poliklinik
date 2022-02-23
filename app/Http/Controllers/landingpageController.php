@@ -29,4 +29,9 @@ class landingpageController extends Controller
         ->with('clinicDetail', $clinicDetail)
         ->with('totalService', $totalService);
     }
+
+    public function accountManagement2(){
+        return view('admin.account_management');
+    }
+
 }

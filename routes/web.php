@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
+use App\Http\Controllers\landingpageController;
 use App\Http\Controllers\LoginController;
 
 /*
@@ -18,6 +19,8 @@ use App\Http\Controllers\LoginController;
 // Route::get('/', function () {
 //     return view('authentication.login');
 // });
+
+Route::get('/account-management2', [LandingPageController::class, 'accountManagement2']);
 
 Route::get('/', [LoginController::class, 'check']);
 // No Auth

@@ -38,7 +38,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-12 col-md-12">
+        <div class="col-lg-12 col-md-12">
         <div class="table-responsive">
             <table class="table table-hover table-custom spacing5" id="table_clinic">
                 <thead>
