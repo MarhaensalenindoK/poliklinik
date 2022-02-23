@@ -38,8 +38,10 @@
                         <label class="mb-0">Total Non-Active Account</label>
                         <h4 class="font-30 font-weight-bold text-col-blue"></h4>
                     </div>
-                    <div class="col-12">
+                    <div class="col-6">
                         <hr style="border: 1px solid rgb(225 232 237);">
+                    </div>
+                    <div class="col-6">
                     </div>
                     <div class="col-6 pb-4 pt-4 border-right">
                         <label class="mb-0">Total Admin</label>
@@ -62,6 +64,30 @@
                     </tr>
                 </thead>
                 <tbody id="renderUser">
+                    <tr>
+                        <td>
+                            <span>1</span>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <a href="javascript:void(0)" title="${user.name}">Nama</a>
+                                    <p class="mb-0">username</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>email@gmail.com</td>
+                        <td>
+                            <span class="badge badge-success ml-0 mr-0">
+                                Active
+                            </span>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-default" onclick="showModalResetPassword()" title="Reset Password" data-toggle="tooltip" data-placement="top"><i class="icon-reload"></i></button>
+                            <button type="button" class="btn btn-sm btn-default" onclick="showModalUpdateAccount()" title="Update Account" data-toggle="tooltip" data-placement="top"><i class="icon-pencil"></i></button>
+                            <button type="button" class="btn btn-sm btn-default" onclick="deleteAccount()" title="Delete Account" data-toggle="tooltip" data-placement="top"><i class="icon-trash"></i></button>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -78,5 +104,9 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
+    $(document).ready( function () {
+            $('#table_account').DataTable();
+        } );
 </script>
 @endsection
