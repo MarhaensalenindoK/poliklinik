@@ -66,6 +66,9 @@ Route::group(['middleware' => ['auth', 'role:ADMIN'], 'prefix' => 'admin'], func
 
 Route::group(['middleware' => ['auth', 'role:DOCTOR'], 'prefix' => 'doctor'], function(){
     Route::get('/dashboard', [Controllers\Doctor\DashboardController::class, 'index']);
+    Route::prefix('medicalHistory')->group(function () {
+        Route::get('/queues', [Controllers\QueuesController::class, 'index']);
+    });
 });
 
 
