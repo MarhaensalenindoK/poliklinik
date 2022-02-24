@@ -53,7 +53,19 @@ Route::group(['middleware' => ['auth', 'role:SUPERADMIN']], function(){
 
 Route::group(['middleware' => ['auth', 'role:ADMIN'], 'prefix' => 'admin'], function(){
     Route::get('/dashboard', [Controllers\Admin\DashboardController::class, 'index']);
-    Route::get('/admin-management', [Controllers\Admin\ManagementAccountController::class, 'index']);
+    Route::get('/account-management', [Controllers\Admin\ManagementAccountController::class, 'index']);
+
+    Route::prefix('database')->group(function () {
+        Route::get('/users', [Controllers\Admin\ManagementAccountController::class, 'getUsers']);
+        Route::post('/user/reset-password', [Controllers\Admin\ManagementAccountController::class, 'resetPassword']);
+        Route::post('/user', [Controllers\Admin\ManagementAccountController::class, 'createAccount']);
+        Route::patch('/user', [Controllers\Admin\ManagementAccountController::class, 'updateAccount']);
+        Route::delete('/user', [Controllers\Admin\ManagementAccountController::class, 'deleteAccount']);
+    });
+});
+
+Route::group(['middleware' => ['auth', 'role:DOCTOR'], 'prefix' => 'doctor'], function(){
+    Route::get('/dashboard', [Controllers\Doctor\DashboardController::class, 'index']);
 });
 
 
