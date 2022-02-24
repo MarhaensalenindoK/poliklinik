@@ -90,8 +90,17 @@ class SuperAdminController extends Controller
 
     public function accountManagement()
     {
-        return view('superadmin.account_management');
+        $DBuser = new UserService;
+
+        $users = $DBuser->index([
+            'with_clinic' => true,
+        ]);
+
+        return view('superadmin.account_management')
+        ->with('users', $users);
     }
+
+
 
     public function getClinic()
     {
