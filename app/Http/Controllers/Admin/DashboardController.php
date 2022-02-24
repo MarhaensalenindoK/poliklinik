@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Service\Database\UserService;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -15,8 +16,12 @@ class DashboardController extends Controller
 
         $users = $DBuser->index([
             'role' => 'ADMIN',
+            'clinic_id' => Auth::user()->clinic_id,
         ]);
-        $totalUser = $DBuser->index(['per_page' => 1])['total'];
+        $totalUser = $DBuser->index([
+            'per_page' => 1,
+            'clinic_id' => Auth::user()->clinic_id,
+        ])['total'];
         $totalUserNonActive = $DBuser->index([
             'status' => 0,
             'per_page' => 1,
