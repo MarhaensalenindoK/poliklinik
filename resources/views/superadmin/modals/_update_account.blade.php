@@ -35,7 +35,7 @@
                     </div>
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="email" class="form-control" name="email" required>
+                        <input type="email" class="form-control" name="email">
                     </div>
                     <div class="form-group">
                         <label>Role</label>
