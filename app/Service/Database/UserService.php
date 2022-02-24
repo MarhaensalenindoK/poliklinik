@@ -22,6 +22,7 @@ class UserService {
         $with_clinic = $filter['with_clinic'] ?? false;
         $with_medical_patient = $filter['with_medical_patient'] ?? false;
         $with_medical_examiner = $filter['with_medical_examiner'] ?? false;
+        $not_role = $filter['not_role'] ?? null;
 
         $query = User::orderBy('created_at', $orderBy);
 
@@ -31,6 +32,10 @@ class UserService {
 
         if ($role !== null) {
             $query->where('role', $role);
+        }
+
+        if ($not_role !== null) {
+            $query->where('role', '!=', $not_role);
         }
 
         if ($name !== null) {
