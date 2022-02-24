@@ -100,7 +100,38 @@ class SuperAdminController extends Controller
 
     public function accountManagement()
     {
-        return view('superadmin.account_management');
+        $DBclinic = new ClinicService;
+        $fullClinics = $DBclinic->index();
+
+        return view('superadmin.account_management')
+        ->with('fullClinics', $fullClinics);
+    }
+
+    public function getUser() {
+        $DBuser = new UserService;
+        $users = $DBuser->index([
+            'with_clinic' => true,
+        ]);
+
+        return response()->json($users);
+    }
+
+    public function createAccount(Request $request) {
+        $DBuser = new UserService;
+        $payload = [
+            'clinic_id' => $request->clinic_id,
+            'name' => $request->name,
+            'username' => $request->username,
+            'password' => $request->username,
+            'email' => $request->email,
+            'nik' => $request->nik,
+            'status' => true,
+            'role' => $request->role,
+        ];
+
+        $create = $DBuser->create($request->clinic_id, $payload);
+
+        return response()->json($create);
     }
 
     public function getClinic()
