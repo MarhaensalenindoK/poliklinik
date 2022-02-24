@@ -35,64 +35,9 @@
                 <h2>Account</h2>
 
                 <!-- create modal account -->
-                <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#createAccountSp">
+                <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#createAccount">
                     Create Account
                 </button>
-
-                <!-- Modal -->
-                <div class="modal fade" id="createAccountSp" tabindex="-1" role="dialog" aria-labelledby="createAccountSpLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h5 class="modal-title" id="createAccountSpLabel">Add Account</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        </div>
-                        <div class="modal-body">
-
-                            <form action="">
-                                <div class="form-group mb-3">
-                                    <label for="name">Name</label>
-                                    <input type="text" class="form-control" id="name" aria-describedby="name" placeholder="Enter name" name="name">
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="username">Username</label>
-                                    <input type="text" class="form-control" id="username" aria-describedby="username" placeholder="Enter username" name="username">
-                                </div>
-                                <label for="username">Klinik</label>
-                                <select class="custom-select mb-3">
-                                    <option selected>Open this select menu</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
-                                <div class="form-group mb-3">
-                                    <label for="nik">Nik</label>
-                                    <input type="text" class="form-control" id="nik" aria-describedby="nik" placeholder="Enter nik" name="nik">
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="email">Email</label>
-                                    <input type="email" class="form-control" id="email" aria-describedby="email" placeholder="Enter email" name="email">
-                                </div>
-                                <label for="username">Role</label>
-                                <select class="custom-select mb-3">
-                                    <option selected>Open this select menu</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
-
-                                <div class="d-flex justify-content-end">
-                                    <button type="button" class="btn btn-secondary mr-2" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                    </div>
-                            </form>
-
-                        </div>
-                    </div>
-                    </div>
-                </div>
 
             </div>
         </div>
@@ -105,7 +50,7 @@
                         <th>#</th>
                         <th>Name</th>
                         <th>Username</th>
-                        <th>Nik</th>
+                        <th>nik</th>
                         <th>Email</th>
                         <th>Klinik</th>
                         <th>Role</th>
@@ -113,114 +58,16 @@
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tbody >
-
-                    @foreach ($users['data'] as $key => $item)
-                    <tr>
-                        <td>
-                            <span>{{ $key + 1 }}</span>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <div>
-                                    <a href="javascript:void(0)" title=>{{ $item['name'] }}</a>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <span>{{ $item['username'] }}</span>
-                        </td>
-                        <td>
-                            <span>{{ $item['nik'] }}</span>
-                        </td>
-                        <td>
-                            <span>{{ $item['email'] }}</span>
-                        </td>
-                        <td>
-                            <span>{{ $item['clinic']['name'] }}</span>
-                        </td>
-                        <td>
-                            <span>{{ $item['role'] }}</span>
-                        </td>
-                        <td>
-                            @if ($item['status'] === 1)
-                                <span class="badge badge-success ml-0 mr-0">Active</span>
-                                @else
-                                <span class="badge badge-warning ml-0 mr-0">Non-Active</span>
-                            @endif
-
-
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-sm btn-default" title="Reset Password" data-toggle="tooltip" data-placement="top"><i class="icon-reload"></i></button>
-
-                            <!-- edit modal account -->
-                            <button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#editAccountSp"><i class="icon-pencil"></i></button>
-
-                            <button type="button" class="btn btn-sm btn-default" title="Delete Account" data-toggle="tooltip" data-placement="top" onclick="deleteAccount()"><i class="icon-trash"></i></button>
-                        </td>
-                    </tr>
-                    @endforeach
+                <tbody id="renderUser">
                 </tbody>
             </table>
         </div>
     </div>
 </div>
 
-<!-- Modal Edit -->
-<div class="modal fade" id="editAccountSp" tabindex="-1" role="dialog" aria-labelledby="editAccountSpLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-        <h5 class="modal-title" id="editAccountSpLabel">Edit Account</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        </div>
-        <div class="modal-body">
-
-            <form action="">
-                <div class="form-group mb-3">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" aria-describedby="name" placeholder="Enter name" name="name">
-                </div>
-                <div class="form-group mb-3">
-                    <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username" aria-describedby="username" placeholder="Enter username" name="username">
-                </div>
-                <label for="username">Klinik</label>
-                <select class="custom-select mb-3">
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
-                <div class="form-group mb-3">
-                    <label for="nik">Nik</label>
-                    <input type="text" class="form-control" id="nik" aria-describedby="nik" placeholder="Enter nik" name="nik">
-                </div>
-                <div class="form-group mb-3">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" aria-describedby="email" placeholder="Enter email" name="email">
-                </div>
-                <label for="username">Role</label>
-                <select class="custom-select mb-3">
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
-
-                <div class="d-flex justify-content-end">
-                    <button type="button" class="btn btn-secondary mr-2" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-            </form>
-
-        </div>
-    </div>
-    </div>
-</div>
+@include('superadmin.modals._create_account')
+@include('superadmin.modals._reset_password')
+@include('superadmin.modals._update_account')
 
 @endsection
 
@@ -228,9 +75,8 @@
 <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap4.min.js"></script>
 <script>
-    $(document).ready( function () {
-        $('#manageAccTable').DataTable();
-    } );
+    let users = {}
+
     $('#renderClinic').slick({
         dots: false,
         infinite: true,
@@ -264,31 +110,132 @@
         ]
     });
 
-    function deleteAccount(userId) {
-        let user = users.data.find(user => user.id === userId)
-        swal({
-            title: "Delete account",
-            text: `Yakin ingin menghapus akun <b>${user.name}</b> ?`,
-            type: "warning",
-            confirmButtonColor: "#dc3545",
-            confirmButtonText: "Hapus",
-            cancelButtonText: "Tutup",
-            html: true,
-            showCancelButton: true,
-            closeOnConfirm: false,
-            showLoaderOnConfirm: true,
-        }, function () {
+    getUser()
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    function getUser() {
+        $.ajax({
+            type: "get",
+            url: "{{ url('database/user') }}",
+            success: function (response) {
+                users = response
+                renderUser(response.data)
+            },
+            error: function (e) {
+                swal({
+                    title: "Error",
+                    text: "Gagal mengambil data",
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+            }
+        });
+    }
+
+    function renderUser(data) {
+        let html = ``
+        let no = 1
+        $.each(data, function (key, user) {
+            html += `
+            <tr>
+                <td>
+                    <span>${no++}</span>
+                </td>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <a href="javascript:void(0)" title="${user.name}">${user.name}</a>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <span>${user.username}</span>
+                </td>
+                <td>
+                    <span>${user.nik === null ? '-' : user.nik}</span>
+                </td>
+                <td>
+                    <span>${user.email === null ? '-' : user.email}</span>
+                </td>
+                <td>
+                    <span>${user.clinic.name}</span>
+                </td>
+                <td>
+                    <span>${user.role}</span>
+                </td>
+                <td>
+                    <span class="badge ${user.status === 1 ? 'badge-success' : 'badge-danger'} ml-0 mr-0">
+                        ${user.status === 1 ? 'Active' : 'Non-active'}
+                    </span>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-sm btn-default" onclick="showModalResetPassword('${user.id}')" title="Reset Password" data-toggle="tooltip" data-placement="top"><i class="icon-reload"></i></button>
+                    <button type="button" class="btn btn-sm btn-default" onclick="showModalUpdateAccount('${user.id}')" title="Update Account" data-toggle="tooltip" data-placement="top"><i class="icon-pencil"></i></button>
+                    <button type="button" class="btn btn-sm btn-default" onclick="deleteAccount('${user.id}')" title="Delete Account" data-toggle="tooltip" data-placement="top"><i class="icon-trash"></i></button>
+                </td>
+            </tr>
+            `
+        });
+
+        $("#renderUser").html(html);
+
+        $(document).ready( function () {
+            $('#manageAccTable').DataTable();
+        } );
+    }
+
+    function craeteAccount() {
+        let name = $("#createAccount").find('input[type=text][name=name]').val()
+        let username = $("#createAccount").find('input[type=text][name=username]').val()
+        let clinic_id = $("#createAccount").find('select[name=clinic]').val()
+        let nik = $("#createAccount").find('input[type=text][name=nik]').val()
+        let email = $("#createAccount").find('input[type=email][name=email]').val()
+        let role = $("#createAccount").find('select[name=role]').val()
+
+        if (name == '' || username == '' || role == null || clinic_id == null) {
+            swal({
+                    title: "Lengkapi Data !",
+                    text: "Gagal membuat data, silahkan lengkapi kembali !",
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+        } else {
             $.ajax({
-                type: "delete",
-                url: `{{ url('/database/user') }}`,
+                type: "post",
+                url: `{{ url('database/user') }}`,
                 data: {
-                    user_id : userId
+                    name,
+                    username,
+                    clinic_id,
+                    nik,
+                    email,
+                    role
                 },
                 success: function (response) {
-                    swal("Berhasil!", `Berhasil menghapus akun ${user.name}`, "success");
+                    $("#createAccount").modal('hide')
+                    swal({
+                        title: "Success",
+                        text: "Berhasil menambahkan account",
+                        timer: 1500,
+                        showConfirmButton: false
+                    });
+                    getUser()
+                },
+                error: function (e) {
+                    swal({
+                        title: "Error",
+                        text: "Gagal membuat data",
+                        timer: 1500,
+                        showConfirmButton: false
+                    });
                 }
             });
-        })
+        }
     }
 
     function showModalResetPassword(userId) {
@@ -326,6 +273,92 @@
                 });
             }
         });
+    }
+
+    function showModalUpdateAccount(userId) {
+        let user = users.data.find(user => user.id === userId)
+        $("#updateAccount").find('input[type=hidden][name=user_id]').val(user.id)
+        $("#updateAccount").find('input[type=text][name=name]').val(user.name)
+        $("#updateAccount").find('input[type=text][name=username]').val(user.username)
+        $("#updateAccount").find('select[name=clinic]').val(user.clinic_id)
+        $("#updateAccount").find('input[type=text][name=nik]').val(user.nik)
+        $("#updateAccount").find('input[type=email][name=email]').val(user.email)
+        $("#updateAccount").find('select[name=role]').val(user.role)
+        $("div.id_100 select").val("val2");
+        $("#updateAccount").modal('show')
+    }
+
+    function updateAccount() {
+        let url = `{{ url('/database/user') }}`
+        let user_id = $("#updateAccount").find('input[type=hidden][name=user_id]').val()
+        let name = $("#updateAccount").find('input[type=text][name=name]').val()
+        let username = $("#updateAccount").find('input[type=text][name=username]').val()
+        let clinic_id = $("#updateAccount").find('select[name=clinic]').val()
+        let nik = $("#updateAccount").find('input[type=text][name=nik]').val()
+        let email = $("#updateAccount").find('input[type=text][name=email]').val()
+        let role = $("#updateAccount").find('select[name=role]').val()
+
+        let data = {
+            user_id,
+            name,
+            clinic_id,
+            nik,
+            email,
+            role,
+            username
+        }
+
+        $.ajax({
+            type: "patch",
+            url: url,
+            data: data,
+            success: function (response) {
+                $("#updateAccount").modal('hide')
+                swal({
+                    title: "Success",
+                    text: "Berhasil mengubah account",
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+                getUser()
+            },
+            error: function (e) {
+                swal({
+                    title: "Error",
+                    text: "Gagal mengubah account",
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+            }
+        });
+    }
+
+    function deleteAccount(userId) {
+        let user = users.data.find(user => user.id === userId)
+        swal({
+            title: "Delete account",
+            text: `Yakin ingin menghapus akun <b>${user.name}</b> ?`,
+            type: "warning",
+            confirmButtonColor: "#dc3545",
+            confirmButtonText: "Hapus",
+            cancelButtonText: "Tutup",
+            html: true,
+            showCancelButton: true,
+            closeOnConfirm: false,
+            showLoaderOnConfirm: true,
+        }, function () {
+            $.ajax({
+                type: "delete",
+                url: `{{ url('/database/user') }}`,
+                data: {
+                    user_id : userId
+                },
+                success: function (response) {
+                    getUser()
+                    swal("Berhasil!", `Berhasil menghapus akun ${user.name}`, "success");
+                }
+            });
+        })
     }
 </script>
 @endsection

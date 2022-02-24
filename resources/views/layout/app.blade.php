@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/vendor/font-awesome/css/font-awesome.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/vendor/animate-css/vivify.min.css') }}">
-
+<link rel="stylesheet" href="{{ asset('assets/vendor/dropify/css/dropify.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/vendor/c3/c3.min.css') }}"/>
 
 <link rel="stylesheet" href="{{ asset('assets/vendor/sweetalert/sweetalert.css') }}"/>
@@ -63,6 +63,8 @@
 
 <script src="{{ asset('assets/bundles/c3.bundle.js') }}"></script>
 
+<script src="{{ asset('assets/vendor/dropify/js/dropify.js') }}"></script>
+<script src="{{ asset('assets/form/dropify.js') }}"></script>
 <script src="{{ asset('assets/bundles/mainscripts.bundle.js') }}"></script>
 <script src="{{ asset('assets/vendor/sweetalert/sweetalert.min.js') }}"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
