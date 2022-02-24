@@ -44,6 +44,8 @@ Route::group(['middleware' => ['auth', 'role:SUPERADMIN']], function(){
     Route::prefix('database')->group(function () {
         Route::get('/superadmin', [Controllers\SuperAdminController::class, 'getSuperAdmin']);
         Route::post('/user/reset-password', [Controllers\SuperAdminController::class, 'resetPassword']);
+        Route::get('/user', [Controllers\SuperAdminController::class, 'getUser']);
+        Route::post('/user', [Controllers\SuperAdminController::class, 'createAccount']);
         Route::patch('/user', [Controllers\SuperAdminController::class, 'updateAccount']);
         Route::delete('/user', [Controllers\SuperAdminController::class, 'deleteAccount']);
 
