@@ -20,6 +20,8 @@ class UserService {
         $status = $filter['status'] ?? null;
         $clinic_id = $filter['clinic_id'] ?? null;
         $with_clinic = $filter['with_clinic'] ?? false;
+        $with_medical_patient = $filter['with_medical_patient'] ?? false;
+        $with_medical_examiner = $filter['with_medical_examiner'] ?? false;
         $not_role = $filter['not_role'] ?? null;
 
         $query = User::orderBy('created_at', $orderBy);
@@ -48,6 +50,14 @@ class UserService {
             $query->with('clinic');
         }
 
+        if ($with_medical_patient) {
+            $query->with('medicalHistoryPatient');
+        }
+
+        if ($with_medical_examiner) {
+            $query->with('medicalHistoryExaminer');
+        }
+
         $users = $query->paginate($per_page, ['*'], 'page', $page);
 
         return $users->toArray();
@@ -56,6 +66,20 @@ class UserService {
     public function detail($userId)
     {
         $user = User::with('clinic')->findOrFail($userId);
+
+        return $user->toArray();
+    }
+
+    public function detailWithMedicalHistoryPatient($userId)
+    {
+        $user = User::with('medicalHistoryPatient')->findOrFail($userId);
+
+        return $user->toArray();
+    }
+
+    public function detailWithMedicalHistoryExaminer($userId)
+    {
+        $user = User::with('medicalHistoryExaminer')->findOrFail($userId);
 
         return $user->toArray();
     }
