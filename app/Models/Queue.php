@@ -25,4 +25,12 @@ class Queue extends Model
         'created_at',
         'update_at',
     ];
+
+    public function patient() {
+        return $this->hasone(User::class, 'id', 'patient_id');
+    }
+
+    public function medicalHistory() {
+        return $this->hasone(MedicalHistory::class, 'id', 'medical_history_id');
+    }
 }

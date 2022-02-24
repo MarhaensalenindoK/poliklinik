@@ -15,6 +15,7 @@ class CreateMedicinesTable extends Migration
     {
         Schema::create('medicines', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->uuid('clinic_id')->index();
             $table->string('name');
             $table->string('amount');
             $table->string('type');

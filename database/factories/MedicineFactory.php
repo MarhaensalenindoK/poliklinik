@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Clinic;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class MedicineFactory extends Factory
@@ -26,6 +27,7 @@ class MedicineFactory extends Factory
 
         return [
             'id' => $this->faker->uuid(),
+            'clinic_id' => Clinic::factory()->create()->id,
             'name' => $this->faker->name(),
             'amount' => $this->faker->randomElement($amount),
             'type' => $this->faker->randomElement($type),

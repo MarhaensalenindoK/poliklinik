@@ -32,4 +32,12 @@ class MedicalHistory extends Model
         'created_at',
         'update_at',
     ];
+
+    public function patient() {
+        return $this->hasone(User::class, 'id', 'patient_id');
+    }
+
+    public function examiner() {
+        return $this->hasone(User::class, 'id', 'examiner_id');
+    }
 }
