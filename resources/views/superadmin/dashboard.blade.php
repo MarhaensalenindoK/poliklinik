@@ -322,6 +322,7 @@
                 success: function (response) {
                     getSuperadmin()
                     swal("Berhasil!", `Berhasil menghapus akun ${user.name}`, "success");
+                    location.reload()
                 }
             });
         })
