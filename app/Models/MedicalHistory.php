@@ -34,10 +34,10 @@ class MedicalHistory extends Model
     ];
 
     public function patient() {
-        return $this->hasone(User::class, 'id', 'patient_id');
+        return $this->hasOne(User::class, 'id', 'patient_id');
     }
 
     public function examiner() {
-        return $this->hasone(User::class, 'id', 'examiner_id');
+        return $this->hasOne(User::class, 'id', 'examiner_id');
     }
 }

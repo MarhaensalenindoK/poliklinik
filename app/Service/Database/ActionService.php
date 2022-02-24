@@ -22,7 +22,7 @@ class ActionService {
 
     public function detail($actionId)
     {
-        $action = Action::with('medicine')->with('medicalHistory')->findOrFail($actionId);
+        $action = Action::with(['medicine', 'medicalHistory'])->findOrFail($actionId);
 
         return $action->toArray();
     }

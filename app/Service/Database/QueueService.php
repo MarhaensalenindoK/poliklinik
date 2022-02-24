@@ -5,6 +5,7 @@ namespace App\Service\Database;
 use App\Models\Queue as ModelsQueue;
 use Illuminate\Support\Facades\Validator;
 use Ramsey\Uuid\Uuid;
+use Illuminate\Validation\Rule;
 
 class QueueService {
     public function detail($queueId)
@@ -54,7 +55,7 @@ class QueueService {
             'patient_id' => 'required',
             'queue' => 'required',
             'date' => 'required',
-            'status' => 'required',
+            'status' => ['required', Rule::in(config('constant.queue.status'))],
         ])->validate();
 
         return $queue;
