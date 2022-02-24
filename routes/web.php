@@ -44,16 +44,33 @@ Route::group(['middleware' => ['auth', 'role:SUPERADMIN']], function(){
     Route::prefix('database')->group(function () {
         Route::get('/superadmin', [Controllers\SuperAdminController::class, 'getSuperAdmin']);
         Route::post('/user/reset-password', [Controllers\SuperAdminController::class, 'resetPassword']);
+        Route::get('/user', [Controllers\SuperAdminController::class, 'getUser']);
+        Route::post('/user', [Controllers\SuperAdminController::class, 'createAccount']);
         Route::patch('/user', [Controllers\SuperAdminController::class, 'updateAccount']);
         Route::delete('/user', [Controllers\SuperAdminController::class, 'deleteAccount']);
 
         Route::get('/clinic', [Controllers\SuperAdminController::class, 'getClinic']);
+        Route::post('/clinic', [Controllers\SuperAdminController::class, 'createClinic']);
+        Route::delete('/clinic', [Controllers\SuperAdminController::class, 'deleteClinic']);
+        Route::post('/clinic/update', [Controllers\SuperAdminController::class, 'updateClinic']);
     });
 });
 
 Route::group(['middleware' => ['auth', 'role:ADMIN'], 'prefix' => 'admin'], function(){
     Route::get('/dashboard', [Controllers\Admin\DashboardController::class, 'index']);
-    Route::get('/admin-management', [Controllers\Admin\ManagementAccountController::class, 'index']);
+    Route::get('/account-management', [Controllers\Admin\ManagementAccountController::class, 'index']);
+
+    Route::prefix('database')->group(function () {
+        Route::get('/users', [Controllers\Admin\ManagementAccountController::class, 'getUsers']);
+        Route::post('/user/reset-password', [Controllers\Admin\ManagementAccountController::class, 'resetPassword']);
+        Route::post('/user', [Controllers\Admin\ManagementAccountController::class, 'createAccount']);
+        Route::patch('/user', [Controllers\Admin\ManagementAccountController::class, 'updateAccount']);
+        Route::delete('/user', [Controllers\Admin\ManagementAccountController::class, 'deleteAccount']);
+    });
+});
+
+Route::group(['middleware' => ['auth', 'role:DOCTOR'], 'prefix' => 'doctor'], function(){
+    Route::get('/dashboard', [Controllers\Doctor\DashboardController::class, 'index']);
 });
 
 
