@@ -70,6 +70,15 @@ class SuperAdminController extends Controller
         return response()->json($delete);
     }
 
+    public function deleteClinic(Request $request)
+    {
+        $DBclinic = new ClinicService;
+
+        $delete = $DBclinic->destroy($request->clinic_id);
+
+        return response()->json($delete);
+    }
+
     public function resetPassword(Request $request)
     {
         $DBuser = new UserService;

@@ -153,6 +153,34 @@
         });
     }
 
+    function deleteClinic(clinicId) {
+        let clinic = clinics.data.find(thisClinic => thisClinic.id === clinicId)
+        swal({
+            title: "Delete Clinic",
+            text: `Yakin ingin menghapus clinic <b>${clinic.name}</b> ?`,
+            type: "warning",
+            confirmButtonColor: "#dc3545",
+            confirmButtonText: "Hapus",
+            cancelButtonText: "Tutup",
+            html: true,
+            showCancelButton: true,
+            closeOnConfirm: false,
+            showLoaderOnConfirm: true,
+        }, function () {
+            $.ajax({
+                type: "delete",
+                url: `{{ url('/database/clinic') }}`,
+                data: {
+                    clinic_id : clinicId
+                },
+                success: function (response) {
+                    swal("Berhasil!", `Berhasil menghapus clinic ${clinic.name}`, "success");
+                    location.reload()
+                }
+            });
+        })
+    }
+
     function renderClinic(data) {
         let html = ``
         let no = 1

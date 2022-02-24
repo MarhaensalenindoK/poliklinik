@@ -49,6 +49,7 @@ Route::group(['middleware' => ['auth', 'role:SUPERADMIN']], function(){
 
         Route::get('/clinic', [Controllers\SuperAdminController::class, 'getClinic']);
         Route::post('/clinic', [Controllers\SuperAdminController::class, 'createClinic']);
+        Route::delete('/clinic', [Controllers\SuperAdminController::class, 'deleteClinic']);
         Route::post('/clinic/update', [Controllers\SuperAdminController::class, 'updateClinic']);
     });
 });

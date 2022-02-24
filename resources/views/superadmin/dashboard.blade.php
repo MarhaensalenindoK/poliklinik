@@ -321,6 +321,7 @@
                 },
                 success: function (response) {
                     swal("Berhasil!", `Berhasil menghapus akun ${user.name}`, "success");
+                    location.reload()
                 }
             });
         })
