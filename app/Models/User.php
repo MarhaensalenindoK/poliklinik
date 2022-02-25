@@ -36,6 +36,10 @@ class User extends Authenticatable
         return $this->belongsTo(Clinic::class);
     }
 
+    public function queue() {
+        return $this->hasOne(Queue::class, 'patient_id', 'id');
+    }
+
     public function medicalHistoryPatient() {
         return $this->belongsTo(MedicalHistory::class, 'patient_id', 'id');
     }
