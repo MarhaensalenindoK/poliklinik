@@ -111,7 +111,7 @@
                             <span>reski@gmail.com</span>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-default" title="Check" data-toggle="tooltip" data-placement="top"><i class="fa fa-check-square-o"></i></button>
+                            <button type="button" class="btn btn-sm btn-default" title="Add queue" data-toggle="tooltip" data-placement="top"><i class="fa fa-check-square-o"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -135,7 +135,7 @@
                             <span>reski@gmail.com</span>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-default" title="Check" data-toggle="tooltip" data-placement="top"><i class="fa fa-check-square-o"></i></button>
+                            <button type="button" class="btn btn-sm btn-default" title="Add queue" data-toggle="tooltip" data-placement="top"><i class="fa fa-check-square-o"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -159,7 +159,7 @@
                             <span>reski@gmail.com</span>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-default" title="Check" data-toggle="tooltip" data-placement="top"><i class="fa fa-check-square-o"></i></button>
+                            <button type="button" class="btn btn-sm btn-default" title="Add queue" data-toggle="tooltip" data-placement="top"><i class="fa fa-check-square-o"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -183,7 +183,7 @@
                             <span>reski@gmail.com</span>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-default" title="Check" data-toggle="tooltip" data-placement="top"><i class="fa fa-check-square-o"></i></button>
+                            <button type="button" class="btn btn-sm btn-default" title="Add queue" data-toggle="tooltip" data-placement="top"><i class="fa fa-check-square-o"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -207,7 +207,7 @@
                             <span>reski@gmail.com</span>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-default" title="Check" data-toggle="tooltip" data-placement="top"><i class="fa fa-check-square-o"></i></button>
+                            <button type="button" class="btn btn-sm btn-default" title="Add queue" data-toggle="tooltip" data-placement="top"><i class="fa fa-check-square-o"></i></button>
                         </td>
                     </tr>
 
