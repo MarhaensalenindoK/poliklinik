@@ -30,22 +30,19 @@
             </div>
             <div class="body">
                 <div class="row text-center">
-                    <div class="col-6 border-right pb-4 pt-4">
-                        <label class="mb-0">Total akun</label>
-                        <h4 class="font-30 font-weight-bold text-col-blue"></h4>
+                    <div class="col col-md-6 border-right">
+                        <div class="border-bottom  pb-4 pt-4">
+                            <label class="mb-0">Total akun</label>
+                            <h4 class="font-30 font-weight-bold text-col-blue">{{ $totalUser }}</h4>
+                        </div>
+                        <div class="pb-4 pt-4">
+                            <label class="mb-0">Total Admin</label>
+                            <h4 class="font-30 font-weight-bold text-col-blue">{{ $users['total'] }}</h4>
+                        </div>
                     </div>
-                    <div class="col-6 pb-4 pt-4">
+                    <div class="col col-md-6 mx-auto my-auto">
                         <label class="mb-0">Total Non-Active Account</label>
-                        <h4 class="font-30 font-weight-bold text-col-blue"></h4>
-                    </div>
-                    <div class="col-6">
-                        <hr style="border: 1px solid rgb(225 232 237);">
-                    </div>
-                    <div class="col-6">
-                    </div>
-                    <div class="col-6 pb-4 pt-4 border-right">
-                        <label class="mb-0">Total Admin</label>
-                        <h4 class="font-30 font-weight-bold text-col-blue"></h4>
+                        <h4 class="font-30 font-weight-bold text-col-blue">{{ $totalUserNonActive }}</h4>
                     </div>
                 </div>
             </div>
@@ -57,37 +54,15 @@
                 <thead>
                     <tr>
                         <th style="width: 20px;">#</th>
-                        <th>Name</th>
-                        <th style="width: 50px;">email</th>
-                        <th style="width: 50px;">Status</th>
-                        <th style="width: 110px;">Action</th>
+                        <th>name</th>
+                        <th>username</th>
+                        <th>nik</th>
+                        <th>email</th>
+                        <th>role</th>
+                        <th>status</th>
                     </tr>
                 </thead>
                 <tbody id="renderUser">
-                    <tr>
-                        <td>
-                            <span>1</span>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <div>
-                                    <a href="javascript:void(0)" title="${user.name}">Nama</a>
-                                    <p class="mb-0">username</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td>email@gmail.com</td>
-                        <td>
-                            <span class="badge badge-success ml-0 mr-0">
-                                Active
-                            </span>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-sm btn-default" onclick="showModalResetPassword()" title="Reset Password" data-toggle="tooltip" data-placement="top"><i class="icon-reload"></i></button>
-                            <button type="button" class="btn btn-sm btn-default" onclick="showModalUpdateAccount()" title="Update Account" data-toggle="tooltip" data-placement="top"><i class="icon-pencil"></i></button>
-                            <button type="button" class="btn btn-sm btn-default" onclick="deleteAccount()" title="Delete Account" data-toggle="tooltip" data-placement="top"><i class="icon-trash"></i></button>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
         </div>
@@ -105,8 +80,85 @@
         }
     });
 
-    $(document).ready( function () {
+    getUsers();
+    let users;
+
+    function getUsers() {
+        let url = `{{ url('/admin/database/users') }}`
+
+        $.ajax({
+            type: "get",
+            url: url,
+            beforeSend: function () {
+                html = `
+                <tr>
+                    <td colspan="7">
+                        <span>sedang mengambil data ...</span>
+                    </td>
+                </tr>
+                `;
+                $("#renderUser").html(html);
+            },
+            success: function (response) {
+                users = response.data;
+                if (response.total !== 0) {
+                    renderUser(users)
+                } else {
+                    html = `
+                    <tr>
+                        <td colspan="7">
+                            <span>Belum ada data</span>
+                        </td>
+                    </tr>
+                    `;
+
+                    $("#renderUser").html(html);
+                }
+            },
+            error: function (e) {
+                swal({
+                    title: "Error",
+                    text: "Gagal mendapatkan data",
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+            }
+        });
+    }
+
+    function renderUser(data) {
+        let html = ``;
+        let no = 0;
+        $.each(data, function (key, user) {
+            html += `
+            <tr>
+                <td>
+                    <span>${key + 1}</span>
+                </td>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <a href="javascript:void(0)" title="${user.name}">${user.name}</a>
+                        </div>
+                    </div>
+                </td>
+                <td><span>${user.username}</span></td>
+                <td><span>${user.nik !== null ? user.nik : '-'}</span></td>
+                <td><span>${user.email !== null ? user.email : '-'}</span></td>
+                <td><span>${user.role}</span></td>
+                <td>
+                    <span class="badge ${user.status === 1 ? 'badge-success' : 'badge-danger'} ml-0 mr-0">
+                        ${user.status === 1 ? 'Active' : 'Non-active'}
+                    </span>
+                </td>
+            </tr>
+            `;
+        });
+
+        $("#renderUser").html(html);
+        $(document).ready( function () {
             $('#table_account').DataTable();
-        } );
+        });
+    }
 </script>
 @endsection

@@ -28,9 +28,7 @@ Route::get('/home', [Controllers\LandingPageController::class, 'index'])->name('
 Route::get('/{clinicId}/detail-clinic', [Controllers\LandingPageController::class, 'detailClinic'])->name('detail_clinic');
 
 // Auth
-Route::get('/login', function () {
-    return view('authentication.login');
-})->name('login');
+Route::get('/login', [LoginController::class, 'check'])->name('login');
 
 Route::post('/authenticate', [LoginController::class, 'authenticate'])->name('auth');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
