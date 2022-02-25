@@ -17,6 +17,7 @@ class CreateQueuesTable extends Migration
             $table->uuid('id')->primary();
             $table->uuid('medical_history_id');
             $table->uuid('patient_id');
+            $table->uuid('clinic_id');
             $table->integer('queue');
             $table->date('date');
             $table->string('status');
