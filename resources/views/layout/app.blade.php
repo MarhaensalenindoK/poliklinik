@@ -47,11 +47,12 @@
 <div id="wrapper">
     @include('components.header')
     @include('components.sidebar')
+    @include('layout._change_password')
 
     <div id="main-content">
         <div class="container-fluid">
+            <a href="javascript:void(0);" class="megamenu_toggle icon-menu d-none" id="modalResetPassword" title="Mega Menu">Mega</a>
             @yield('content')
-            @include('layout._change_password')
         </div>
     </div>
 </div>
@@ -80,9 +81,9 @@
             confirmButtonColor: "#17C2D7",
             confirmButtonText: "Ganti Password",
             cancelButtonText: "Lewati",
-            closeOnConfirm: false,
+            closeOnConfirm: true,
         }, function () {
-            console.log('ok')
+            $("#modalResetPassword").click();
         })
     }
 </script>
