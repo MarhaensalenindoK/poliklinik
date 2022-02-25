@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Service\Database\ClinicService;
 use App\Service\Database\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class SuperAdminController extends Controller
@@ -26,11 +28,17 @@ class SuperAdminController extends Controller
             'per_page' => 1,
         ])['total'];
 
+        $pw_matches = false;
+        if (Hash::check(Auth::user()->username, Auth::user()->password)){
+            $pw_matches = true;
+        }
+
         return view('superadmin.dashboard')
         ->with('users', $users)
         ->with('fullClinics', $fullClinics)
         ->with('totalUserNonActive', $totalUserNonActive)
         ->with('totalUser', $totalUser)
+        ->with('pw_matches', $pw_matches)
         ->with('clinics', $clinics);
     }
 

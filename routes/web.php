@@ -34,6 +34,7 @@ Route::get('/login', function () {
 
 Route::post('/authenticate', [LoginController::class, 'authenticate'])->name('auth');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::post('reset-password', [LoginController::class, 'resetPassword'])->name('resetPassword');
 
 
 Route::group(['middleware' => ['auth', 'role:SUPERADMIN']], function(){
@@ -73,6 +74,9 @@ Route::group(['middleware' => ['auth', 'role:DOCTOR'], 'prefix' => 'doctor'], fu
     Route::get('/dashboard', [Controllers\Doctor\DashboardController::class, 'index']);
 });
 
+Route::group(['middleware' => ['auth', 'role:RECEPTIONIST'], 'prefix' => 'receptionist'], function(){
+});
 
-
+Route::group(['middleware' => ['auth', 'role:PATIENT'], 'prefix' => 'patient'], function(){
+});
 
