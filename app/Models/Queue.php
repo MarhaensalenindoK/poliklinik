@@ -19,6 +19,7 @@ class Queue extends Model
         'id',
         'medical_history_id',
         'patient_id',
+        'clinic_id',
         'queue',
         'date',
         'status',
