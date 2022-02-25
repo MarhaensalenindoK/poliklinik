@@ -22,6 +22,7 @@ class UserService {
         $with_clinic = $filter['with_clinic'] ?? false;
         $with_medical_patient = $filter['with_medical_patient'] ?? false;
         $with_medical_examiner = $filter['with_medical_examiner'] ?? false;
+        $with_queue = $filter['with_queue'] ?? false;
         $not_role = $filter['not_role'] ?? null;
 
         $query = User::orderBy('created_at', $orderBy);
@@ -56,6 +57,10 @@ class UserService {
 
         if ($with_medical_examiner) {
             $query->with('medicalHistoryExaminer');
+        }
+
+        if ($with_queue) {
+            $query->with('queue');
         }
 
         $users = $query->paginate($per_page, ['*'], 'page', $page);
