@@ -19,23 +19,12 @@
                         <input type="text" class="form-control" name="username" required>
                     </div>
                     <div class="form-group">
-                        <label>Klinik</label>
-                        <div class="input-group mb-3">
-                            <select class="custom-select" name="clinic">
-                                <option selected disabled>Klinik</option>
-                                @foreach ($fullClinics['data'] as $clinic)
-                                <option value="{{ $clinic['id'] }}">{{ $clinic['name'] }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label>NIK</label>
                         <input type="text" class="form-control" name="nik" required>
                     </div>
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="email" class="form-control" name="email">
+                        <input type="email" class="form-control" name="email" required>
                     </div>
                     <div class="form-group">
                         <label>Role</label>

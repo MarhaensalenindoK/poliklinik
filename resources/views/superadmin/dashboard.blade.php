@@ -41,7 +41,7 @@
                         </div>
                         <div class="col-6 pb-4 pt-4">
                             <label class="mb-0">Total Clinic</label>
-                            <h4 class="font-30 font-weight-bold text-col-blue">{{ $clinics['total'] }}</h4>
+                            <h4 class="font-30 font-weight-bold text-col-blue">{{ $clinics ['total']}}</h4>
                         </div>
                         <div class="col-12">
                             <hr style="border: 1px solid rgb(225 232 237);">
@@ -207,7 +207,7 @@
         let html = ``
         let no = 1
         $.each(data, function (key, user) {
-            html = `
+            html += `
             <tr>
                 <td>
                     <span>${no++}</span>
@@ -248,7 +248,7 @@
         $("#updateAccount").find('input[type=text][name=username]').val(user.username)
         $("#updateAccount").find('select[name=clinic]').val(user.clinic_id)
         $("#updateAccount").find('input[type=text][name=nik]').val(user.nik)
-        $("#updateAccount").find('input[type=text][name=email]').val(user.email)
+        $("#updateAccount").find('input[type=email][name=email]').val(user.email)
         $("#updateAccount").find('select[name=role]').val(user.role)
         $("div.id_100 select").val("val2");
         $("#updateAccount").modal('show')
@@ -261,7 +261,7 @@
         let username = $("#updateAccount").find('input[type=text][name=username]').val()
         let clinic_id = $("#updateAccount").find('select[name=clinic]').val()
         let nik = $("#updateAccount").find('input[type=text][name=nik]').val()
-        let email = $("#updateAccount").find('input[type=text][name=email]').val()
+        let email = $("#updateAccount").find('input[type=email][name=email]').val()
         let role = $("#updateAccount").find('select[name=role]').val()
 
         let data = {
@@ -320,7 +320,9 @@
                     user_id : userId
                 },
                 success: function (response) {
+                    getSuperadmin()
                     swal("Berhasil!", `Berhasil menghapus akun ${user.name}`, "success");
+                    location.reload()
                 }
             });
         })
