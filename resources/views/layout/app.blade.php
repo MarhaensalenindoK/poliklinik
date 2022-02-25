@@ -47,10 +47,11 @@
 <div id="wrapper">
     @include('components.header')
     @include('components.sidebar')
+    @include('layout._change_password')
 
     <div id="main-content">
-
         <div class="container-fluid">
+            <a href="javascript:void(0);" class="megamenu_toggle icon-menu d-none" id="modalResetPassword" title="Mega Menu">Mega</a>
             @yield('content')
         </div>
     </div>
@@ -71,5 +72,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="{{ asset('assets/js/index.js') }}"></script>
 @yield('script')
+<script>
+    if ({{ $pw_matches ?? 'false' }}) {
+        swal({
+            title: 'Password kamu belum diganti!',
+            text: 'Ganti password untuk memperkuat keamanan akun kamu',
+            showCancelButton: true,
+            confirmButtonColor: "#17C2D7",
+            confirmButtonText: "Ganti Password",
+            cancelButtonText: "Lewati",
+            closeOnConfirm: true,
+        }, function () {
+            $("#modalResetPassword").click();
+        })
+    }
+</script>
 </body>
 </html>
