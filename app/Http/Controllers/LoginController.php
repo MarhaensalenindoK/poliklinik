@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Service\Database\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -9,12 +10,15 @@ class LoginController extends Controller
 {
     public function check(Request $request){
         if (! Auth::check() && $request->is('login')) {
-            return redirect('home');
+            return view('authentication.login');
         } elseif (! Auth::check()) {
             return redirect('home');
         }
 
-        return redirect('dashboard');
+        $role = strval(Auth::user()->role);
+        if ($role === 'SUPERADMIN') return redirect('dashboard');
+        $route = strtolower($role) . '/dashboard';
+        return redirect($route);
     }
 
     public function authenticate(Request $request){
@@ -39,5 +43,24 @@ class LoginController extends Controller
         Auth::logout();
 
         return redirect('/login');
+    }
+
+    public function resetPassword(Request $request) {
+        $DBuser = new UserService;
+
+        $userId = $request->user_id;
+        $password = $request->password;
+
+        $payload = [
+            'password' => $password,
+        ];
+
+        $DBuser->update($userId, $payload);
+
+        if (Auth::user()->role === 'SUPERADMIN') {
+            return redirect('dashboard');
+        }
+
+        return redirect( strtolower(Auth::user()->role) . '/dashboard');
     }
 }
