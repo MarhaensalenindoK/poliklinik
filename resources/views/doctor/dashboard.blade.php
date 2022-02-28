@@ -34,7 +34,7 @@
                     <div class="icon-in-bg bg-indigo text-white rounded-circle"><i class="fa fa-users"></i></div>
                     <div class="ml-4">
                         <span>Total Antrian Hari Ini</span>
-                        <h4 class="mb-0 font-weight-medium">3</h4>
+                        <h4 class="mb-0 font-weight-medium">{{ $users['total'] }}</h4>
                     </div>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                     <div class="icon-in-bg bg-green text-white rounded-circle"><i class="fa fa-users"></i></div>
                     <div class="ml-4">
                         <span>Total Pasien (CASHER)</span>
-                        <h4 class="mb-0 font-weight-medium">3</h4>
+                        <h4 class="mb-0 font-weight-medium">{{ $totalUser }}</h4>
                     </div>
                 </div>
             </div>
@@ -60,7 +60,7 @@
                     <div class="icon-in-bg bg-blue text-white rounded-circle"><i class="fa fa-users"></i></div>
                     <div class="ml-4">
                         <span>Total Pasien (CHECKUP)</span>
-                        <h4 class="mb-0 font-weight-medium">3</h4>
+                        <h4 class="mb-0 font-weight-medium">{{ $totalUser }}</h4>
                     </div>
                 </div>
             </div>
@@ -89,7 +89,6 @@
                     </tr>
                 </thead>
                 <tbody >
-
                     <tr>
                         <td>
                             <span>01</span>
@@ -159,7 +158,7 @@
                             <span>reski@gmail.com</span>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-default" title="Check" data-toggle="tooltip" data-placement="top"><i class="fa fa-check-square-o"></i></button>
+                            <button type="button" class="btn btn-sm btn " title="Check" data-toggle="tooltip" data-placement="top"><i class="fa fa-check-square-o"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -220,4 +219,36 @@
 @section('script')
 <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap4.min.js"></script>
+<script>
+let users = @json($users)
+
+showAddQueue(patientId, medicalHistoryId) {
+		let user = users.find(user => user.id === patientId)
+		swal({
+            title: "Tambahkan ke antrian?",
+            text: `Yakin ingin menghapus akun <b>${user.name}</b> ?`,
+            type: "warning",
+            confirmButtonColor: "#dc3545",
+            confirmButtonText: "Add",
+            cancelButtonText: "Tutup",
+            html: true,
+            showCancelButton: true,
+            closeOnConfirm: false,
+            showLoaderOnConfirm: true,
+        }, function () {
+            $.ajax({
+                type: "post",
+                url: `{{ url('/doctor/database/queue') }}`,
+                data: {
+                    patient_id : patientId,
+										medical_history_id : medicalHistoryId
+                },
+                success: function (response) {
+                    swal("Berhasil!", `Berhasil menambahkan antrian akun ${user.name}`, "success");
+                    location.reload()
+                }
+            });
+        })
+}
+</script>
 @endsection
