@@ -58,14 +58,6 @@ class DatabaseSeeder extends Seeder
                 'role' => User::RECEPTIONIST,
                 'status' => true,
             ],
-            [
-                'name' => 'patient',
-                'clinic_id' => $clinicId,
-                'username' => 'patient123',
-                'password' => Hash::make('patient123'),
-                'role' => User::PATIENT,
-                'status' => true,
-            ],
         ];
 
         foreach ($users as $user) {
@@ -81,6 +73,15 @@ class DatabaseSeeder extends Seeder
             'status' => true,
         ];
 
+        $patient2 = [
+            'name' => 'patient',
+            'clinic_id' => $clinicId,
+            'username' => 'patient123',
+            'password' => Hash::make('patient123'),
+            'role' => User::PATIENT,
+            'status' => true,
+        ];
+
         $doctor = [
             'name' => 'doctor',
             'clinic_id' => $clinicId,
@@ -91,6 +92,7 @@ class DatabaseSeeder extends Seeder
         ];
 
         $createPatientActive = User::factory($patient)->create()->id;
+        $createPatientActive2 = User::factory($patient2)->create()->id;
         $createDoctorActive = User::factory($doctor)->create()->id;
 
         $medicalHistory = MedicalHistory::factory([
@@ -98,9 +100,20 @@ class DatabaseSeeder extends Seeder
             'patient_id' => $createPatientActive,
         ])->create();
 
+        $medicalHistory2 = MedicalHistory::factory([
+            'examiner_id' => $createDoctorActive,
+            'patient_id' => $createPatientActive2,
+        ])->create();
+
         Queue::factory([
             'medical_history_id' => $medicalHistory->id,
             'user_id' => $createPatientActive,
+            'clinic_id' => $clinicId,
+        ])->create();
+
+        Queue::factory([
+            'medical_history_id' => $medicalHistory2->id,
+            'user_id' => $createPatientActive2,
             'clinic_id' => $clinicId,
         ])->create();
     }
