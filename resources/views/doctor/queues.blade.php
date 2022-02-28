@@ -35,7 +35,6 @@
     </li>
     @endsection
 @section('content')
-@dump($queueNotCheckin)
 <div class="row clearfix mt-5">
     <div class="col-lg-12 col-md-12">
         <div class="card">
