@@ -6,6 +6,7 @@ use App\Models\Clinic;
 use App\Models\MedicalHistory;
 use App\Models\Medicine;
 use App\Models\News;
+use App\Models\Queue;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -92,9 +93,15 @@ class DatabaseSeeder extends Seeder
         $createPatientActive = User::factory($patient)->create()->id;
         $createDoctorActive = User::factory($doctor)->create()->id;
 
-        MedicalHistory::factory([
+        $medicalHistory = MedicalHistory::factory([
             'examiner_id' => $createDoctorActive,
             'patient_id' => $createPatientActive,
+        ])->create();
+
+        Queue::factory([
+            'medical_history_id' => $medicalHistory->id,
+            'patient_id' => $createPatientActive,
+            'clinic_id' => $clinicId,
         ])->create();
     }
 }

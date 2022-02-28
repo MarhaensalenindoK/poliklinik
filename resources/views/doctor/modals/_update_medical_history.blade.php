@@ -7,10 +7,13 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="">
+            <form action="{{ url('doctor/medical-history') }}" method="POST">
+                @csrf
+                @method('PATCH')
+                <input type="hidden" id="medical_history_id" name="medical_history_id">
+                <input type="hidden" id="queue_id" name="queue_id">
+                <input type="hidden" id="patient_id" name="patient_id">
                 <div class="modal-body">
-
-
                     <fieldset disabled>
                         <div class="form-group">
                             <label for="name">Name</label>
@@ -28,8 +31,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="alergic">alergic</label>
-                            <input type="text" class="form-control" id="alergic" aria-describedby="alergic">
+                            <label for="allergic">allergic</label>
+                            <input type="text" class="form-control" id="allergic" aria-describedby="allergic">
                         </div>
 
                         <div id="accordion">
@@ -40,9 +43,9 @@
 
                                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                                     <div class="card-body">
-                                    <ul>
-                                        <li>Diabetes</li>
-                                    </ul>
+                                        <ul id="been-diagnosed">
+
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -52,8 +55,8 @@
                                 </div>
                                 <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
                                     <div class="card-body">
-                                    <ol>
-                                        <li>Operasi kanker kulit</li>
+                                    <ol id="hosp-surgery">
+
                                     </ol>
                                     </div>
                                 </div>
@@ -62,58 +65,65 @@
 
                         <div class="form-group">
                             <label for="anamnesis">Anamnesis</label>
-                            <textarea class="form-control" id="anamnesis" rows="3"></textarea>
+                            <textarea class="form-control" rows="7" id="anamnesis" rows="3"></textarea>
                         </div>
                     </fieldset>
 
                     <div class="form-group">
                         <label for="diagnosis">Diagnosis</label>
-                        <textarea class="form-control" id="diagnosis" rows="3"></textarea>
+                        <textarea required class="form-control" name="diagnosis" rows="7" id="diagnosis" rows="3"></textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="physicalExam">Physical Exam</label>
-                        <textarea class="form-control" id="physicalExam" rows="3"></textarea>
+                        <textarea required class="form-control" name="physicalExam" rows="7" id="physicalExam" rows="3"></textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="vitalSign">Vital Sign</label>
-                        <textarea class="form-control" id="vitalSign" rows="3"></textarea>
+                        <textarea required class="form-control" name="vitalSign" rows="7" id="vitalSign" rows="3"></textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="desc">Desc</label>
-                        <textarea class="form-control" id="desc" rows="3"></textarea>
+                        <textarea    class="form-control" name="descAction" rows="7" id="desc" rows="3"></textarea>
                     </div>
 
-                    <div class="modal-header mb-3">
+                    <div class="modal-header">
                         <h5 class="modal-title">Medication & Therapy</h5>
                     </div>
-                    <div class="form-group">
-                        <label>Medicine</label>
-                        <select class="form-control w-100">
-                            <option selected="selected">orange</option>
-                            <option>white</option>
-                            <option>purple</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Sigma</label>
-                        <input type="text" name="" id="" class="form-control">
-                    </div>
+                    <button type="button" class="btn btn-primary my-3" onclick="addInputAction()">
+                        Tambah Tindakan
+                    </button>
+                    <div class="" id="action">
+                        <div class="many-action action-1">
+                            <div class="form-group">
+                                <label for="medicine">Medicine</label>
+                                <select class="form-control w-100" name="medicine[]" id="medicine" onchange="doseMedicine(this, 1)">
+                                    <option selected="selected" value="null">Medicine</option>
+                                    @foreach ($medicines['data'] as $medicine)
+                                        <option value="{{ $medicine['id'] }}">{{ $medicine['name'] }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Sigma</label>
+                                <input type="text" name="sigma[]" id="sigma" class="form-control">
+                            </div>
 
-                    <label>Dose</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">Tablet</span>
+                            <label>Dose</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text amount-1">-</span>
+                                </div>
+                                <input type="number" name="count[]" class="form-control" placeholder="Count" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
                         </div>
-                        <input type="number" class="form-control" placeholder="Count" aria-label="Username" aria-describedby="basic-addon1">
                     </div>
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>
             </form>
         </div>

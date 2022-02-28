@@ -21,6 +21,10 @@ class QueueService {
 
         $query->where('clinic_id', $clinicId);
 
+        $query->with('patient');
+
+        $query->with('medicalHistory');
+
         $clinics = $query->paginate($per_page, ['*'], 'page', $page);
 
         return $clinics->toArray();

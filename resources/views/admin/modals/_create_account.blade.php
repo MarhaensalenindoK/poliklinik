@@ -35,7 +35,6 @@
                                 <option value="ADMIN">ADMIN</option>
                                 <option value="DOCTOR">DOCTOR</option>
                                 <option value="RECEPTIONIST">RECEPTIONIST</option>
-                                <option value="PATIENT">PATIENT</option>
                             </select>
                         </div>
                     </div>
