@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Doctor;
 
 use App\Http\Controllers\Controller;
+use App\Models\Queue;
 use App\Service\Database\UserService;
 use App\Service\Database\QueueService;
 use Carbon\Carbon;
@@ -12,22 +13,33 @@ use Illuminate\Support\Facades\Hash;
 
 class DashboardController extends Controller
 {
-   public function index()
+    public function index()
     {
         $DBuser = new UserService;
+        $DBqueue = new QueueService;
+
         $clinicId = Auth::user()->clinic_id;
         $users = $DBuser->index([
             'with_queue' => true,
             'with_medical_patient' => true,
-            'clinic_id' => Auth::user()->clinic_id,
+            'clinic_id' => $clinicId,
             'role' => 'PATIENT',
         ]);
+
         $users['data'] = collect($users['data'])->filter(function ($user, $key) {
             return $user['queue'] === null;
         });
-        $totalUser = $DBuser->index([
+
+        $totalQueueNoCheckin = count($users['data']);
+
+        $totalQueueCasher = $DBqueue->index($clinicId, [
+            'status' => Queue::CASHER,
             'per_page' => 1,
-            'clinic_id' => $clinicId,
+        ])['total'];
+
+        $totalQueueCheckin = $DBqueue->index($clinicId, [
+            'status' => Queue::CHECKIN,
+            'per_page' => 1,
         ])['total'];
 
         $pw_matches = false;
@@ -38,8 +50,11 @@ class DashboardController extends Controller
         return view('doctor.dashboard')
         ->with('pw_matches', $pw_matches)
         ->with('users', $users)
-        ->with('totalUser', $totalUser);
+        ->with('totalQueueCasher', $totalQueueCasher)
+        ->with('totalQueueCheckin', $totalQueueCheckin)
+        ->with('totalQueueNoCheckin', $totalQueueNoCheckin);
     }
+
     public function createQueue(Request $request) {
         $DBqueue = new QueueService;
         $clinicId = Auth::user()->clinic_id;
@@ -47,12 +62,12 @@ class DashboardController extends Controller
         $payload = [
             'clinic_id' => $clinicId,
             'queue' => $queues['total'] + 1,
-            'date' => Carbon::now()->format('Y-m-d H:i:s'),
+            'date' => Carbon::now()->format('Y-m-d'),
             'status' => 'CHECKIN',
         ];
-    
+
         $create = $DBqueue->create($request->medical_history_id, $request->patient_id, $clinicId, $payload);
-    
+
         return response()->json($create);
     }
 }
