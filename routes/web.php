@@ -82,6 +82,7 @@ Route::group(['middleware' => ['auth', 'role:DOCTOR'], 'prefix' => 'doctor'], fu
 });
 
 Route::group(['middleware' => ['auth', 'role:RECEPTIONIST'], 'prefix' => 'receptionist'], function(){
+    Route::get('/dashboard', [Controllers\Receptionist\DashboardController::class, 'index']);
 });
 
 Route::group(['middleware' => ['auth', 'role:PATIENT'], 'prefix' => 'patient'], function(){
