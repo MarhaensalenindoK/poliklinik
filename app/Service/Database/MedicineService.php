@@ -22,7 +22,10 @@ class MedicineService {
 
     public function detail($medicineId)
     {
-        $medicine = Medicine::findOrFail($medicineId);
+        $medicine = Medicine::where('id', $medicineId)->first();
+        if ($medicine === null) {
+            return null;
+        }
 
         return $medicine->toArray();
     }
