@@ -73,6 +73,12 @@ Route::group(['middleware' => ['auth', 'role:DOCTOR'], 'prefix' => 'doctor'], fu
     Route::prefix('database')->group(function () {
         Route::post('/queue', [Controllers\Doctor\DashboardController::class, 'createQueue']);
     });
+    
+    Route::prefix('medical-history')->group(function () {
+        Route::get('/queues', [Controllers\Doctor\QueuesController::class, 'index']);
+        Route::delete('/action', [Controllers\Doctor\QueuesController::class, 'deleteAction']);
+        Route::patch('/', [Controllers\Doctor\QueuesController::class, 'updateMedicalHistory']);
+    });
 });
 
 Route::group(['middleware' => ['auth', 'role:RECEPTIONIST'], 'prefix' => 'receptionist'], function(){

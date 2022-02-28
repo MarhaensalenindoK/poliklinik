@@ -21,7 +21,7 @@
         <a href="#myPage" class="has-arrow"><i class="icon-home"></i><span>My Page</span></a>
         <ul>
             <li class="active"><a href="{{ url('doctor/dashboard') }}">Dashboard</a></li>
-            <li><a>My Patient</a></li>
+            <li><a href="{{ url('doctor/medical-history/queues') }}">My Patient</a></li>
         </ul>
     </li>
     @endsection
@@ -110,7 +110,7 @@
                             <span>reski@gmail.com</span>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-default" title="Check" data-toggle="tooltip" data-placement="top"><i class="fa fa-check-square-o"></i></button>
+                            <button type="button" class="btn btn-sm btn-default" title="Add queue" data-toggle="tooltip" data-placement="top"><i class="fa fa-check-square-o"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -134,7 +134,7 @@
                             <span>reski@gmail.com</span>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-default" title="Check" data-toggle="tooltip" data-placement="top"><i class="fa fa-check-square-o"></i></button>
+                            <button type="button" class="btn btn-sm btn-default" title="Add queue" data-toggle="tooltip" data-placement="top"><i class="fa fa-check-square-o"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -158,7 +158,7 @@
                             <span>reski@gmail.com</span>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-sm btn " title="Check" data-toggle="tooltip" data-placement="top"><i class="fa fa-check-square-o"></i></button>
+                            <button type="button" class="btn btn-sm btn-default" title="Add queue" data-toggle="tooltip" data-placement="top"><i class="fa fa-check-square-o"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -182,7 +182,7 @@
                             <span>reski@gmail.com</span>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-default" title="Check" data-toggle="tooltip" data-placement="top"><i class="fa fa-check-square-o"></i></button>
+                            <button type="button" class="btn btn-sm btn-default" title="Add queue" data-toggle="tooltip" data-placement="top"><i class="fa fa-check-square-o"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -206,10 +206,10 @@
                             <span>reski@gmail.com</span>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-default" title="Check" data-toggle="tooltip" data-placement="top"><i class="fa fa-check-square-o"></i></button>
+                            <button type="button" class="btn btn-sm btn-default" title="Add queue" data-toggle="tooltip" data-placement="top"><i class="fa fa-check-square-o"></i></button>
                         </td>
                     </tr>
-                    
+
                 </tbody>
             </table>
         </div>

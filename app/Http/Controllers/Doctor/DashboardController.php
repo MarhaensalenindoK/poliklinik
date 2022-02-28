@@ -4,14 +4,15 @@ namespace App\Http\Controllers\Doctor;
 
 use App\Http\Controllers\Controller;
 use App\Service\Database\UserService;
-use Illuminate\Support\Facades\Auth;
 use App\Service\Database\QueueService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class DashboardController extends Controller
 {
-    public function index()
+   public function index()
     {
         $DBuser = new UserService;
         $clinicId = Auth::user()->clinic_id;
@@ -28,10 +29,16 @@ class DashboardController extends Controller
             'per_page' => 1,
             'clinic_id' => $clinicId,
         ])['total'];
+
+        $pw_matches = false;
+        if (Hash::check(Auth::user()->username, Auth::user()->password)){
+            $pw_matches = true;
+        }
+
         return view('doctor.dashboard')
+        ->with('pw_matches', $pw_matches)
         ->with('users', $users)
         ->with('totalUser', $totalUser);
-        
     }
     public function createQueue(Request $request) {
         $DBqueue = new QueueService;
