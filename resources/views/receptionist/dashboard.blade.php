@@ -38,22 +38,22 @@
                 <div class="row text-center">
                     <div class="col-6 border-right pb-4 pt-4">
                         <label class="mb-0">Total Users Patient</label>
-                        <h4 class="font-30 font-weight-bold text-col-blue">2000</h4>
+                        <h4 class="font-30 font-weight-bold text-col-blue">{{ $totalPatient }}</h4>
                     </div>
                     <div class="col-6 pb-4 pt-4">
                         <label class="mb-0">Total User(CASHER)</label>
-                        <h4 class="font-30 font-weight-bold text-col-blue">1000</h4>
+                        <h4 class="font-30 font-weight-bold text-col-blue">{{ $totalQueueCasher }}</h4>
                     </div>
                     <div class="col-12">
                         <hr style="border: 1px solid rgb(225 232 237);">
                     </div>
                     <div class="col-6 border-right pb-4 pt-4">
                         <label class="mb-0">Total User(CHECKIN)</label>
-                        <h4 class="font-30 font-weight-bold text-col-blue">2000</h4>
+                        <h4 class="font-30 font-weight-bold text-col-blue">{{ $totalQueueCheckin }}</h4>
                     </div>
                     <div class="col-6 pb-4 pt-4">
                         <label class="mb-0">Total User(DONE)</label>
-                        <h4 class="font-30 font-weight-bold text-col-blue">2000</h4>
+                        <h4 class="font-30 font-weight-bold text-col-blue">{{ $totalQueueDone }}</h4>
                     </div>
                 </div>
             </div>
@@ -61,13 +61,13 @@
     </div>
     <div class="col-lg-6 col-md-12">
         <div class="card">
-           <div class="header">
-               <h2>Diagram Patient</h2>
-           </div>
-           <div class="body">
-               <div id="chart-pie" style="height: 260px"></div>
-           </div>
-       </div>       
+            <div class="header">
+                <h2>Diagram Patient</h2>
+            </div>
+            <div class="body">
+                <div id="chart-pie" style="height: 260px"></div>
+            </div>
+        </div>
     </div>
     <div class="col-lg-12 col-md-12">
         <div class="table-responsive">
@@ -81,102 +81,41 @@
                     </tr>
                 </thead>
                 <tbody >
+                    @foreach ($users['data'] as $user)
+                    <tr>
+                        <td>
+                            <span>{{ $loop->iteration }}</span>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <a href="javascript:void(0)" title="{{ $user['name'] }}">{{ $user['name'] }}</a>
+                                </div>
+                            </div>
+                            <span>{{ $user['username'] }}</span>
+                        </td>
+                        <td>
+                            <span>{{ $user['email'] }}</span>
+                        </td>
+                        <td>
+                            @if ($user['queue'] !== null)
 
-                    <tr>
-                        <td>
-                            <span>01</span>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <div>
-                                    <a href="javascript:void(0)" title=>Nama User</a>
-                                </div>
-                            </div>
-                            <span>username</span>
-                        </td>
-                        <td>
-                            <span>user@gmail.com</span>
-                        </td>
-                        <td>
-                            <span>CHECKIN</span>
+                            @switch($user['queue']['status'])
+                                @case('CHECKIN')
+                                    <span class="badge badge-primary">CHECKIN</span>
+                                        @break
+                                    @case('CASHER')
+                                    <span class="badge badge-warning">CASHER</span>
+                                        @break
+                                    @default
+                                    <span class="badge badge-success">DONE</span>
+                                @endswitch
+                            @else
+                            <span class="badge badge-info">DONT HAVE</span>
+                            @endif
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            <span>02</span>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <div>
-                                    <a href="javascript:void(0)" title=>Nama User</a>
-                                </div>
-                            </div>
-                            <span>username</span>
-                        </td>
-                        <td>
-                            <span>user@gmail.com</span>
-                        </td>
-                        <td>
-                            <span>CHECKIN</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span>03</span>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <div>
-                                    <a href="javascript:void(0)" title=>Nama User</a>
-                                </div>
-                            </div>
-                            <span>username</span>
-                        </td>
-                        <td>
-                            <span>user@gmail.com</span>
-                        </td>
-                        <td>
-                            <span>CHECKIN</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span>04</span>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <div>
-                                    <a href="javascript:void(0)" title=>Nama User</a>
-                                </div>
-                            </div>
-                            <span>username</span>
-                        </td>
-                        <td>
-                            <span>user@gmail.com</span>
-                        </td>
-                        <td>
-                            <span>CHECKIN</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span>05</span>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <div>
-                                    <a href="javascript:void(0)" title=>Nama User</a>
-                                </div>
-                            </div>
-                            <span>username</span>
-                        </td>
-                        <td>
-                            <span>user@gmail.com</span>
-                        </td>
-                        <td>
-                            <span>CHECKIN</span>
-                        </td>
-                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -187,4 +126,40 @@
 @section('script')
 <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap4.min.js"></script>
+<script>
+    let totalCheckin = parseInt(`{{ $totalQueueCheckin }}`)
+    let totalCasher = parseInt(`{{ $totalQueueCasher }}`)
+    let totalDone = parseInt(`{{ $totalQueueDone }}`)
+
+    c3.generate({
+        bindto: '#chart-pie',
+        data: {
+            columns: [
+                ['data1', totalCheckin],
+                ['data2', totalCasher],
+                ['data3', totalDone]
+            ],
+            type: 'pie',
+            colors: {
+                'data1': '#1c3353',
+                'data2': '#007FFF',
+                'data3': '#c8d9f1',
+            },
+            names: {
+                'data1': 'checkin',
+                'data2': 'casher',
+                'data3': 'done',
+            }
+        },
+        axis: {
+        },
+        legend: {
+            show: true,
+        },
+        padding: {
+            bottom: 20,
+            top: 0
+        },
+    });
+</script>
 @endsection
