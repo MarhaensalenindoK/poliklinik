@@ -16,7 +16,7 @@ class CreateQueuesTable extends Migration
         Schema::create('queues', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('medical_history_id');
-            $table->uuid('patient_id');
+            $table->uuid('user_id');
             $table->uuid('clinic_id');
             $table->integer('queue');
             $table->date('date');

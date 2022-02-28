@@ -100,7 +100,7 @@ class DatabaseSeeder extends Seeder
 
         Queue::factory([
             'medical_history_id' => $medicalHistory->id,
-            'patient_id' => $createPatientActive,
+            'user_id' => $createPatientActive,
             'clinic_id' => $clinicId,
         ])->create();
     }

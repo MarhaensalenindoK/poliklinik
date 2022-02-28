@@ -34,7 +34,7 @@
                     <div class="icon-in-bg bg-indigo text-white rounded-circle"><i class="fa fa-users"></i></div>
                     <div class="ml-4">
                         <span>Total Antrian Hari Ini</span>
-                        <h4 class="mb-0 font-weight-medium">3</h4>
+                        <h4 class="mb-0 font-weight-medium">{{ $totalQueueNoCheckin }}</h4>
                     </div>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                     <div class="icon-in-bg bg-green text-white rounded-circle"><i class="fa fa-users"></i></div>
                     <div class="ml-4">
                         <span>Total Pasien (CASHER)</span>
-                        <h4 class="mb-0 font-weight-medium">3</h4>
+                        <h4 class="mb-0 font-weight-medium">{{ $totalQueueCasher }}</h4>
                     </div>
                 </div>
             </div>
@@ -59,8 +59,8 @@
                 <div class="d-flex align-items-center">
                     <div class="icon-in-bg bg-blue text-white rounded-circle"><i class="fa fa-users"></i></div>
                     <div class="ml-4">
-                        <span>Total Pasien (CHECKUP)</span>
-                        <h4 class="mb-0 font-weight-medium">3</h4>
+                        <span>Total Pasien (CHECKIN)</span>
+                        <h4 class="mb-0 font-weight-medium">{{ $totalQueueCheckin }}</h4>
                     </div>
                 </div>
             </div>
@@ -88,129 +88,33 @@
                         <th>action</th>
                     </tr>
                 </thead>
-                <tbody >
-
+                <tbody>
+                    @foreach ($users['data'] as $user)
                     <tr>
                         <td>
-                            <span>01</span>
+                            <span>{{ $loop->iteration }}</span>
                         </td>
                         <td>
                             <div class="d-flex align-items-center">
                                 <div>
-                                    <a href="javascript:void(0)" title=>Reski Junaedi</a>
+                                    <a href="javascript:void(0)" title="{{ $user['name'] }}">{{ $user['name'] }}</a>
                                 </div>
                             </div>
                         </td>
                         <td>
-                            <span>Saekyo</span>
+                            <span>{{ $user['username'] }}</span>
                         </td>
                         <td>
-                            <span>612981989</span>
+                            <span>{{ $user['nik'] }}</span>
                         </td>
                         <td>
-                            <span>reski@gmail.com</span>
+                            <span>{{ $user['email'] }}</span>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-default" title="Add queue" data-toggle="tooltip" data-placement="top"><i class="fa fa-check-square-o"></i></button>
+                            <button type="button" class="btn btn-sm btn-default" title="Add queue" data-toggle="tooltip" data-placement="top" onclick="showAddQueue('{{ $user['id'] }}', '{{ $user['medical_history_patient']['id'] }}')"><i class="fa fa-check-square-o"></i></button>
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            <span>02</span>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <div>
-                                    <a href="javascript:void(0)" title=>Reski Junaedi</a>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <span>Saekyo</span>
-                        </td>
-                        <td>
-                            <span>612981989</span>
-                        </td>
-                        <td>
-                            <span>reski@gmail.com</span>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-sm btn-default" title="Add queue" data-toggle="tooltip" data-placement="top"><i class="fa fa-check-square-o"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span>03</span>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <div>
-                                    <a href="javascript:void(0)" title=>Reski Junaedi</a>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <span>Saekyo</span>
-                        </td>
-                        <td>
-                            <span>612981989</span>
-                        </td>
-                        <td>
-                            <span>reski@gmail.com</span>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-sm btn-default" title="Add queue" data-toggle="tooltip" data-placement="top"><i class="fa fa-check-square-o"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span>04</span>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <div>
-                                    <a href="javascript:void(0)" title=>Reski Junaedi</a>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <span>Saekyo</span>
-                        </td>
-                        <td>
-                            <span>612981989</span>
-                        </td>
-                        <td>
-                            <span>reski@gmail.com</span>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-sm btn-default" title="Add queue" data-toggle="tooltip" data-placement="top"><i class="fa fa-check-square-o"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span>05</span>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <div>
-                                    <a href="javascript:void(0)" title=>Reski Junaedi</a>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <span>Saekyo</span>
-                        </td>
-                        <td>
-                            <span>612981989</span>
-                        </td>
-                        <td>
-                            <span>reski@gmail.com</span>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-sm btn-default" title="Add queue" data-toggle="tooltip" data-placement="top"><i class="fa fa-check-square-o"></i></button>
-                        </td>
-                    </tr>
-
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -220,4 +124,43 @@
 @section('script')
 <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap4.min.js"></script>
+<script>
+    let users = @json($users)
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    function showAddQueue(patientId, medicalHistoryId) {
+            let user = users.data.find(user => user.id === patientId)
+            swal({
+                title: "Tambahkan ke antrian?",
+                text: `Yakin ingin menambahkan <b>${user.name}</b> ke antrian ?`,
+                type: "warning",
+                confirmButtonColor: "#dc3545",
+                confirmButtonText: "Tambahkan",
+                cancelButtonText: "Tutup",
+                html: true,
+                showCancelButton: true,
+                closeOnConfirm: false,
+                showLoaderOnConfirm: true,
+            }, function () {
+                $.ajax({
+                    type: "post",
+                    url: `{{ url('/doctor/database/queue') }}`,
+                    data: {
+                        patient_id : patientId,
+                        medical_history_id : medicalHistoryId
+                    },
+                    success: function (response) {
+                        swal("Berhasil!", `Berhasil menambahkan antrian akun ${user.name}`, "success");
+
+                        window.setTimeout(function(){location.reload()},1000)
+                    }
+                });
+            })
+    }
+</script>
 @endsection

@@ -37,7 +37,7 @@ class User extends Authenticatable
     }
 
     public function queue() {
-        return $this->hasOne(Queue::class, 'patient_id', 'id');
+        return $this->hasOne(Queue::class, 'user_id', 'id');
     }
 
     public function medicalHistoryPatient() {
