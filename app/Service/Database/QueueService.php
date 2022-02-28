@@ -14,12 +14,17 @@ class QueueService {
         $orderBy = $filter['order_by'] ?? 'DESC';
         $per_page = $filter['per_page'] ?? 999;
         $page = $filter['page'] ?? 1;
+        $status = $filter['status'] ?? null;
 
         Clinic::findOrFail($clinicId);
 
         $query = ModelsQueue::orderBy('created_at', $orderBy);
 
         $query->where('clinic_id', $clinicId);
+
+        if ($status !== null) {
+            $query->where('status', $status);
+        }
 
         $query->with('patient');
 
