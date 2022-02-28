@@ -49,7 +49,7 @@ class QueueService {
         $queue = new ModelsQueue();
         $queue->id = Uuid::uuid4()->toString();
         $queue->medical_history_id = $medical_history_id;
-        $queue->patient_id = $patient_id;
+        $queue->user_id = $patient_id;
         $queue->clinic_id = $clinic_id;
         $queue = $this->fill($queue, $payload);
         $queue->save();
@@ -82,7 +82,7 @@ class QueueService {
 
         Validator::make($queue->toArray(), [
             'medical_history_id' => 'required',
-            'patient_id' => 'required',
+            'user_id' => 'required',
             'clinic_id' => 'required',
             'queue' => 'required',
             'date' => 'required',

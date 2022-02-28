@@ -18,7 +18,7 @@ class Queue extends Model
     protected $fillable = [
         'id',
         'medical_history_id',
-        'patient_id',
+        'user_id',
         'clinic_id',
         'queue',
         'date',
@@ -28,10 +28,10 @@ class Queue extends Model
     ];
 
     public function patient() {
-        return $this->hasone(User::class, 'id', 'patient_id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function medicalHistory() {
-        return $this->hasone(MedicalHistory::class, 'id', 'medical_history_id');
+        return $this->belongsTo(MedicalHistory::class, 'medical_history_id', 'id');
     }
 }
