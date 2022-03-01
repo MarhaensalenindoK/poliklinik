@@ -238,7 +238,6 @@
 
     function showModalMedicalHistory (queueId, type = null) {
         let queue = queues.data.find(thisQueue => thisQueue.id === queueId)
-        console.log(queue, queueId)
         $("#editPatient").find("#patient_id").val(queue.patient.id);
         $("#editPatient").find("#queue_id").val(queue.id);
         $("#editPatient").find("#medical_history_id").val(queue.medical_history.id);
