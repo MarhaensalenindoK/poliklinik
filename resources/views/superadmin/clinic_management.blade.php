@@ -256,7 +256,9 @@
         $("#updateClinic").find("input[type=text][name=address]").val(dataClinic.address)
         $("#updateClinic").find("input[type=text][name=contact]").val(dataClinic.contact ?? '')
         $("#updateClinic").find("input[type=email][name=email]").val(dataClinic.email ?? '')
-        $("#updateClinic").find("#show-image-clinic").attr('src', `images/${dataClinic.profile_image ?? ''}`)
+        if (dataClinic.profile_image !== null) {
+            $("#updateClinic").find("#show-image-clinic").attr('src', `images/${dataClinic.profile_image ?? ''}`)
+        }
 
         // input Service
         let countFacility = dataClinic.facility.length

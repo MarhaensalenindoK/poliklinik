@@ -73,7 +73,7 @@ class ClinicService {
             'about' => 'required|string',
             'facility' => 'required',
             'service' => 'required',
-            'contact' => 'nullable|numeric',
+            'contact' => 'nullable',
             'email' => 'nullable|email',
             'profile_image' => 'nullable',
         ])->validate();
