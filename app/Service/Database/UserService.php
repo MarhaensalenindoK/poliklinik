@@ -70,7 +70,11 @@ class UserService {
 
     public function detail($userId)
     {
-        $user = User::with('clinic')->findOrFail($userId);
+        $user = User::findOrFail($userId);
+
+        if ($user->role === User::PATIENT) {
+            $user = User::with('medicalHistoryPatient')->with('clinic')->findOrFail($userId);
+        }
 
         return $user->toArray();
     }

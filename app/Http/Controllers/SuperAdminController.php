@@ -82,6 +82,12 @@ class SuperAdminController extends Controller
     {
         $DBclinic = new ClinicService;
 
+        $clinic = $DBclinic->detail($request->clinic_id);
+
+        if ($clinic['profile_image'] !== null) {
+            Storage::disk('public')->delete($clinic['profile_image']);
+        }
+
         $delete = $DBclinic->destroy($request->clinic_id);
 
         return response()->json($delete);
@@ -223,8 +229,11 @@ class SuperAdminController extends Controller
         }
 
         if ($request->file('image') !== null) {
-            Storage::disk('public')->delete($clinic['profile_image']);
+            if ($clinic['profile_image'] !== null) {
+                Storage::disk('public')->delete($clinic['profile_image']);
+            }
             $uploadImage = Storage::disk('public')->put('profile_image', $request->file('image'));
+
             $payload['profile_image'] = $uploadImage;
         }
 
