@@ -315,6 +315,33 @@
                 });
 
                 $("#editPatient").find("#action").html(htmlAction);
+            } else {
+                let htmlAction = `
+                <div class="many-action action-1">
+                    <div class="form-group">
+                        <label for="medicine">Medicine</label>
+                        <select class="form-control w-100" name="medicine[]" id="medicine" onchange="doseMedicine(this, 1)">
+                            <option selected="selected" value="null">Medicine</option>
+                            @foreach ($medicines['data'] as $medicine)
+                                <option value="{{ $medicine['id'] }}">{{ $medicine['name'] }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Sigma</label>
+                        <input type="text" name="sigma[]" id="sigma" class="form-control">
+                    </div>
+
+                    <label>Dose</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text amount-1">-</span>
+                        </div>
+                        <input type="number" name="count[]" class="form-control" placeholder="Count" aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                `
+                $("#editPatient").find("#action").html(htmlAction);
             }
         }
 
