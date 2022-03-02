@@ -80,8 +80,7 @@
                             Pelayanan Pasien
                         </p>
                         <p class="font-15 color-brown-1">
-                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum rerum, possimus dignissimos in accusantium quibusdam eaque aliquid. Aliquid, tempore dolorem!
-                        </p>
+                            Pelayanan Pasien kami mencakup konsultasi, pembuatan resep obat resmi dari dokter yang menangani, dan juga pelayanan untuk pasien disabilitas.</p>
                     </div>
                 </div>
             </div>
@@ -93,7 +92,7 @@
                             Dokter Spesialis
                         </p>
                         <p class="font-15 color-brown-1">
-                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum rerum, possimus dignissimos in accusantium quibusdam eaque aliquid. Aliquid, tempore dolorem!
+                            Kami menyediakan beberapa Dokter Spesialis yang sudah mahir dibidangnya. Untuk Dokter Spesialis Anak, Spesialis Jantung dan Paru, dan Dokter Spesialis Kejiwaan.
                         </p>
                     </div>
                 </div>
@@ -106,7 +105,7 @@
                             Terima Resep Dokter
                         </p>
                         <p class="font-15 color-brown-1">
-                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum rerum, possimus dignissimos in accusantium quibusdam eaque aliquid. Aliquid, tempore dolorem!
+                            Anda tidak perlu khawatir, kami menyediakan fasilitas Apotek dan melayani resep yang diberikan oleh dokter, lengkap dengan layanan konsultasi.
                         </p>
                     </div>
                 </div>
@@ -166,7 +165,7 @@
                         </div>
                         <div class="col-md-5 md-3 mt-6 ">
                             <p class="font-25 mb-0 text-white font-weight-500">
-                                masuk untuk mendapatkan berbagai macam pelayanan politeknik dari kami
+                                Masuk untuk mendapatkan berbagai macam pelayanan politeknik dari kami
                             </p>
                                 <button type="button" class="btn btn-primary font-25 w-50 rounded-pill mt-4" onclick="window.open(`/login`, '_blank')">Masuk</button>
 
