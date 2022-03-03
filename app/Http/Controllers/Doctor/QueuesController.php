@@ -67,6 +67,7 @@ class QueuesController extends Controller
         $patient = $DBUser->detail($patientId);
 
         $payloadMedicalHistory = [
+            'examiner_id' => Auth::user()->id,
             'diagnosis' => $diagnosis,
             'physical_exam' => $physicalExam,
             'vital_sign' => $vitalSign,
@@ -85,15 +86,18 @@ class QueuesController extends Controller
                 <li><b>Tindakan : ". $updateMedicalHistory['description_action'] ."</b></li>
             </ul>
         ";
-        foreach ($medicineId as $key => $item) {
-            if ($medicineId[$key] !== 'null' && $sigma[$key] !== null && $count[$key] !== null) {
-                $payloadAction = [
-                    'medicine_id' => $medicineId[$key],
-                    'sigma' => $sigma[$key],
-                    'count' => $count[$key],
-                ];
 
-                $DBaction->create($medicalHistoryId, $payloadAction);
+        if ($medicineId !== null) {
+            foreach ($medicineId as $key => $item) {
+                if ($medicineId[$key] !== 'null' && $sigma[$key] !== null && $count[$key] !== null) {
+                    $payloadAction = [
+                        'medicine_id' => $medicineId[$key],
+                        'sigma' => $sigma[$key],
+                        'count' => $count[$key],
+                    ];
+
+                    $DBaction->create($medicalHistoryId, $payloadAction);
+                }
             }
         }
 

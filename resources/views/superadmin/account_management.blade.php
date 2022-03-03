@@ -141,6 +141,7 @@
         let html = ``
         let no = 1
         $.each(data, function (key, user) {
+            console.log(user)
             html += `
             <tr>
                 <td>
@@ -149,7 +150,7 @@
                 <td>
                     <div class="d-flex align-items-center">
                         <div>
-                            <a href="javascript:void(0)" title="${user.name}">${user.name}</a>
+                            <a href="javascript:void(0)" onclick="showModalUpdateAccount('${user.id}')" title="${user.name}">${user.name}</a>
                         </div>
                     </div>
                 </td>
@@ -163,7 +164,7 @@
                     <span>${user.email === null ? '-' : user.email}</span>
                 </td>
                 <td>
-                    <span>${user.clinic.name}</span>
+                    <span>${user.clinic === null ? '-' : user.clinic.name}</span>
                 </td>
                 <td>
                     <span>${user.role}</span>
@@ -197,7 +198,7 @@
         let email = $("#createAccount").find('input[type=email][name=email]').val()
         let role = $("#createAccount").find('select[name=role]').val()
 
-        if (name == '' || username == '' || role == null || clinic_id == null) {
+        if (name == '' || username == '' || role == null) {
             swal({
                     title: "Lengkapi Data !",
                     text: "Gagal membuat data, silahkan lengkapi kembali !",
