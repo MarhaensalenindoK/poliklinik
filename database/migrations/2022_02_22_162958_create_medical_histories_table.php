@@ -15,7 +15,7 @@ class CreateMedicalHistoriesTable extends Migration
     {
         Schema::create('medical_histories', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('examiner_id');
+            $table->uuid('examiner_id')->nullable();
             $table->uuid('patient_id');
             $table->date('date_checkup');
             $table->string('allergic')->nullable();

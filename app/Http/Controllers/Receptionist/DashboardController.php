@@ -35,6 +35,8 @@ class DashboardController extends Controller
             'per_page' => 1,
         ])['total'];
 
+        // dd($totalQueueCheckin);
+
         $totalQueueDone = $DBqueue->index($clinicId, [
             'status' => Queue::DONE,
             'per_page' => 1,

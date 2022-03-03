@@ -87,7 +87,7 @@
                                 <td><span id="queue">{{ $queue['queue'] }}</span></td>
                                 <td><span id="username">{{ $queue['patient']['username'] }}</span></td>
                                 <td><span id="nik">{{ $queue['patient']['nik'] ?? '-' }}</span></td>
-                                <td><span id="allergic">{{ $queue['medical_history']['allergic'] }}</span></td>
+                                <td><span id="allergic">{{ $queue['medical_history']['allergic'] ?? '-' }}</span></td>
                                 <td>
                                     <span id="diagnosed">
                                         @foreach ($queue['medical_history']['been_diagnosed'] as $item)
@@ -187,7 +187,7 @@
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-sm btn-default" onclick="showModalMedicalHistory('{{ $queue['id'] }}', 'history')" title="Medical History"><i class="fa fa-folder-o"></i></button>
-                                    <button type="button" class="btn btn-sm btn-default" onclick="deleteAccount('${user.id}')" title="Delete Queue" data-toggle="tooltip" data-placement="top"><i class="icon-trash"></i></button>
+                                    <button type="button" class="btn btn-sm btn-default" onclick="deleteQueue('{{ $queue['id'] }}')" title="Delete Queue" data-toggle="tooltip" data-placement="top"><i class="icon-trash"></i></button>
                                 </td>
                             </tr>
                             @endforeach
@@ -425,6 +425,37 @@
                 swal("Gagal!", "Gagal menghapus tindakan", "error");
             }
         });
+    }
+
+    function deleteQueue(queueId) {
+        let queue = queues.data.find(thisQueue => thisQueue.id === queueId)
+        swal({
+            title: "Delete Patient",
+            text: `Yakin ingin menghapus antrean pasien <b>${queue.patient.name}</b> ?`,
+            type: "warning",
+            confirmButtonColor: "#dc3545",
+            confirmButtonText: "Hapus",
+            cancelButtonText: "Tutup",
+            html: true,
+            showCancelButton: true,
+            closeOnConfirm: false,
+            showLoaderOnConfirm: true,
+        }, function () {
+            $.ajax({
+                type: "delete",
+                url: `{{ url('doctor/database/queue') }}`,
+                data: {
+                    queue_id : queueId
+                },
+                success: function (response) {
+                    swal("Berhasil!", `Berhasil menghapus antrean pasien ${patient.name}`, "success");
+                    window.setTimeout(function(){location.reload()},1000)
+                },
+                error: function (e) {
+                    swal("Gagal!", `Gagal menghapus antrean pasien ${patient.name}`, "error");
+                }
+            });
+        })
     }
 
 </script>

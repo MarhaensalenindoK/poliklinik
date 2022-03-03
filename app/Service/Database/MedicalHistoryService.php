@@ -42,7 +42,7 @@ class MedicalHistoryService {
         $medicalHistory = $this->fill($medicalHistory, $payload);
         $medicalHistory->save();
 
-        return $medicalHistory;
+        return $medicalHistory->toArray();
     }
 
     public function update($medicalHistoryId, $payload)

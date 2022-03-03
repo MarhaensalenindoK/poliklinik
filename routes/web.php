@@ -72,6 +72,7 @@ Route::group(['middleware' => ['auth', 'role:DOCTOR'], 'prefix' => 'doctor'], fu
     Route::get('/dashboard', [Controllers\Doctor\DashboardController::class, 'index']);
     Route::prefix('database')->group(function () {
         Route::post('/queue', [Controllers\Doctor\DashboardController::class, 'createQueue']);
+        Route::delete('/queue', [Controllers\Doctor\QueuesController::class, 'deleteQueue']);
     });
 
     Route::prefix('medical-history')->group(function () {
@@ -84,6 +85,12 @@ Route::group(['middleware' => ['auth', 'role:DOCTOR'], 'prefix' => 'doctor'], fu
 Route::group(['middleware' => ['auth', 'role:RECEPTIONIST'], 'prefix' => 'receptionist'], function(){
     Route::get('/dashboard', [Controllers\Receptionist\DashboardController::class, 'index']);
     Route::get('/patient-management', [Controllers\Receptionist\PatientManagementController::class, 'index']);
+
+    Route::prefix('database')->group(function () {
+        Route::post('/patient', [Controllers\Receptionist\PatientManagementController::class, 'createPatient']);
+        Route::patch('/patient', [Controllers\Receptionist\PatientManagementController::class, 'updatePatient']);
+        Route::delete('/patient', [Controllers\Receptionist\PatientManagementController::class, 'deletePatient']);
+    });
 });
 
 Route::group(['middleware' => ['auth', 'role:PATIENT'], 'prefix' => 'patient'], function(){
