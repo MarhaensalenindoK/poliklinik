@@ -108,4 +108,12 @@ class QueuesController extends Controller
 
         return $DBaction->destroy($request->action_id);
     }
+
+    public function deleteQueue(Request $request)
+    {
+        $DBqueue = new QueueService;
+        return response()->json(
+            $DBqueue->destroy($request->queue_id)
+        );
+    }
 }

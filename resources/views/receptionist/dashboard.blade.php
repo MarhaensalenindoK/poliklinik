@@ -21,7 +21,7 @@
         <a href="#myPage" class="has-arrow"><i class="icon-home"></i><span>My Page</span></a>
         <ul>
             <li class="active"><a href="{{ url('receptionist/dashboard') }}">Dashboard</a></li>
-            <li><a href="#">Management Patient</a></li>
+            <li><a href="{{ url('receptionist/patient-management') }}">Management Patient</a></li>
             <li><a href="#">Management Queue</a></li>
             <li><a href="#">Management Medicine</a></li>
         </ul>

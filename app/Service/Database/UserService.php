@@ -106,7 +106,7 @@ class UserService {
         $user->password = Hash::make($user->password);
         $user->save();
 
-        return $user;
+        return $user->toArray();
     }
 
     public function update($userId, $payload)

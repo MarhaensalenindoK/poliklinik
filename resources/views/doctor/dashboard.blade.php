@@ -77,7 +77,7 @@
 
     <div class="col-lg-12 col-md-12">
         <div class="table-responsive">
-            <table class="table table-hover table-custom spacing5"">
+            <table class="table table-hover table-custom spacing5" id="tableNoQueue">
                 <thead>
                     <tr>
                         <th style="width: 20px;">#</th>
@@ -132,6 +132,10 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
+    $(document).ready( function () {
+        $('#tableNoQueue').DataTable();
+    } );
 
     function showAddQueue(patientId, medicalHistoryId) {
             let user = users.data.find(user => user.id === patientId)
