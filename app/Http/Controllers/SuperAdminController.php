@@ -133,7 +133,7 @@ class SuperAdminController extends Controller
     public function createAccount(Request $request) {
         $DBuser = new UserService;
         $payload = [
-            'clinic_id' => $request->clinic_id,
+            'clinic_id' => $request->clinic_id ?? null,
             'name' => $request->name,
             'username' => $request->username,
             'password' => $request->username,

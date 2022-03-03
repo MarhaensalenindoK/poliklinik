@@ -131,7 +131,7 @@
                 <td>
                     <div class="d-flex align-items-center">
                         <div>
-                            <a href="javascript:void(0)" title="${user.name}">${user.name}</a>
+                            <a href="javascript:void(0)" onclick="showModalUpdateAccount('${user.id}')" title="${user.name}">${user.name}</a>
                         </div>
                     </div>
                 </td>

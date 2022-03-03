@@ -85,7 +85,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="desc">Desc</label>
+                        <label for="desc">Deskripsi Tindakan</label>
                         <textarea    class="form-control" name="descAction" rows="7" id="desc" rows="3"></textarea>
                     </div>
 

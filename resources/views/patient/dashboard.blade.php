@@ -44,14 +44,14 @@
             <div class="col-lg-6 col-md-6">
                 <a class="card" href="javascript:void(0)">
                     <div class="body text-center">
-                        <h6 class="mt-3">{{ $user['doctor']['name'] }}</h6>
+                        <h6 class="mt-3">{{ $user['doctor']['name'] ?? 'Belum diperiksa oleh dokter' }}</h6>
                         <div class="text-center text-muted">Your Doctor</div>
                     </div>
                     <div class="card-footer text-center">
                         <div class="row clearfix">
                             <div class="col-12">
                                 <i class="fa fa-envelope-open font-22"></i>
-                                <div><span class="text-muted">{{ $user['doctor']['email'] }}</span></div>
+                                <div><span class="text-muted">{{ $user['doctor']['email'] ?? '-' }}</span></div>
                             </div>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="card-wrapper flip-left">
-                    <div class="card s-widget-top">
+                    <div class="card s-widget-top" style="height: 18.75rem;">
                         <div class="front p-3 px-4">
                             <div class="py-4 m-0 text-center h2 text-info">Allergic</div>
                         </div>
@@ -88,12 +88,21 @@
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="card-wrapper flip-left">
-                    <div class="card s-widget-top">
+                    <div class="card s-widget-top" style="height: 18.75rem;">
                         <div class="front p-3 px-4 bg-danger text-light">
                             <div class="py-4 m-0 text-center h2">Been Diagnosed</div>
                         </div>
                         <div class="back p-3 px-4 text-light">
                             <p>
+                                @if (count($user['medical_history_patient']['been_diagnosed']) > 5)
+                                    @foreach ($user['medical_history_patient']['been_diagnosed'] as $item)
+                                        @if ($loop->last)
+                                            {{ $item }}.
+                                        @else
+                                            {{ $item }},
+                                        @endif
+                                    @endforeach
+                                @else
                                 <ul>
                                 @foreach ($user['medical_history_patient']['been_diagnosed'] as $item)
                                     <li>
@@ -101,6 +110,7 @@
                                     </li>
                                 @endforeach
                                 </ul>
+                                @endif
                             </p>
                         </div>
                     </div>
@@ -108,7 +118,7 @@
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="card-wrapper flip-left">
-                    <div class="card s-widget-top">
+                    <div class="card s-widget-top" style="height: 18.75rem;">
                         <div class="front p-3 px-4 bg-warning text-light">
                             <div class="py-4 m-0 text-center h2">Hospitalization or Surgery</div>
                         </div>
@@ -128,7 +138,7 @@
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="card-wrapper flip-left">
-                    <div class="card s-widget-top">
+                    <div class="card s-widget-top" style="height: 18.75rem;">
                         <div class="front p-3 px-4">
                             <div class="py-4 m-0 text-center h2 text-success">Anamnesis</div>
                         </div>
@@ -141,7 +151,7 @@
 
             <div class="col-lg-6 col-md-6">
                 <div class="card-wrapper flip-left">
-                    <div class="card s-widget-top">
+                    <div class="card s-widget-top" style="height: 18.75rem;">
                         <div class="front p-3 px-4">
                             <div class="py-4 m-0 text-center h2 text-info">Diagnosis</div>
                         </div>
@@ -153,7 +163,7 @@
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="card-wrapper flip-left">
-                    <div class="card s-widget-top">
+                    <div class="card s-widget-top" style="height: 18.75rem;">
                         <div class="front p-3 px-4 bg-danger text-light">
                             <div class="py-4 m-0 text-center h2">Physical Exam</div>
                         </div>
@@ -167,7 +177,7 @@
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="card-wrapper flip-left">
-                    <div class="card s-widget-top">
+                    <div class="card s-widget-top" style="height: 18.75rem;">
                         <div class="front p-3 px-4 bg-warning text-light">
                             <div class="py-4 m-0 text-center h2">Vital Sign</div>
                         </div>
@@ -181,7 +191,7 @@
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="card-wrapper flip-left">
-                    <div class="card s-widget-top">
+                    <div class="card s-widget-top" style="height: 18.75rem;">
                         <div class="front p-3 px-4">
                             <div class="py-4 m-0 text-center h2 text-success">Description of Action (Important)</div>
                         </div>

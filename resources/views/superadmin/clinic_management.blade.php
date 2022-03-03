@@ -193,7 +193,7 @@
                 <td>
                     <div class="d-flex align-items-center">
                         <div>
-                            <a href="javascript:void(0)" title="${clinic.name}">${clinic.name}</a>
+                            <a href="javascript:void(0)" onclick="showModalUpdateClinic('${clinic.id}')" title="${clinic.name}">${clinic.name}</a>
                             <p class="mb-0">${clinic.email === null ? '-' : clinic.email}</p>
                         </div>
                     </div>
