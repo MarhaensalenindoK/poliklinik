@@ -22,7 +22,7 @@
         <ul>
             <li class="active"><a href="{{ url('receptionist/dashboard') }}">Dashboard</a></li>
             <li><a href="{{ url('receptionist/patient-management') }}">Management Patient</a></li>
-            <li><a href="#">Management Queue</a></li>
+            <li><a href="{{ url('receptionist/queque-management') }}">Management Queue</a></li>
             <li><a href="#">Management Medicine</a></li>
         </ul>
     </li>

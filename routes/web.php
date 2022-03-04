@@ -85,6 +85,7 @@ Route::group(['middleware' => ['auth', 'role:DOCTOR'], 'prefix' => 'doctor'], fu
 Route::group(['middleware' => ['auth', 'role:RECEPTIONIST'], 'prefix' => 'receptionist'], function(){
     Route::get('/dashboard', [Controllers\Receptionist\DashboardController::class, 'index']);
     Route::get('/patient-management', [Controllers\Receptionist\PatientManagementController::class, 'index']);
+    Route::get('/queque-management', [Controllers\Receptionist\QuequeManagementController::class, 'index']);
 
     Route::prefix('database')->group(function () {
         Route::post('/patient', [Controllers\Receptionist\PatientManagementController::class, 'createPatient']);
