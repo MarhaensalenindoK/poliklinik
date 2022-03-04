@@ -42,7 +42,7 @@
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="otherAllergic">Other</label>
+                                    <label for="otherAllergic" class="text-muted">Other</label>
                                     <input name="allergic[]" type="text" class="form-control" id="otherAllergic" aria-describedby="otherAllergic">
                                 </div>
                             </div>
@@ -87,7 +87,7 @@
                             </div>
                             <div class="col-12">
                                 <div class="form-group mx-2">
-                                    <label for="otherDiagnosed">Other</label>
+                                    <label for="otherDiagnosed" class="text-muted">Other</label>
                                     <input name="diagnosed[]" type="text" class="form-control" id="otherDiagnosed" aria-describedby="otherDiagnosed">
                                 </div>
                             </div>
@@ -108,7 +108,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="otherDiagnosed">Anamnesis</label>
+                        <label for="anamnesis">Anamnesis</label>
                         <textarea required class="form-control" name="anamnesis" rows="7" id="anamnesis" rows="3"></textarea>
                     </div>
                 </div>

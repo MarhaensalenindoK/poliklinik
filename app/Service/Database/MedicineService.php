@@ -38,7 +38,7 @@ class MedicineService {
         $medicine = $this->fill($medicine, $payload);
         $medicine->save();
 
-        return $medicine;
+        return $medicine->toArray();
     }
 
     public function update($medicineId, $payload)
@@ -47,7 +47,7 @@ class MedicineService {
         $medicine = $this->fill($medicine, $payload);
         $medicine->save();
 
-        return $medicine;
+        return $medicine->toArray();
     }
 
     public function destroy($medicineId)
