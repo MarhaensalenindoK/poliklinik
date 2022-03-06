@@ -307,7 +307,6 @@
 
     function searchClinic(e) {
         let value = $("#searchInput").val();
-        console.log(value)
         if (value != '') {
             let keyword = value.toLowerCase();
             filtered_clinics = clinics.filter(function(clinic){

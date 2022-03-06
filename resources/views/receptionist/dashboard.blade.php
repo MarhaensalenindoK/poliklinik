@@ -22,8 +22,16 @@
         <ul>
             <li class="active"><a href="{{ url('receptionist/dashboard') }}">Dashboard</a></li>
             <li><a href="{{ url('receptionist/patient-management') }}">Management Patient</a></li>
-            <li><a href="#">Management Queue</a></li>
             <li><a href="{{ url('receptionist/medicine-management') }}">Management Medicine</a></li>
+        </ul>
+    </li>
+
+    <li class="header">Queue</li>
+    <li class="">
+        <a href="javascript:void(0)" class="has-arrow"><i class="icon-briefcase"></i><span>Management Queue</span></a>
+        <ul>
+            <li><a href="{{ url('receptionist/add-queue-page') }}">Add Queue</a></li>
+            <li><a href="{{ url('receptionist/queue-management') }}">Management Queue</a></li>
         </ul>
     </li>
     @endsection
@@ -71,7 +79,7 @@
     </div>
     <div class="col-lg-12 col-md-12">
         <div class="table-responsive">
-            <table class="table table-hover table-custom spacing5"">
+            <table class="table table-hover table-custom spacing5" id="tablePatient">
                 <thead>
                     <tr>
                         <th style="width: 20px;">#</th>
@@ -130,6 +138,8 @@
     let totalCheckin = parseInt(`{{ $totalQueueCheckin }}`)
     let totalCasher = parseInt(`{{ $totalQueueCasher }}`)
     let totalDone = parseInt(`{{ $totalQueueDone }}`)
+
+    $("#tablePatient").DataTable()
 
     c3.generate({
         bindto: '#chart-pie',

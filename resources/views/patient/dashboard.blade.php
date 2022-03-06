@@ -263,7 +263,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text amount-1">Total Harga</span>
                         </div>
-                        <input type="number" class="form-control" placeholder="Count" aria-label="Username" aria-describedby="basic-addon1" value="{{ $countPrice }}" disabled>
+                        <input type="number" class="form-control" placeholder="Count" aria-label="" aria-describedby="basic-addon1" value="{{ $countPrice }}" disabled>
                     </div>
                     <button type="button" class="btn btn-primary mt-5" onclick="showAlertConfirm()">
                         Confirm to Receptionist

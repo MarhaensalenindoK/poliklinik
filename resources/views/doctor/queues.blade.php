@@ -84,12 +84,28 @@
                                         <p id="email">{{ $queue['patient']['email'] }}</p>
                                     </div>
                                 </td>
-                                <td><span id="queue">{{ $queue['queue'] }}</span></td>
-                                <td><span id="username">{{ $queue['patient']['username'] }}</span></td>
-                                <td><span id="nik">{{ $queue['patient']['nik'] ?? '-' }}</span></td>
-                                <td><span id="allergic">{{ $queue['medical_history']['allergic'] ?? '-' }}</span></td>
                                 <td>
-                                    <span id="diagnosed">
+                                    <span>
+                                        {{ $queue['queue'] }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span>
+                                        {{ $queue['patient']['username'] }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span>
+                                        {{ $queue['patient']['nik'] ?? '-' }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="text-wrap" style="width:23rem">
+                                        {{ $queue['medical_history']['allergic'] ?? '-' }}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="text-wrap" style="width:23rem">
                                         @foreach ($queue['medical_history']['been_diagnosed'] as $item)
                                             @if($loop->last)
                                                 {{ $item }}
@@ -97,16 +113,20 @@
                                                 {{ $item }} ,
                                             @endif
                                         @endforeach
-                                    </span>
+                                    </div>
                                 </td>
                                 <td>
+                                    @if ($queue['medical_history']['hospitalization_surgery'] === [])
+                                        -
+                                    @else
                                     <ol>
                                         @foreach ($queue['medical_history']['hospitalization_surgery'] as $item)
                                             <li>{{ $item['reason'] }}</li>
                                         @endforeach
                                     </ol>
+                                    @endif
                                 </td>
-                                <td class="">
+                                <td>
                                     <div class="text-wrap" style="width:23rem">
                                         {{ $queue['medical_history']['anamnesis'] }}
                                     </div>

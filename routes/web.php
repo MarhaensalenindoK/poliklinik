@@ -85,6 +85,10 @@ Route::group(['middleware' => ['auth', 'role:DOCTOR'], 'prefix' => 'doctor'], fu
 Route::group(['middleware' => ['auth', 'role:RECEPTIONIST'], 'prefix' => 'receptionist'], function(){
     Route::get('/dashboard', [Controllers\Receptionist\DashboardController::class, 'index']);
     Route::get('/patient-management', [Controllers\Receptionist\PatientManagementController::class, 'index']);
+
+    Route::get('/queue-management', [Controllers\Receptionist\QueueManagementController::class, 'indexManagement']);
+    Route::get('/add-queue-page', [Controllers\Receptionist\QueueManagementController::class, 'indexQueue']);
+
     Route::get('/medicine-management', [Controllers\Receptionist\MedicineManagementController::class, 'index']);
 
     Route::prefix('database')->group(function () {
@@ -95,6 +99,10 @@ Route::group(['middleware' => ['auth', 'role:RECEPTIONIST'], 'prefix' => 'recept
         Route::post('/medicine', [Controllers\Receptionist\MedicineManagementController::class, 'createMedicine']);
         Route::patch('/medicine', [Controllers\Receptionist\MedicineManagementController::class, 'updateMedicine']);
         Route::delete('/medicine', [Controllers\Receptionist\MedicineManagementController::class, 'deleteMedicine']);
+
+        Route::post('/queue', [Controllers\Receptionist\QueueManagementController::class, 'createQueue']);
+        Route::patch('/queue', [Controllers\Receptionist\QueueManagementController::class, 'updateQueue']);
+        Route::delete('/queue', [Controllers\Receptionist\QueueManagementController::class, 'deleteQueue']);
     });
 });
 

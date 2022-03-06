@@ -70,7 +70,7 @@
     <div class="col-lg-12 col-md-12">
         <div class="card">
             <div class="header d-flex justify-content-between">
-                <h2>Pasien yang belum check up</h2>
+                <h2>Pasien yang belum memiliki antrean</h2>
             </div>
         </div>
     </div>

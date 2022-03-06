@@ -141,7 +141,6 @@
         let html = ``
         let no = 1
         $.each(data, function (key, user) {
-            console.log(user)
             html += `
             <tr>
                 <td>

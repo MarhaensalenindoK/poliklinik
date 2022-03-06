@@ -23,6 +23,9 @@ class QueuesController extends Controller
 
         $queues = $DBqueue->index($clinicId);
         $medicines = $DBmedicine->index($clinicId);
+        $queues['data'] = collect($queues['data'])->filter(function ($queue, $key) {
+            return $queue['medical_history']['examiner_id'] === Auth::user()->id;
+        })->toArray();
 
         $queueCheckin = collect($queues['data'])->filter(function ($queue, $key) {
             return $queue['status'] === 'CHECKIN';
@@ -38,6 +41,10 @@ class QueuesController extends Controller
         foreach ($queueNotCheckin as $key => $queue) {
             $queueNotCheckin[$key]['action'] = $DBaction->index($queue['medical_history_id'])['data'];
         }
+
+        $queueCheckin = array_values($queueCheckin);
+        $queueNotCheckin = array_values($queueNotCheckin);
+        $queues['data'] = array_values($queues['data']);
 
         return view('doctor.queues')
         ->with('queues', $queues)
