@@ -22,8 +22,16 @@
         <ul>
             <li><a href="{{ url('receptionist/dashboard') }}">Dashboard</a></li>
             <li class="active"><a href="{{ url('receptionist/patient-management') }}">Management Patient</a></li>
-            <li><a href="{{ url('receptionist/queque-management') }}">Management Queue</a></li>
             <li><a href="{{ url('receptionist/medicine-management') }}">Management Medicine</a></li>
+        </ul>
+    </li>
+
+    <li class="header">Queue</li>
+    <li class="">
+        <a href="javascript:void(0)" class="has-arrow"><i class="icon-briefcase"></i><span>Management Queue</span></a>
+        <ul>
+            <li><a href="{{ url('receptionist/add-queue-page') }}">Add Queue</a></li>
+            <li><a href="{{ url('receptionist/queue-management') }}">Management Queue</a></li>
         </ul>
     </li>
     @endsection

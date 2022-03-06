@@ -257,6 +257,8 @@
                     showConfirmButton: false
                 });
                 getUsers()
+
+                resetValue()
             },
             error: function (e) {
                 swal({
@@ -269,12 +271,20 @@
         });
     }
 
+    function resetValue() {
+        $("#createAccount").find('input[type=text]').val('')
+        $("#createAccount").find('input[type=email]').val('')
+        $("#createAccount").find('select option:selected').prop('selected', false)
+        $("#updateAccount").find('input[type=text]').val('')
+        $("#updateAccount").find('input[type=email]').val('')
+        $("#updateAccount").find('select option:selected').prop('selected', false)
+    }
+
     function showModalUpdateAccount(userId) {
         let user = users.find(user => user.id === userId)
         $("#updateAccount").find('input[type=hidden][name=user_id]').val(user.id)
         $("#updateAccount").find('input[type=text][name=name]').val(user.name)
         $("#updateAccount").find('input[type=text][name=username]').val(user.username)
-        $("#updateAccount").find('select[name=clinic]').val(user.clinic_id)
         $("#updateAccount").find('input[type=text][name=nik]').val(user.nik)
         $("#updateAccount").find('input[type=email][name=email]').val(user.email)
         $("#updateAccount").find('select[name=role]').val(user.role)
@@ -313,6 +323,7 @@
                     showConfirmButton: false
                 });
                 getUsers()
+                resetValue()
             },
             error: function (e) {
                 swal({

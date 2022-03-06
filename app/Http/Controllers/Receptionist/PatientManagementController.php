@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Service\Database\MedicalHistoryService;
 use Carbon\Carbon;
 use App\Service\Database\UserService;
+use Faker\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -33,9 +34,9 @@ class PatientManagementController extends Controller
     {
         $DBuser = new UserService;
         $DBmedicalHistory = new MedicalHistoryService;
+        $faker = Factory::create();
 
         $name = $request->name;
-        $username = $request->username;
         $nik = $request->nik;
         $email = $request->email;
 
@@ -43,7 +44,7 @@ class PatientManagementController extends Controller
         $been_diagnosed = array_filter($request->diagnosed);
         $hospitalization_surgery = array_filter($request->hospitalization_surgery);
         $anamnesis = $request->anamnesis;
-
+        $username = strtolower($request->username . $faker->numerify('####'));
         $payloadUser = [
             'name' => $name,
             'username' => $username,
@@ -58,7 +59,7 @@ class PatientManagementController extends Controller
 
         $payloadMedicalHistory = [
             'patient_id' => $createUser['id'],
-            'date_checkup' => Carbon::now()->format('Y-m-d'),
+            'date_checkup' => Carbon::now('GMT+7')->format('Y-m-d'),
             'allergic' => implode(", ", array_filter($allergic)),
             'anamnesis' => $anamnesis,
             'been_diagnosed' => [],

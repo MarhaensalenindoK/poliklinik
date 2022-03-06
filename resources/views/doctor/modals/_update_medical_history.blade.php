@@ -100,7 +100,7 @@
                             <div class="form-group">
                                 <label for="medicine">Medicine</label>
                                 <select class="form-control w-100" name="medicine[]" id="medicine" onchange="doseMedicine(this, 1)">
-                                    <option selected="selected" value="null">Medicine</option>
+                                    <option selected="selected" value="null" disabled>Medicine</option>
                                     @foreach ($medicines['data'] as $medicine)
                                         <option value="{{ $medicine['id'] }}">{{ $medicine['name'] }}</option>
                                     @endforeach

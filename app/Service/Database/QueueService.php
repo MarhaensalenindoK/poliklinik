@@ -63,7 +63,7 @@ class QueueService {
         $queue = $this->fill($queue, $payload);
         $queue->save();
 
-        return $queue;
+        return $queue->toArray();
     }
 
     public function destroy($queueId)

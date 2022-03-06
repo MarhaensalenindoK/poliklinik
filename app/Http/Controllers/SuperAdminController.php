@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Service\Database\ClinicService;
 use App\Service\Database\UserService;
+use Faker\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -132,11 +133,13 @@ class SuperAdminController extends Controller
 
     public function createAccount(Request $request) {
         $DBuser = new UserService;
+        $faker = Factory::create();
+        $username = strtolower($request->username . $faker->numerify('####'));
         $payload = [
             'clinic_id' => $request->clinic_id ?? null,
             'name' => $request->name,
-            'username' => $request->username,
-            'password' => $request->username,
+            'username' => $username,
+            'password' => $username,
             'email' => $request->email,
             'nik' => $request->nik,
             'status' => true,

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Service\Database\UserService;
+use Faker\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -56,11 +57,12 @@ class ManagementAccountController extends Controller
     {
         $DBUser = new UserService;
         $clinicId = Auth::user()->clinic_id;
-
+        $faker = Factory::create();
+        $username = strtolower($request->username . $faker->numerify('####'));
         $create = $DBUser->create($clinicId, [
             'name' => $request->name,
-            'username' => $request->username,
-            'password' => $request->username,
+            'username' => $username,
+            'password' => $username,
             'email' => $request->email,
             'nik' => $request->nik,
             'role' => $request->role,
