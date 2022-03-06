@@ -21,7 +21,7 @@
         <a href="#myPage" class="has-arrow"><i class="icon-home"></i><span>My Page</span></a>
         <ul>
             <li><a href="{{ url('admin/dashboard') }}">Dashboard</a></li>
-            <li class="active"><a href="{{ url('admin/admin-management') }}">Manage Account Admin</a></li>
+            <li class="active"><a href="{{ url('admin/account-management') }}">Management Account</a></li>
         </ul>
     </li>
     @endsection
