@@ -42,7 +42,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-round btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-round btn-primary" onclick="createAccount()">Confirm</button>
+                <button type="button" class="btn btn-round btn-primary" onclick="createAccount()">Create</button>
             </div>
         </div>
     </div>
