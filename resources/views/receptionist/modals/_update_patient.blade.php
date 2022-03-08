@@ -14,6 +14,31 @@
                 <input type="hidden" name="medical_history_id">
                 <div class="modal-body">
                     <div class="form-group">
+                        <label>Status</label>
+                        <div class="row">
+                            <div class="col-6">
+                                <div>
+                                    <label class="fancy-radio custom-color-green">
+                                        <input name="status" value="true" type="radio" checked>
+                                        <span>
+                                            <i></i>Aktive
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div>
+                                    <label class="fancy-radio custom-color-green">
+                                        <input name="status" value="false" type="radio">
+                                        <span>
+                                            <i></i>Non-Aktive
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="nameUpdate">Name</label>
                         <input required type="text" class="form-control" id="nameUpdate" name="name" aria-describedby="name">
                     </div>

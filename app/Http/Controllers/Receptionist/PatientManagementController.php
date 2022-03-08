@@ -20,7 +20,6 @@ class PatientManagementController extends Controller
         $patients = $DBuser->index([
             'role' => User::PATIENT,
             'clinic_id' => Auth::user()->clinic_id,
-            'status' => true,
             'with_clinic' => true,
             'with_medical_patient' => true,
             'with_queue' => true,
@@ -115,6 +114,7 @@ class PatientManagementController extends Controller
         $username = $request->username;
         $nik = $request->nik;
         $email = $request->email;
+        $status = $request->status;
 
         $medicalHistoryId = $request->medical_history_id;
         $allergic = $request->allergic;
@@ -128,6 +128,7 @@ class PatientManagementController extends Controller
             'password' => $username,
             'nik' => $nik,
             'email' => $email,
+            'status' => $status === 'true' ? true : false,
         ];
 
         $updateUser = $DBuser->update($patientId, $payloadUser);

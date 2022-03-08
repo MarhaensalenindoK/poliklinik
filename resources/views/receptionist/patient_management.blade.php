@@ -60,6 +60,7 @@
                         <th>Diagnosed</th>
                         <th>Hospitalzation surgery</th>
                         <th>Amnanesis</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -108,6 +109,11 @@
                             <div class="text-wrap" style="width:23rem">
                                 {{ $patient['medical_history_patient']['anamnesis'] }}
                             </div>
+                        </td>
+                        <td>
+                            <span class="badge {{  $patient['status'] === 1 ? 'badge-success' : 'badge-danger' }} ml-0 mr-0">
+                                {{  $patient['status'] === 1 ? 'Active' : 'Non-active' }}
+                            </span>
                         </td>
                         <td>
                             <button type="button" class="btn btn-sm btn-default" onclick="showModalUpdatePatient('{{ $patient['id'] }}')" title="Update Patient" data-toggle="tooltip" data-placement="top"><i class="icon-pencil"></i></button>
@@ -241,6 +247,7 @@
         $('#updatePatient').find('input[type=text][name=nik]').val(patient.nik)
         $('#updatePatient').find('input[type=email][name=email]').val(patient.email)
         $('#updatePatient').find('textarea[name=anamnesis]').val(patient.medical_history_patient.anamnesis)
+        $('#updatePatient').find(`input[type=radio][name=status][value=${patient.status === 1 ? true : false}]`).prop('checked', true)
 
         $("#hospitalizationSurgeryInputUpdate").html(`
             <div class="inputManyHS input-HS-1">

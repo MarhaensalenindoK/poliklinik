@@ -184,9 +184,7 @@
 
         $("#renderUser").html(html);
 
-        $(document).ready( function () {
-            $('#manageAccTable').DataTable();
-        } );
+        $('#manageAccTable').DataTable();
     }
 
     function craeteAccount() {
@@ -284,6 +282,7 @@
         $("#updateAccount").find('input[type=text][name=nik]').val(user.nik)
         $("#updateAccount").find('input[type=email][name=email]').val(user.email)
         $("#updateAccount").find('select[name=role]').val(user.role)
+        $("#updateAccount").find(`input[type=radio][name=status][value=${user.status === 1 ? true : false}]`).prop('checked', true)
         $("div.id_100 select").val("val2");
         $("#updateAccount").modal('show')
     }
@@ -297,6 +296,7 @@
         let nik = $("#updateAccount").find('input[type=text][name=nik]').val()
         let email = $("#updateAccount").find('input[type=text][name=email]').val()
         let role = $("#updateAccount").find('select[name=role]').val()
+        let status = $("#updateAccount").find('input[type=radio][name=status]:checked').val()
 
         let data = {
             user_id,
@@ -305,7 +305,8 @@
             nik,
             email,
             role,
-            username
+            username,
+            status
         }
 
         $.ajax({

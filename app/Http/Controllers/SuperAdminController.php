@@ -63,6 +63,7 @@ class SuperAdminController extends Controller
             'email' => $request->email,
             'nik' => $request->nik,
             'role' => $request->role,
+            'status' => $request->status === 'true' ? true : false,
         ];
 
         $update = $DBuser->update($request->user_id, $payload);

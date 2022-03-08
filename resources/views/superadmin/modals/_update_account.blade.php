@@ -11,6 +11,31 @@
                 <form id="basic-form" novalidate>
                     <input type="hidden" name="user_id">
                     <div class="form-group">
+                        <label>Status</label>
+                        <div class="row">
+                            <div class="col-6">
+                                <div>
+                                    <label class="fancy-radio custom-color-green">
+                                        <input name="status" value="true" type="radio" checked>
+                                        <span>
+                                            <i></i>Aktive
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div>
+                                    <label class="fancy-radio custom-color-green">
+                                        <input name="status" value="false" type="radio">
+                                        <span>
+                                            <i></i>Non-Aktive
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label>Nama</label>
                         <input type="text" class="form-control" name="name" required>
                     </div>
