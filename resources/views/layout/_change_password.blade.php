@@ -7,7 +7,7 @@
                     @csrf
                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                     <div class="form-group text-white">
-                        <label>Current Password</label>
+                        <label>New Password</label>
                         <input type="password" class="form-control" name="password" required>
                     </div>
                     <button type="submit" class="btn btn-default">Ubah Password</button>
