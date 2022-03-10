@@ -24,7 +24,7 @@ class QueuesController extends Controller
         $queues = $DBqueue->index($clinicId);
         $medicines = $DBmedicine->index($clinicId);
         $queues['data'] = collect($queues['data'])->filter(function ($queue, $key) {
-            return $queue['medical_history']['examiner_id'] === Auth::user()->id;
+            return ($queue['medical_history'] !== null && $queue['medical_history']['examiner_id'] === Auth::user()->id);
         })->toArray();
 
         $queueCheckin = collect($queues['data'])->filter(function ($queue, $key) {
