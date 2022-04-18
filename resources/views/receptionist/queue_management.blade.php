@@ -229,6 +229,7 @@
     function showModalPayment(queueId) {
         let queue = queues.data.find(thisQueue => thisQueue.id === queueId)
         $("#payment").find(`input[type=hidden][name=queue_id]`).val(queue.id)
+        $("#payment").find(`input[type=hidden][name=medical_history_id]`).val(queue.medical_history.id)
         $("#payment").find(`input[type=text][name=name]`).val(queue.patient.name)
         $("#payment").find(`input[type=text][name=username]`).val(queue.patient.username)
         $("#payment").find(`input[type=text][name=nik]`).val(queue.patient.nik)
