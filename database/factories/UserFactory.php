@@ -31,6 +31,7 @@ class UserFactory extends Factory
             'id' => $this->faker->uuid(),
             'clinic_id' => Clinic::factory()->create()->id,
             'name' => $name,
+            'nik' => $this->faker->randomNumber(7, true),
             'username' => $username,
             'password' => Hash::make($username),
             'role' => $this->faker->randomElement($roles),

@@ -14,7 +14,7 @@
 @endsection
 @section('sidebar-biodata')
     <span>Welcome,</span>
-    <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>Doctor</strong></a>
+    <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>{{ Auth::user()->name }}</strong></a>
     <ul class="dropdown-menu dropdown-menu-right account vivify flipInY" style="right: auto;">
         {{-- <li><a href="page-profile.html"><i class="icon-user"></i>My Profile</a></li>
         <li><a href="app-inbox.html"><i class="icon-envelope-open"></i>Messages</a></li>
@@ -362,6 +362,33 @@
                 `
                 $("#editPatient").find("#action").html(htmlAction);
             }
+        } else {
+                let htmlAction = `
+                <div class="many-action action-1">
+                    <div class="form-group">
+                        <label for="medicine">Medicine</label>
+                        <select class="form-control w-100" name="medicine[]" id="medicine" onchange="doseMedicine(this, 1)">
+                            <option selected="selected" value="null">Medicine</option>
+                            @foreach ($medicines['data'] as $medicine)
+                                <option value="{{ $medicine['id'] }}">{{ $medicine['name'] }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Sigma</label>
+                        <input type="text" name="sigma[]" id="sigma" class="form-control">
+                    </div>
+
+                    <label>Dose</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text amount-1">-</span>
+                        </div>
+                        <input type="number" name="count[]" class="form-control" placeholder="Count" aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                `
+                $("#editPatient").find("#action").html(htmlAction);
         }
 
         $("#editPatient").modal('show')

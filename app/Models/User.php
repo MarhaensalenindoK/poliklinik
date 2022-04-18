@@ -40,8 +40,20 @@ class User extends Authenticatable
         return $this->hasOne(Queue::class, 'user_id', 'id');
     }
 
+    public function fullQueue() {
+        return $this->hasMany(Queue::class, 'user_id', 'id');
+    }
+
+    public function medicalHistories() {
+        return $this->hasMany(MedicalHistory::class, 'patient_id', 'id')->orderBy('created_at', 'DESC');
+    }
+
     public function medicalHistoryPatient() {
         return $this->hasOne(MedicalHistory::class, 'patient_id', 'id');
+    }
+
+    public function fullMedicalHistoryPatient() {
+        return $this->hasMany(MedicalHistory::class, 'patient_id', 'id');
     }
 
     public function medicalHistoryExaminer() {

@@ -29,8 +29,9 @@
     <li class="active open">
         <a href="javascript:void(0)" class="has-arrow"><i class="icon-briefcase"></i><span>Management Queue</span></a>
         <ul>
-            <li class="active"><a href="{{ url('receptionist/add-queue-page') }}">Add Queue</a></li>
+            <li class="active"><a href="{{ url('receptionist/add-queue-page') }}">Add New Queue</a></li>
             <li><a href="{{ url('receptionist/queue-management') }}">Management Queue</a></li>
+            <li><a href="{{ url('receptionist/queue-done') }}">List Queue Done</a></li>
         </ul>
     </li>
     @endsection
@@ -39,7 +40,7 @@
 <div class="col-lg-12 col-md-12 mt-5">
     <div class="card">
         <div class="header d-flex justify-content-between">
-            <h2>Pasien yang belum memiliki antrean</h2>
+            <h2>Patients who don't have a queue</h2>
         </div>
     </div>
 </div>
@@ -58,7 +59,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($users['data'] as $user)
+                @foreach ($notHaveQueue as $medicalHistory)
                 <tr>
                     <td>
                         <span>{{ $loop->iteration }}</span>
@@ -66,21 +67,21 @@
                     <td>
                         <div class="d-flex align-items-center">
                             <div>
-                                <a href="javascript:void(0)" title="{{ $user['name'] }}">{{ $user['name'] }}</a>
+                                <a href="javascript:void(0)" title="{{ $medicalHistory['patient']['name'] }}">{{ $medicalHistory['patient']['name'] }}</a>
                             </div>
                         </div>
                     </td>
                     <td>
-                        <span>{{ $user['username'] }}</span>
+                        <span>{{ $medicalHistory['patient']['username'] }}</span>
                     </td>
                     <td>
-                        <span>{{ $user['nik'] }}</span>
+                        <span>{{ $medicalHistory['patient']['nik'] }}</span>
                     </td>
                     <td>
-                        <span>{{ $user['email'] }}</span>
+                        <span>{{ $medicalHistory['patient']['email'] }}</span>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-sm btn-default" title="Add queue" data-toggle="tooltip" data-placement="top" onclick="showAddQueue('{{ $user['id'] }}', '{{ $user['medical_history_patient']['id'] }}')"><i class="fa fa-check-square-o"></i></button>
+                        <button type="button" class="btn btn-sm btn-default" title="Add queue" data-toggle="tooltip" data-placement="top" onclick="showAddQueue('{{ $medicalHistory['patient']['id'] }}', '{{ $medicalHistory['id'] }}')"><i class="fa fa-check-square-o"></i></button>
                     </td>
                 </tr>
                 @endforeach
@@ -108,7 +109,7 @@
 @endif
 
 <script>
-    let users = @json($users);
+    let notHaveQueue = @json($notHaveQueue);
 
     $("#tableNoQueue").DataTable()
 
@@ -119,12 +120,12 @@
     });
 
     function showAddQueue(patientId, medicalHistoryId) {
-        let user = users.data.find(user => user.id === patientId)
-        $("#createQueue").find(`input[type=hidden][name=patient_id]`).val(user.id)
-        $("#createQueue").find(`input[type=hidden][name=medical_history_id]`).val(user.medical_history_patient.id)
-        $("#createQueue").find(`input[type=text][name=name]`).val(user.name)
-        $("#createQueue").find(`input[type=text][name=username]`).val(user.username)
-        $("#createQueue").find(`input[type=text][name=nik]`).val(user.nik)
+        let medicalHistory = notHaveQueue.find(medicalHistory => medicalHistory.id === medicalHistoryId)
+        $("#createQueue").find(`input[type=hidden][name=patient_id]`).val(medicalHistory.patient.id)
+        $("#createQueue").find(`input[type=hidden][name=medical_history_id]`).val(medicalHistory.id)
+        $("#createQueue").find(`input[type=text][name=name]`).val(medicalHistory.patient.name)
+        $("#createQueue").find(`input[type=text][name=username]`).val(medicalHistory.patient.username)
+        $("#createQueue").find(`input[type=text][name=nik]`).val(medicalHistory.patient.nik)
 
         $("#createQueue").modal('show')
     }
@@ -133,10 +134,10 @@
         let patientId = $("#createQueue").find(`input[type=hidden][name=patient_id]`).val()
         let medicalHistoryId = $("#createQueue").find(`input[type=hidden][name=medical_history_id]`).val()
         let doctorId = $("#createQueue").find(`select[name=doctor]`).val()
-        let user = users.data.find(user => user.id === patientId)
+        let medicalHistory = notHaveQueue.find(medicalHistory => medicalHistory.id === medicalHistoryId)
 
         if (doctorId === null) {
-            swal("Gagal!", `Gagal menambahkan antrian akun ${user.name}, silahkan lengkapi dengan siapa pasien ditangani`, "error");
+            swal("Gagal!", `Gagal menambahkan antrian akun ${medicalHistory.patient.name}, silahkan lengkapi dengan siapa pasien ditangani`, "error");
             return;
         }
 
@@ -149,12 +150,12 @@
                 medical_history_id : medicalHistoryId
             },
             success: function (response) {
-                swal("Berhasil!", `Berhasil menambahkan antrian akun ${user.name}`, "success");
+                swal("Berhasil!", `Berhasil menambahkan antrian akun ${medicalHistory.patient.name}`, "success");
 
                 window.setTimeout(function(){location.reload()},1000)
             },
             error: function (e) {
-                swal("Gagal!", `Gagal menambahkan antrian akun ${user.name}`, "error");
+                swal("Gagal!", `Gagal menambahkan antrian akun ${medicalHistory.patient.name}`, "error");
             }
         });
     }

@@ -17,12 +17,15 @@ class UserService {
         $page = $filter['page'] ?? 1;
         $role = $filter['role'] ?? null;
         $name = $filter['name'] ?? null;
+        $nik = $filter['nik'] ?? null;
         $status = $filter['status'] ?? null;
         $clinic_id = $filter['clinic_id'] ?? null;
         $with_clinic = $filter['with_clinic'] ?? false;
         $with_medical_patient = $filter['with_medical_patient'] ?? false;
+        $with_full_medical_patient = $filter['with_full_medical_patient'] ?? false;
         $with_medical_examiner = $filter['with_medical_examiner'] ?? false;
         $with_queue = $filter['with_queue'] ?? false;
+        $with_full_queue = $filter['with_full_queue'] ?? false;
         $not_role = $filter['not_role'] ?? null;
 
         $query = User::orderBy('created_at', $orderBy);
@@ -43,6 +46,10 @@ class UserService {
             $query->where('name', $name);
         }
 
+        if ($nik !== null) {
+            $query->where('nik', $nik);
+        }
+
         if ($status !== null) {
             $query->where('status', $status);
         }
@@ -55,12 +62,20 @@ class UserService {
             $query->with('medicalHistoryPatient');
         }
 
+        if ($with_full_medical_patient) {
+            $query->with('fullMedicalHistoryPatient');
+        }
+
         if ($with_medical_examiner) {
             $query->with('medicalHistoryExaminer');
         }
 
         if ($with_queue) {
             $query->with('queue');
+        }
+
+        if ($with_full_queue) {
+            $query->with('fullQueue');
         }
 
         $users = $query->paginate($per_page, ['*'], 'page', $page);
@@ -73,7 +88,12 @@ class UserService {
         $user = User::findOrFail($userId);
 
         if ($user->role === User::PATIENT) {
-            $user = User::with('medicalHistoryPatient')->with('clinic')->findOrFail($userId);
+            $user = User::with('medicalHistories')->with('clinic')->findOrFail($userId);
+
+            $data = $user->toArray();
+            $data['latest_medical_history'] = $data['medical_histories'][0] ?? [];
+
+            return $data;
         }
 
         return $user->toArray();
@@ -138,7 +158,7 @@ class UserService {
             'username' => 'required|string',
             'password' => 'required|string',
             'status' => 'required',
-            'nik' => 'nullable|numeric',
+            'nik' => 'numeric',
             'email' => 'nullable|email',
             'role' => ['required', Rule::in(config('constant.user.roles'))],
         ])->validate();

@@ -19,42 +19,86 @@ class QueueManagementController extends Controller
     public function indexManagement(){
         $DBqueue = new QueueService;
         $DBaction = new ActionService;
+        $DBuser = new UserService;
+
+        $clinicId = Auth::user()->clinic_id;
 
         $queues = $DBqueue->index(Auth::user()->clinic_id);
+        $doctors = $DBuser->index([
+            'clinic_id' => $clinicId,
+            'role' => User::DOCTOR,
+        ]);
 
         foreach ($queues['data'] as $key => $queue) {
             $queues['data'][$key]['action'] = $DBaction->index($queue['medical_history']['id'])['data'] ?? [];
         }
 
-        return view('receptionist.queue_management', compact('queues'));
+        return view('receptionist.queue_management', compact('queues', 'doctors'));
     }
 
     public function indexQueue()
     {
-        $DBuser = new UserService;
-
         $clinicId = Auth::user()->clinic_id;
+        $DBuser = new UserService;
         $users = $DBuser->index([
-            'with_queue' => true,
-            'with_medical_patient' => true,
+            'with_full_queue' => true,
+            'with_full_medical_patient' => true,
             'clinic_id' => $clinicId,
             'role' => 'PATIENT',
         ]);
+
+        $notHaveQueue = [];
+
+        foreach ($users['data'] as $user) {
+            if ($user['full_medical_history_patient'] === null || $user['full_medical_history_patient'] === []) {
+                continue;
+            }
+
+            if ($user['full_queue'] === null || $user['full_queue'] === []) {
+                continue;
+            }
+
+            $queueCollection = collect($user['full_queue']);
+            foreach ($user['full_medical_history_patient'] as $medicalHistory) {
+                $checkQueue = $queueCollection->filter(function ($queue) use ($medicalHistory) {
+                    return $queue['medical_history_id'] === $medicalHistory['id'];
+                })->toArray();
+
+                if ($checkQueue === []) {
+                    $data = $medicalHistory;
+                    $data['patient'] = $user;
+                    $notHaveQueue[] = $data;
+                }
+            }
+        }
 
         $doctors = $DBuser->index([
             'clinic_id' => $clinicId,
             'role' => User::DOCTOR,
         ]);
 
-        $users['data'] = collect($users['data'])->filter(function ($user, $key) {
-            return $user['queue'] === null;
-        })->toArray();
-
-        $users['data'] = array_values($users['data']);
-
         return view('receptionist.add_queue_management')
         ->with('doctors', $doctors)
-        ->with('users', $users);
+        ->with('notHaveQueue', $notHaveQueue);
+    }
+
+    public function indexQueueDone(){
+        $DBqueue = new QueueService;
+        $DBaction = new ActionService;
+        $DBuser = new UserService;
+
+        $clinicId = Auth::user()->clinic_id;
+
+        $queues = $DBqueue->index(Auth::user()->clinic_id,
+        [
+            'status' => Queue::DONE,
+        ]);
+
+        foreach ($queues['data'] as $key => $queue) {
+            $queues['data'][$key]['action'] = $DBaction->index($queue['medical_history']['id'])['data'] ?? [];
+        }
+
+        return view('receptionist.queue_done', compact('queues'));
     }
 
     public function createQueue(Request $request) {
@@ -62,6 +106,7 @@ class QueueManagementController extends Controller
         $DBmedicalHistory = new MedicalHistoryService;
         $clinicId = Auth::user()->clinic_id;
         $doctorId = $request->doctor_id;
+
         $queues = $DBqueue->index($clinicId, ['per_page' => 1]);
 
         $payloadMedicalHistory = [
@@ -80,6 +125,81 @@ class QueueManagementController extends Controller
         $create = $DBqueue->create($updateMedicalHistory['id'], $request->patient_id, $clinicId, $payload);
 
         return response()->json($create);
+    }
+
+    public function createQueueExisting(Request $request) {
+        $DBqueue = new QueueService;
+        $DBuser = new UserService;
+        $DBmedicalHistory = new MedicalHistoryService;
+        $clinicId = Auth::user()->clinic_id;
+
+        $patient = $DBuser->index([
+            'nik' => $request->nik,
+        ])['data'][0] ?? null;
+
+        if ($patient === null) {
+            return redirect('receptionist/queue-management')
+            ->with('message', 'Pasien NIK : <strong>'. $request->nik .'</strong> tidak ditemukan, pastikan pasien sudah terdaftar !');
+        }
+
+
+        $allergic = $request->allergic;
+        $been_diagnosed = array_filter($request->diagnosed);
+        $hospitalization_surgery = array_filter($request->hospitalization_surgery);
+        $anamnesis = $request->anamnesis;
+        $doctorId = $request->doctor;
+
+        $payloadMedicalHistory = [
+            'patient_id' => $patient['id'],
+            'date_checkup' => Carbon::now('GMT+7')->format('Y-m-d'),
+            'allergic' => implode(", ", array_filter($allergic)),
+            'anamnesis' => $anamnesis,
+            'been_diagnosed' => [],
+            'hospitalization_surgery' => [],
+        ];
+
+        if ($been_diagnosed !== []) {
+            $payloadMedicalHistory['been_diagnosed'] = [];
+
+            foreach ($been_diagnosed as $key => $item) {
+                $payloadMedicalHistory['been_diagnosed'][$key] = $item;
+            }
+        }
+
+        if ($hospitalization_surgery !== []) {
+            $payloadMedicalHistory['hospitalization_surgery'] = [];
+
+            foreach ($hospitalization_surgery as $key => $item) {
+                $payloadMedicalHistory['hospitalization_surgery'][$key]['reason'] = $item;
+            }
+        }
+        $createMedicalHistory = $DBmedicalHistory->create(Auth::user()->clinic_id, $doctorId, $payloadMedicalHistory);
+        if ($doctorId !== null) {
+            $queues = $DBqueue->index($clinicId, ['per_page' => 1]);
+
+            $payload = [
+                'clinic_id' => $clinicId,
+                'queue' => intval(Carbon::now('GMT+7')->day . $queues['total'] + 1),
+                'date' => Carbon::now('GMT+7')->format('Y-m-d'),
+                'status' => 'CHECKIN',
+            ];
+
+            $DBqueue->create($createMedicalHistory['id'], $patient['id'], $clinicId, $payload);
+        }
+
+        if ($createMedicalHistory['id']) {
+            return redirect('receptionist/queue-management')
+            ->with('message', '<div class="text-left">Pasien NIK : <strong>'. $request->nik ."</strong> ditambahkan ke antrian terbaru ! <br>
+            <ul>
+                <li>Name : <strong>" .$patient['name']. "</strong></li>
+                <li>NIK : <strong>" .$patient['nik']. "</strong></li>
+                <li>Email : <strong>" .$patient['email']. "</strong></li>
+                <li>Anamnesis : " .$createMedicalHistory['anamnesis']. "</li>
+            </ul></div>");
+        }
+
+        return redirect('receptionist/queue-management')
+            ->with('message', 'Pasien NIK : <strong>'. $request->nik .'</strong> gagal membuat antrian baru !');
     }
 
     public function updateQueue(Request $request) {
