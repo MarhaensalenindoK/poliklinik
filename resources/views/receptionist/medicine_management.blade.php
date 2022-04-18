@@ -30,8 +30,9 @@
     <li class="">
         <a href="javascript:void(0)" class="has-arrow"><i class="icon-briefcase"></i><span>Management Queue</span></a>
         <ul>
-            <li><a href="{{ url('receptionist/add-queue-page') }}">Add Queue</a></li>
+            <li><a href="{{ url('receptionist/add-queue-page') }}">Add New Queue</a></li>
             <li><a href="{{ url('receptionist/queue-management') }}">Management Queue</a></li>
+            <li><a href="{{ url('receptionist/queue-done') }}">List Queue Done</a></li>
         </ul>
     </li>
     @endsection

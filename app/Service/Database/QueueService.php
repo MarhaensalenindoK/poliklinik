@@ -15,6 +15,7 @@ class QueueService {
         $per_page = $filter['per_page'] ?? 999;
         $page = $filter['page'] ?? 1;
         $status = $filter['status'] ?? null;
+        $medical_history_id = $filter['medica$medical_history_id'] ?? null;
 
         Clinic::findOrFail($clinicId);
 
@@ -24,6 +25,10 @@ class QueueService {
 
         if ($status !== null) {
             $query->where('status', $status);
+        }
+
+        if ($medical_history_id !== null) {
+            $query->where('medical_history_id', $medical_history_id);
         }
 
         $query->with('patient');

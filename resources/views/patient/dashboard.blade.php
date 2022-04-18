@@ -21,6 +21,7 @@
         <a href="#myPage" class="has-arrow"><i class="icon-home"></i><span>My Page</span></a>
         <ul>
             <li class="active"><a href="{{ url('patient/dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url('patient/history-payment') }}">History Payment</a></li>
         </ul>
     </li>
     @endsection
@@ -74,6 +75,11 @@
                     </div>
                 </a>
             </div>
+            <div class="col-lg-12 col-md-12 py-5 color-blue-1">
+                <h4>
+                    Latest Medical History
+                </h4>
+            </div>
             <div class="col-lg-6 col-md-6">
                 <div class="card-wrapper flip-left">
                     <div class="card s-widget-top" style="height: 18.75rem;">
@@ -81,7 +87,7 @@
                             <div class="py-4 m-0 text-center h2 text-info">Allergic</div>
                         </div>
                         <div class="back p-3 px-4 my-auto bg-info text-center">
-                            <p class="text-light">{{ $user['medical_history_patient']['allergic'] }}</p>
+                            <p class="text-light">{{ $user['latest_medical_history']['allergic'] }}</p>
                         </div>
                     </div>
                 </div>
@@ -94,8 +100,8 @@
                         </div>
                         <div class="back p-3 px-4 text-light">
                             <p>
-                                @if (count($user['medical_history_patient']['been_diagnosed']) > 5)
-                                    @foreach ($user['medical_history_patient']['been_diagnosed'] as $item)
+                                @if (count($user['latest_medical_history']['been_diagnosed']) > 5)
+                                    @foreach ($user['latest_medical_history']['been_diagnosed'] as $item)
                                         @if ($loop->last)
                                             {{ $item }}.
                                         @else
@@ -104,7 +110,7 @@
                                     @endforeach
                                 @else
                                 <ul>
-                                @foreach ($user['medical_history_patient']['been_diagnosed'] as $item)
+                                @foreach ($user['latest_medical_history']['been_diagnosed'] as $item)
                                     <li>
                                         {{ $item }}
                                     </li>
@@ -125,7 +131,7 @@
                         <div class="back p-3 px-4 text-white">
                             <p>
                                 <ol>
-                                @foreach ($user['medical_history_patient']['hospitalization_surgery'] as $item)
+                                @foreach ($user['latest_medical_history']['hospitalization_surgery'] as $item)
                                     <li>
                                         Reason : <b>{{ $item['reason'] }}</b>
                                     </li>
@@ -143,7 +149,7 @@
                             <div class="py-4 m-0 text-center h2 text-success">Anamnesis</div>
                         </div>
                         <div class="back p-3 px-4 bg-success text-center">
-                            <p class="text-light">{{ $user['medical_history_patient']['anamnesis'] }}</p>
+                            <p class="text-light">{{ $user['latest_medical_history']['anamnesis'] }}</p>
                         </div>
                     </div>
                 </div>
@@ -156,7 +162,7 @@
                             <div class="py-4 m-0 text-center h2 text-info">Diagnosis</div>
                         </div>
                         <div class="back p-3 px-4 my-auto bg-info text-center">
-                            <p class="text-light">{{ $user['medical_history_patient']['diagnosis'] }}</p>
+                            <p class="text-light">{{ $user['latest_medical_history']['diagnosis'] }}</p>
                         </div>
                     </div>
                 </div>
@@ -169,7 +175,7 @@
                         </div>
                         <div class="back p-3 px-4 text-light">
                             <p>
-                                {{ $user['medical_history_patient']['physical_exam'] }}
+                                {{ $user['latest_medical_history']['physical_exam'] }}
                             </p>
                         </div>
                     </div>
@@ -183,7 +189,7 @@
                         </div>
                         <div class="back p-3 px-4 text-white">
                             <p>
-                                {{ $user['medical_history_patient']['vital_sign'] }}
+                                {{ $user['latest_medical_history']['vital_sign'] }}
                             </p>
                         </div>
                     </div>
@@ -196,7 +202,7 @@
                             <div class="py-4 m-0 text-center h2 text-success">Description of Action (Important)</div>
                         </div>
                         <div class="back p-3 px-4 bg-success text-center">
-                            <p class="text-light">{{ $user['medical_history_patient']['description_action'] }}</p>
+                            <p class="text-light">{{ $user['latest_medical_history']['description_action'] }}</p>
                         </div>
                     </div>
                 </div>

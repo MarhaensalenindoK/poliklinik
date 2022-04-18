@@ -12,6 +12,8 @@ class MedicalHistoryService {
         $per_page = $filter['per_page'] ?? 999;
         $page = $filter['page'] ?? 1;
         $examiner_id = $filter['examiner_id'] ?? null;
+        $with_queue = $filter['with_queue'] ?? false;
+        $with_action = $filter['with_action'] ?? false;
 
         $query = ModelsMedicalHistory::orderBy('created_at', $orderBy);
 
@@ -21,6 +23,14 @@ class MedicalHistoryService {
             $query->where('examiner_id', $examiner_id)->with('examiner');
         }
 
+        if ($with_queue) {
+            $query->with('queue');
+        }
+
+        if ($with_action) {
+            $query->with('action');
+        }
+
         $medicalHistory = $query->paginate($per_page, ['*'], 'page', $page);
 
         return $medicalHistory->toArray();
@@ -28,7 +38,7 @@ class MedicalHistoryService {
 
     public function detail($medicalHistoryId)
     {
-        $medicalHistory = ModelsMedicalHistory::findOrFail($medicalHistoryId);
+        $medicalHistory = ModelsMedicalHistory::with('queue')->with('patient')->findOrFail($medicalHistoryId);
 
         return $medicalHistory->toArray();
     }

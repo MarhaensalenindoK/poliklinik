@@ -31,6 +31,17 @@
                         </div>
                     </fieldset>
                     <div class="form-group">
+                        <label>Doctor</label>
+                        <div class="input-group mb-3">
+                            <select class="form-control" name="doctor" required>
+                                <option selected disabled>Doctor</option>
+                                @foreach ($doctors['data'] as $doctor)
+                                    <option value="{{ $doctor['id'] }}">{{ $doctor['name'] }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label>Status</label>
                         <div class="input-group mb-3">
                             <select class="form-control" name="status">

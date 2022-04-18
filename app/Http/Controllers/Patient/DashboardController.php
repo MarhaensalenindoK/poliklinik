@@ -17,10 +17,12 @@ class DashboardController extends Controller
 
         $user = $DBuser->detail(Auth::user()->id);
 
-        if ($user['medical_history_patient']['examiner_id'] !== null) {
-            $user['doctor'] = $DBuser->detail($user['medical_history_patient']['examiner_id']);
+        if ($user['latest_medical_history']['examiner_id'] !== null) {
+            $user['doctor'] = $DBuser->detail($user['latest_medical_history']['examiner_id']);
         }
-        $user['action'] = $DBaction->index($user['medical_history_patient']['id'])['data'];
+
+        $user['action'] = $DBaction->index($user['latest_medical_history']['id'])['data'];
+
         return view('patient.dashboard')
         ->with('user', $user);
     }

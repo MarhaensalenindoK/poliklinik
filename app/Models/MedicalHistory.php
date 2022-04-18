@@ -40,4 +40,12 @@ class MedicalHistory extends Model
     public function examiner() {
         return $this->hasOne(User::class, 'id', 'examiner_id');
     }
+
+    public function action() {
+        return $this->hasMany(Action::class, 'medical_history_id', 'id');
+    }
+
+    public function queue() {
+        return $this->hasOne(Queue::class, 'medical_history_id', 'id');
+    }
 }

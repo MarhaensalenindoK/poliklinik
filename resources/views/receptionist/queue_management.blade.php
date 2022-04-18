@@ -29,8 +29,9 @@
     <li class="active open">
         <a href="javascript:void(0)" class="has-arrow"><i class="icon-briefcase"></i><span>Management Queue</span></a>
         <ul>
-            <li><a href="{{ url('receptionist/add-queue-page') }}">Add Queue</a></li>
+            <li><a href="{{ url('receptionist/add-queue-page') }}">Add New Queue</a></li>
             <li class="active"><a href="{{ url('receptionist/queue-management') }}">Management Queue</a></li>
+            <li><a href="{{ url('receptionist/queue-done') }}">List Queue Done</a></li>
         </ul>
     </li>
     @endsection
@@ -40,9 +41,13 @@
         <div class="card">
             <div class="header d-flex justify-content-between">
                 <h2>Queue</h2>
+                <button type="button" onclick="showModalCreateQueue()" class="btn btn-primary float-right">
+                    Create Queue from existing patient
+                </button>
             </div>
         </div>
     </div>
+
     <div class="col-lg-12 col-md-12">
         <div class="table-responsive">
             <table class="table table-hover table-custom spacing5" id="tableQueue">
@@ -107,6 +112,7 @@
 </div>
 
 @include('receptionist.modals._update_queue')
+@include('receptionist.modals._create_existing_queue')
 @include('receptionist.modals._payment')
 
 @endsection
@@ -148,12 +154,45 @@
 
         $("#updateQueue").find(`select[name=status]`).prop('disabled', false)
         $("#updateQueue").find(`#btn-update`).prop('disabled', false)
+        if (queue.medical_history.examiner_id !== null) {
+            $("#updateQueue").find(`select[name=doctor] option[value=${queue.medical_history.examiner_id}]`).prop('selected', true)
+        }
+
+        console.log(queue)
         if (queue.status === 'DONE') {
             $("#updateQueue").find(`select[name=status]`).prop('disabled', true)
+            $("#updateQueue").find(`select[name=doctor]`).prop('disabled', true)
             $("#updateQueue").find(`#btn-update`).prop('disabled', true)
+        } else {
+            $("#updateQueue").find(`select[name=status]`).prop('disabled', false)
+            $("#updateQueue").find(`select[name=doctor]`).prop('disabled', false)
+            $("#updateQueue").find(`#btn-update`).prop('disabled', false)
         }
 
         $("#updateQueue").modal('show')
+    }
+
+    function showModalCreateQueue() {
+        $("#createExistingQueue").modal('show')
+    }
+
+    function addInputHS() {
+        let inputLength = $('#createExistingQueue').find(".inputManyHS").length
+        let html = `
+            <div class="mt-3 inputManyHS input-HS-${inputLength + 1}" style="display:none">
+                <div class="d-flex">
+                    <input name="hospitalization_surgery[]" type="text" class="form-control" id="hospitalizationSurgery" aria-describedby="hospitalizationSurgery">
+                    <button type="button" class="btn btn-primary ml-2" onclick="removeInputHS(${inputLength + 1})">X</button>
+                </div>
+            </div>
+        `
+
+        $('#createExistingQueue').find("#hospitalizationSurgeryInput").append(html)
+        $('#createExistingQueue').find("#hospitalizationSurgeryInput").find(`.input-HS-${inputLength + 1}`).show('slow')
+    }
+
+    function removeInputHS(index) {
+        $("#createExistingQueue").find(`.input-HS-${index}`).hide('slow', function(){ $(this).remove(); });
     }
 
     function showModalDeleteQueue(queueId) {

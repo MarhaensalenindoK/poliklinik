@@ -33,6 +33,7 @@ Route::get('/login', [LoginController::class, 'check'])->name('login');
 Route::post('/authenticate', [LoginController::class, 'authenticate'])->name('auth');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::post('reset-password', [LoginController::class, 'resetPassword'])->name('resetPassword');
+Route::post('/payment/print', [Controllers\Patient\HistoryPaymentController::class, 'print']);
 
 
 Route::group(['middleware' => ['auth', 'role:SUPERADMIN']], function(){
@@ -88,6 +89,7 @@ Route::group(['middleware' => ['auth', 'role:RECEPTIONIST'], 'prefix' => 'recept
 
     Route::get('/queue-management', [Controllers\Receptionist\QueueManagementController::class, 'indexManagement']);
     Route::get('/add-queue-page', [Controllers\Receptionist\QueueManagementController::class, 'indexQueue']);
+    Route::get('/queue-done', [Controllers\Receptionist\QueueManagementController::class, 'indexQueueDone']);
 
     Route::get('/medicine-management', [Controllers\Receptionist\MedicineManagementController::class, 'index']);
 
@@ -103,10 +105,14 @@ Route::group(['middleware' => ['auth', 'role:RECEPTIONIST'], 'prefix' => 'recept
         Route::post('/queue', [Controllers\Receptionist\QueueManagementController::class, 'createQueue']);
         Route::patch('/queue', [Controllers\Receptionist\QueueManagementController::class, 'updateQueue']);
         Route::delete('/queue', [Controllers\Receptionist\QueueManagementController::class, 'deleteQueue']);
+
+        Route::post('/queue/existing', [Controllers\Receptionist\QueueManagementController::class, 'createQueueExisting']);
     });
 });
 
 Route::group(['middleware' => ['auth', 'role:PATIENT'], 'prefix' => 'patient'], function(){
     Route::get('/dashboard', [Controllers\Patient\DashboardController::class, 'index']);
+    Route::get('/history-payment', [Controllers\Patient\HistoryPaymentController::class, 'index']);
+    Route::post('/payment/print', [Controllers\Patient\HistoryPaymentController::class, 'print']);
 });
 
