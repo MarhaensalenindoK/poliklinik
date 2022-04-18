@@ -13,6 +13,7 @@ use App\Service\Database\UserService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 
 class QueueManagementController extends Controller
 {
@@ -51,10 +52,6 @@ class QueueManagementController extends Controller
 
         foreach ($users['data'] as $user) {
             if ($user['full_medical_history_patient'] === null || $user['full_medical_history_patient'] === []) {
-                continue;
-            }
-
-            if ($user['full_queue'] === null || $user['full_queue'] === []) {
                 continue;
             }
 
@@ -206,6 +203,28 @@ class QueueManagementController extends Controller
         $DBqueue = new QueueService;
         $DBaction = new ActionService;
         $DBmedicine = new MedicineService;
+        if ($request->print === true || $request->print === 'true') {
+            $DBmedicalHistory = new MedicalHistoryService;
+            $DBaction = new ActionService;
+
+            $medicalHistoryId = $request->medical_history_id;
+
+            $medicalHistory = $DBmedicalHistory->detail($medicalHistoryId);
+            $actions = $DBaction->index($medicalHistory['id'])['data'];
+            $medicalHistory['action'] = $actions;
+            $medicalHistory['total_payment'] = 0;
+            $totalPayment = 0;
+
+            foreach ($actions as $action) {
+                $totalPayment += $action['medicine']['price'] * $action['count'];
+            }
+
+            $medicalHistory['total_payment'] = $totalPayment;
+
+            $pdf = PDF::loadview('print_payment',['medicalHistory' => $medicalHistory]);
+
+            return $pdf->download('struk-payment.pdf');
+        }
 
         if (strtoupper($request->status) !== Queue::DONE) {
             $DBqueue->update($request->queue_id, [

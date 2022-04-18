@@ -11,6 +11,7 @@
                 @csrf
                 @method('PATCH')
                 <input type="hidden" name="queue_id">
+                <input type="hidden" name="medical_history_id">
                 <input type="hidden" name="status" value="DONE">
                 <div class="modal-body">
                     <fieldset disabled>
@@ -39,6 +40,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" name="print" value="true" class="btn btn-success">Print</button>
                     <button type="submit" class="btn btn-primary" id="btn-payment">Done Payment</button>
                 </div>
             </form>
