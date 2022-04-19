@@ -56,9 +56,8 @@ class HistoryPaymentController extends Controller
 
         $medicalHistory['total_payment'] = $totalPayment;
 
-        // return view('print_payment', compact('medicalHistory'));
         $pdf = PDF::loadview('print_payment',['medicalHistory' => $medicalHistory]);
 
-        return $pdf->download('struk-payment');
+        return $pdf->download('struk-payment.pdf');
     }
 }
