@@ -4,7 +4,7 @@
 @endsection
 
 @section('content')
-<div id="slideLandingPage" class="carousel slide mt-5" data-ride="carousel">
+{{-- <div id="slideLandingPage" class="carousel slide mt-5" data-ride="carousel">
     <ol class="carousel-indicators">
         <li data-target="#slideLandingPage" data-slide-to="0" class="active"></li>
         <li data-target="#slideLandingPage" data-slide-to="1"></li>
@@ -35,7 +35,7 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </a>
-</div>
+</div> --}}
 <div id="main-content" class="w-100 p-0">
     <div class="container-fluid p-0">
         <div class="row-clearfix mx-5 mt-5 text-center">
@@ -113,7 +113,7 @@
         </div>
 
         <div class="mx-auto mt-5">
-            <img src="{{ asset('images/landingpage/group 9.png') }}" alt="image" class="d-block w-100 image-fluid">
+            <img src="{{ asset('images/landingpage/landingpage.jpg') }}" height="1000" alt="image" class="d-block w-100 image-fluid">
         </div>
 
         <div class="row-clearfix mx-5 mt-6 text-center">
