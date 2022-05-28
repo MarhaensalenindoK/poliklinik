@@ -45,7 +45,7 @@ class DashboardController extends Controller
         if (Hash::check(Auth::user()->username, Auth::user()->password)){
             $pw_matches = true;
         }
-        // dd($users);
+
         return view('receptionist.dashboard')
         ->with('users', $users)
         ->with('totalPatient', $totalPatient)
