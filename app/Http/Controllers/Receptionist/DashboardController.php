@@ -19,6 +19,7 @@ class DashboardController extends Controller
         $clinicId = Auth::user()->clinic_id;
         $users = $DBuser->index([
             'with_queue' => true,
+            'with_full_queue' => true,
             'clinic_id' => $clinicId,
             'role' => 'PATIENT',
         ]);
