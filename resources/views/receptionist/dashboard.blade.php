@@ -85,8 +85,8 @@
                     <tr>
                         <th style="width: 20px;">#</th>
                         <th>Nama</th>
-                        <th style="width:50px;">email</th>
-                        <th style="width:50px;">Status</th>
+                        <th style="width:50px;">Email</th>
+                        <th style="width:50px;">Latest Status</th>
                     </tr>
                 </thead>
                 <tbody >
@@ -108,17 +108,20 @@
                         </td>
                         <td>
                             @if ($user['queue'] !== null)
+                                @php
+                                    $latestQueue = end($user['full_queue']);
+                                @endphp
 
-                            @switch($user['queue']['status'])
-                                @case('CHECKIN')
-                                    <span class="badge badge-primary">CHECKIN</span>
-                                        @break
-                                    @case('CASHER')
-                                    <span class="badge badge-warning">CASHER</span>
-                                        @break
-                                    @default
-                                    <span class="badge badge-success">DONE</span>
-                                @endswitch
+                                @switch($latestQueue['status'])
+                                    @case('CHECKIN')
+                                        <span class="badge badge-primary">CHECKIN</span>
+                                            @break
+                                        @case('CASHER')
+                                        <span class="badge badge-warning">CASHER</span>
+                                            @break
+                                        @default
+                                        <span class="badge badge-success">DONE</span>
+                                    @endswitch
                             @else
                             <span class="badge badge-info">DONT HAVE</span>
                             @endif

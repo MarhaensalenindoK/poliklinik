@@ -19,6 +19,7 @@ class DashboardController extends Controller
         $clinicId = Auth::user()->clinic_id;
         $users = $DBuser->index([
             'with_queue' => true,
+            'with_full_queue' => true,
             'clinic_id' => $clinicId,
             'role' => 'PATIENT',
         ]);
@@ -44,7 +45,7 @@ class DashboardController extends Controller
         if (Hash::check(Auth::user()->username, Auth::user()->password)){
             $pw_matches = true;
         }
-
+        // dd($users);
         return view('receptionist.dashboard')
         ->with('users', $users)
         ->with('totalPatient', $totalPatient)
