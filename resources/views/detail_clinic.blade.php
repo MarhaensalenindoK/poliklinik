@@ -37,7 +37,7 @@
                     <span class="icon-menu"></span>
                     <span class="icon-menu"></span>
                 </button>
-                <a href="index.html" class="navbar-brand"><img src="assets/img/logo.png" alt=""></a>
+                <a href="index.html" class="navbar-brand"><img src="{{ asset('images/logo-poliklinik.png') }}" alt=""></a>
             </div>
             <div class="collapse navbar-collapse" id="main-navbar">
                 <ul class="navbar-nav mr-auto w-100 justify-content-end clearfix">
@@ -71,7 +71,7 @@
                         {{ $clinicDetail['name'] }}</h2>
                     </div>
                     <div class="img-thumb text-center wow fadeInUp" data-wow-delay="0.6s">
-                        <img class="img-fluid" src="{{ $clinicDetail['profile_image'] !== null ? asset('images/profile_image/' . $clinicDetail['profile_image']) : asset('images/profile_image/thumbnail1.png') }}" alt="">
+                        <img class="img-fluid" src="{{ $clinicDetail['profile_image'] !== null ? asset('images/' . $clinicDetail['profile_image']) : asset('images/profile_image/thumbnail1.png') }}" alt="">
                     </div>
                 </div>
             </div>
