@@ -46,6 +46,12 @@
                 <tbody>
                     <tr>
                         <td>
+                            Clinic
+                        </td>
+                        <td>: {{ $medicalHistory['clinic']['name'] }}</td>
+                    </tr>
+                    <tr>
+                        <td>
                             Name
                         </td>
                         <td>: {{ $medicalHistory['patient']['name'] }}</td>
@@ -138,7 +144,7 @@
                     <tr>
                         <td>Price</td>
                         <td>
-                            : {{ $action['medicine']['price'] }}
+                            : {{ "Rp " . number_format($action['medicine']['price'],2,',','.') }}
                         </td>
                     </tr>
                     <tr>
@@ -156,7 +162,7 @@
                     <tr>
                         <td>Total harga obat {{ $action['medicine']['name'] }}</td>
                         <td>
-                            : <strong>{{ $action['medicine']['price'] * $action['count'] }}</strong>
+                            : <strong>{{ "Rp " . number_format(($action['medicine']['price'] * $action['count']),2,',','.') }}</strong>
                         </td>
                     </tr>
                     @php
@@ -168,7 +174,7 @@
                             <strong>Total Harga</strong>
                         </td>
                         <td>:
-                            <strong>{{ $countPrice }}</strong>
+                            <strong>{{ "Rp " . number_format($countPrice,2,',','.') }}</strong>
                         </td>
                     </tr>
                 </tbody>

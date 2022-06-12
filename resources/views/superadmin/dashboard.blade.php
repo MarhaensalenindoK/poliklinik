@@ -29,6 +29,7 @@
         <li><a href="app-inbox.html"><i class="icon-envelope-open"></i>Messages</a></li>
         <li><a href="javascript:void(0);"><i class="icon-settings"></i>Settings</a></li>
         <li class="divider"></li> --}}
+        <li><a href="javascript:void(0)" onclick="$('#modalResetPassword').click();"><i class="icon-lock"></i>Change Password</a></li>
         <li><a href="{{ url('/logout') }}"><i class="icon-power"></i>Logout</a></li>
     </ul>
     @endsection

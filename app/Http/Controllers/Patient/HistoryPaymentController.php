@@ -40,6 +40,7 @@ class HistoryPaymentController extends Controller
     public function print(Request $request)
     {
         $DBmedicalHistory = new MedicalHistoryService;
+        $DBschool = new ClinicService;
         $DBaction = new ActionService;
 
         $medicalHistoryId = $request->medical_history_id;
@@ -55,6 +56,8 @@ class HistoryPaymentController extends Controller
         }
 
         $medicalHistory['total_payment'] = $totalPayment;
+
+        $medicalHistory['clinic'] = $DBschool->detail($medicalHistory['patient']['clinic_id']);
 
         $pdf = PDF::loadview('print_payment',['medicalHistory' => $medicalHistory]);
 

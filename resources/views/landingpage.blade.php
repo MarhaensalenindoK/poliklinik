@@ -111,10 +111,10 @@
                 </div>
             </div>
         </div>
-
-        <div class="mx-auto mt-5">
+        {{-- Archive Code --}}
+        {{-- <div class="mx-auto mt-5">
             <img src="{{ asset('images/landingpage/landingpage.jpg') }}" height="1000" alt="image" class="d-block w-100 image-fluid">
-        </div>
+        </div> --}}
 
         <div class="row-clearfix mx-5 mt-6 text-center">
 
@@ -165,7 +165,7 @@
                         </div>
                         <div class="col-md-5 md-3 mt-6 ">
                             <p class="font-25 mb-0 text-white font-weight-500">
-                                Masuk untuk mendapatkan berbagai macam pelayanan politeknik dari kami
+                                Masuk untuk mendapatkan berbagai macam pelayanan poliklinik dari kami
                             </p>
                                 <button type="button" class="btn btn-primary font-25 w-50 rounded-pill mt-4" onclick="window.open(`/login`, '_blank')">Masuk</button>
 
@@ -189,29 +189,9 @@
                 </div>
 
                 <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-                    <h5 class="text-uppercase mb-4 font-weight-bold text-white">Company</h5>
-                <p>
-                    <a href="javascript:void(0)" class="text-white text-decoration-none"> Press lereases </a>
-                </p>
-                <p>
-                    <a href="javascript:void(0)" class="text-white text-decoration-none"> Mission</a>
-                </p>
-                <p>
-                    <a href="javascript:void(0)" class="text-white text-decoration-none"> Srategy</a>
-                </p>
                 </div>
 
                 <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-                    <h5 class="text-uppercase mb-4 font-weight-bold text-white">About</h5>
-                <p>
-                    <a href="javascript:void(0)" class="text-white text-decoration-none"> Carrier</a>
-                </p>
-                <p>
-                    <a href="javascript:void(0)" class="text-white text-decoration-none"> Team</a>
-                </p>
-                <p>
-                    <a href="javascript:void(0)" class="text-white text-decoration-none"> Clients</a>
-                </p>
                 </div>
 
                 <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">

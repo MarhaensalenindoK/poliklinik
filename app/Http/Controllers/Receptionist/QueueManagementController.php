@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Queue;
 use App\Models\User;
 use App\Service\Database\ActionService;
+use App\Service\Database\ClinicService;
 use App\Service\Database\MedicalHistoryService;
 use App\Service\Database\MedicineService;
 use App\Service\Database\QueueService;
@@ -203,6 +204,7 @@ class QueueManagementController extends Controller
         $DBqueue = new QueueService;
         $DBaction = new ActionService;
         $DBmedicine = new MedicineService;
+        $DBschool = new ClinicService;
         if ($request->print === true || $request->print === 'true') {
             $DBmedicalHistory = new MedicalHistoryService;
             $DBaction = new ActionService;
@@ -220,6 +222,8 @@ class QueueManagementController extends Controller
             }
 
             $medicalHistory['total_payment'] = $totalPayment;
+
+            $medicalHistory['clinic'] = $DBschool->detail($medicalHistory['patient']['clinic_id']);
 
             $pdf = PDF::loadview('print_payment',['medicalHistory' => $medicalHistory]);
 

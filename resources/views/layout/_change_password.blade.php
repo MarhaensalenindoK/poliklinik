@@ -8,7 +8,12 @@
                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                     <div class="form-group text-white">
                         <label>New Password</label>
-                        <input type="password" class="form-control" name="password" required>
+                        <div class="input-group d-flex" id="show_hide_password">
+                            <input class="form-control text-white" type="password" name="password" required>
+                            <div class="card border-1" style="width: 3%">
+                                <a href="javascript:void(0)" class=""><i class="fa fa-eye-slash my-2 mx-2" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-default">Ubah Password</button>
                 </form>
