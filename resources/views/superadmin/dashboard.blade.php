@@ -282,6 +282,7 @@
         let nik = $("#updateAccount").find('input[type=text][name=nik]').val()
         let email = $("#updateAccount").find('input[type=email][name=email]').val()
         let role = $("#updateAccount").find('select[name=role]').val()
+        let status = $("#updateAccount").find('input[type=radio][name=status]:checked').val()
 
         let data = {
             user_id,
@@ -290,7 +291,8 @@
             nik,
             email,
             role,
-            username
+            username,
+            status
         }
 
         $.ajax({
